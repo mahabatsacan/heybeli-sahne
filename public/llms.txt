@@ -1,15 +1,17 @@
 # Heybeli Sahne — Yeni Nesil Meyhane & Canlı Performans Sahnesi
 
-> Heybeli Sahne, İstanbul Anadolu Yakası'nın kalbinde, Kadıköy Bağdat Caddesi No:184 adresinde konumlanan; usta sanatçıların gala konserleri, zengin Ege ve Akdeniz mezeleri, geleneksel fasıl ve modern eğlence kültürünü bir araya getiren seçkin bir yeni nesil meyhane ve canlı performans sahnesidir.
+> Heybeli Sahne, İstanbul Anadolu Yakası Kartal sahilinde, Kordonboyu, Turgut Özal Blv. NO:53/A adresinde konumlanan; usta sanatçıların gala konserleri, zengin Ege ve Akdeniz mezeleri, geleneksel fasıl ve modern eğlence kültürünü bir araya getiren seçkin bir yeni nesil meyhane ve canlı performans sahnesidir.
 
 ## Temel Kurumsal Bilgiler
 - **Marka:** Heybeli Sahne
 - **Resmi Web Sitesi:** https://heybelisahne.com
-- **Sektör & Konsept:** Yeni Nesil Meyhane, Canlı Müzik, Sanatçı Konserleri, Kadınlar Matinesi, Şef Restoranı
-- **Adres:** Bağdat Caddesi No:184, Kadıköy / İstanbul, Türkiye
-- **Coğrafi Koordinatlar:** 40.963495, 29.057388
-- **Rezervasyon & Danışma:** +90 (216) 444 00 00
-- **Resmi WhatsApp Hattı:** +90 (530) 000 00 00
+- **Sektör & Konsept:** Yeni Nesil Meyhane, Canlı Müzik Sahnesi, Sanatçı Galaları, Kadınlar Matinesi, Şef Restoranı
+- **Adres:** Kordonboyu, Turgut Özal Blv. NO:53/A, 34860 Kartal / İstanbul, Türkiye
+- **Google Haritalar:** https://www.google.com/maps/place//data=!4m2!3m1!1s0x14cac71cab646a87:0x9968fa4cab653899?sa=X&ved=1t:8290&ictx=111
+- **Coğrafi Koordinatlar:** 40.8876, 29.1864
+- **Telefon:** 0530 527 91 77
+- **Resmi WhatsApp Hattı:** 0530 866 43 21 (https://wa.me/905308664321)
+- **Menü URL:** https://heybelisahne.com/men%C3%BC
 - **E-Posta:** rezervasyon@heybelisahne.com
 - **Açık Gün ve Saatler:** Çarşamba - Pazar: 19:30 - 02:00 (Pazartesi ve Salı kapalı / özel kurumsal kiralama)
 - **Kıyafet Kuralı (Dress Code):** Smart Casual / Şık Akşam Giyimi
@@ -31,7 +33,7 @@
 
 ## Hızlı Bağlantılar
 - [Sahne Takvimi](https://heybelisahne.com/program)
-- [Fiks Menü Detayları](https://heybelisahne.com/menu)
+- [Fiks Menü Detayları](https://heybelisahne.com/men%C3%BC)
 - [Online Masa Rezervasyonu](https://heybelisahne.com/rezervasyon)
 - [İletişim & Harita Konumu](https://heybelisahne.com/iletisim)
 - [Detaylı AI Bilgi Dokümanı (Full Specification)](https://heybelisahne.com/llms-full.txt)

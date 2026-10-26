@@ -152,10 +152,12 @@ const MENU_DATA = {
 
 const VENUE_INFO = {
   name: 'Heybeli Sahne',
-  tagline: 'Yeni Nesil Meyhane & Canlı Performans Sahnesi',
-  phone: '+90 216 444 00 00',
-  whatsapp: '905300000000',
-  address: 'Bağdat Caddesi No:184, Kadıköy / İstanbul',
+  tagline: 'Anadolu Meyhanesi & Canlı Performans Sahnesi',
+  phone: '0530 527 91 77',
+  whatsapp: '905308664321',
+  address: 'Kordonboyu, Turgut Özal Blv. NO:53/A, 34860 Kartal / İstanbul',
+  mapUrl: 'https://www.google.com/maps/place//data=!4m2!3m1!1s0x14cac71cab646a87:0x9968fa4cab653899?sa=X&ved=1t:8290&ictx=111',
+  menuUrl: 'https://heybelisahne.com/men%C3%BC',
   email: 'rezervasyon@heybelisahne.com',
   workingHours: 'Çarşamba - Pazar: 19:30 - 02:00',
   musicStart: '20:30 Fasıl & DJ | 21:45 Canlı Sahne'

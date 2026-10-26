@@ -68,7 +68,7 @@ app.get('/program', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'program.html'));
 });
 
-app.get('/menu', (req, res) => {
+app.get(['/menu', '/menü', encodeURI('/menü')], (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'menu.html'));
 });
 

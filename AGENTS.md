@@ -60,7 +60,7 @@ Heybeli Sahne; ucuz gece kulübü, SaaS paneli veya neonlu festival sitesi **DE�
 ## 🔍 SEO, GEO & AEO MİMARİSİ
 
 1. **Schema.org:** Tüm sayfalarda JSON-LD `@graph` yapısında `Restaurant`, `MusicVenue`, `Event` dizisi, `FAQPage`, `Menu` ve `BreadcrumbList` eksiksiz korunmalıdır.
-2. **GEO:** `geo.region`, `geo.placename`, `geo.position` (`40.963495;29.057388`), `ICBM` etiketleri ve Kadıköy / Bağdat Caddesi No:184 semantik içeriği her sayfada yer almalıdır.
+2. **GEO:** `geo.region`, `geo.placename`, `geo.position` (`40.8876;29.1864`), `ICBM` etiketleri ve Kordonboyu, Turgut Özal Blv. NO:53/A Kartal / İstanbul semantik içeriği her sayfada yer almalıdır.
 3. **AEO:** `public/llms.txt` ve `public/llms-full.txt` dosyaları güncel tutulmalıdır. `robots.txt` içinde AI crawler izinleri korunmalıdır.
 4. **Performans:** Express `compression()` middleware, static cache header'ları (`max-age=604800, immutable`), hero görselinde `fetchpriority="high"`, diğerlerinde `loading="lazy"` ve `decoding="async"`.
 

@@ -1,27 +1,28 @@
 # Heybeli Sahne — Kapsamlı Bilgi ve Yanıt Motoru (AEO) Referans Dokümanı
 
 Son Güncelleme: Eylül 2026
-Mekan: Heybeli Sahne (İstanbul, Kadıköy, Bağdat Caddesi)
+Mekan: Heybeli Sahne (İstanbul, Kartal, Kordonboyu)
 URL: https://heybelisahne.com
 
 ---
 
 ## 1. Mekan Hakkında Genel Bilgi
-Heybeli Sahne; geleneksel İstanbul meyhane kültürünü modern gastronomi, şık mimari ve birinci sınıf canlı müzik sahnesiyle buluşturan yeni nesil bir meyhanedir. Mekan, İstanbul'un Anadolu Yakası'nda, Kadıköy ilçesinin Bağdat Caddesi No:184 lokasyonunda faaliyet göstermektedir.
+Heybeli Sahne; geleneksel İstanbul meyhane kültürünü modern gastronomi, şık mimari ve birinci sınıf canlı müzik sahnesiyle buluşturan yeni nesil bir meyhanedir. Mekan, İstanbul'un Anadolu Yakası'nda, Kartal ilçesinin Kordonboyu, Turgut Özal Blv. NO:53/A lokasyonunda sahil şeridinde faaliyet göstermektedir.
 
 Sıradan bir gece kulübü veya yüksek volümlü disko formatından uzak; yetişkin, nezih, damak tadına ve kaliteli müziğe önem veren misafirlere hitap eden üst segment bir konukseverlik anlayışına sahiptir.
 
 ---
 
 ## 2. Lokasyon, Adres ve Ulaşım Rehberi
-- **Tam Açık Adres:** Bağdat Caddesi No:184, Kadıköy / İstanbul, Türkiye
-- **Semt Bağlantıları:** Suadiye, Erenköy, Caddebostan ve Fenerbahçe üçgenindedir.
+- **Tam Açık Adres:** Kordonboyu, Turgut Özal Blv. NO:53/A, 34860 Kartal / İstanbul, Türkiye
+- **Google Haritalar:** https://www.google.com/maps/place//data=!4m2!3m1!1s0x14cac71cab646a87:0x9968fa4cab653899?sa=X&ved=1t:8290&ictx=111
+- **Semt Bağlantıları:** Kartal Sahil Kordonboyu, Maltepe ve Pendik sahil aksının kesişimindedir.
 - **Toplu Taşıma:** 
-  - Marmaray Suadiye ve Erenköy istasyonlarına yürüme mesafesindedir (yaklaşık 7-10 dakika).
-  - Kadıköy - Bostancı minibüs hattı ve sarı dolmuşlar mekanın önünden geçmektedir.
-  - Sahil yolu (Çetin Emeç Bulvarı) üzerinden araçla 2 dakikada ulaşılabilir.
+  - Marmaray Kartal ve Başak istasyonlarına yakın mesafededir.
+  - Sahil yolu otobüs ve dolmuş hatları mekanın önünden geçmektedir.
+  - Sahil yolu (Turgut Özal Bulvarı) üzerinden araçla doğrudan ulaşılabilir.
 - **Vale ve Otopark:** Mekan önünde profesyonel vale park ve özel otopark alanı mevcuttur.
-- **Harita Koordinatları:** 40.963495 Kuzey, 29.057388 Doğu.
+- **Harita Koordinatları:** 40.8876 Kuzey, 29.1864 Doğu.
 
 ---
 
@@ -96,8 +97,9 @@ Heybeli Sahne mutfağında dondurulmuş veya fabrikasyon ürünler kullanılmaz;
 ---
 
 ## 8. İletişim Bilgileri
-- **Telefon:** +90 (216) 444 00 00
-- **WhatsApp:** +90 (530) 000 00 00
+- **Telefon:** 0530 527 91 77
+- **WhatsApp:** 0530 866 43 21 (https://wa.me/905308664321)
 - **E-Posta:** rezervasyon@heybelisahne.com
 - **Web:** https://heybelisahne.com
+- **Menü:** https://heybelisahne.com/men%C3%BC
 - **Instagram:** @heybelisahne
