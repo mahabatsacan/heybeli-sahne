@@ -118,11 +118,24 @@
       <!-- HayalMest 1:1 Navigation Structure -->
       <nav class="desktop-nav" aria-label="Ana Menü">
         <ul class="nav-list">
-          <li><a href="/" class="nav-link active">Ana Sayfa</a></li>
-          <li><a href="#menu" class="nav-link">Menümüz</a></li>
-          <li><a href="#galeri" class="nav-link">Galerimiz</a></li>
-          <li><a href="#program" class="nav-link">Canlı Etkinlikler</a></li>
-          <li><a href="#hikaye" class="nav-link">Mekânımız</a></li>
+          <li><a href="/" class="nav-link active">Anasayfa</a></li>
+          <li><a href="/hakkimizda" class="nav-link">Hakkımızda</a></li>
+          <li><a href="/etkinlik-takvimi" class="nav-link">Etkinlik Takvimi</a></li>
+          <li class="nav-item-dropdown">
+            <a href="/menu" class="nav-link dropdown-toggle">
+              Menü
+              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/menu#ana-yemek">Ana Yemek <span class="sub-badge">Izgaralar</span></a></li>
+              <li><a href="/menu#ara-sicaklar">Ara Sıcaklar <span class="sub-badge">Sıcaklar</span></a></li>
+              <li><a href="/menu#mezeler">Mezeler <span class="sub-badge">Ege</span></a></li>
+              <li><a href="/menu#salatalar">Salatalar <span class="sub-badge">Taze</span></a></li>
+              <li><a href="/menu#ickiler">Alkollü İçecekler <span class="sub-badge">Rakı & Şarap</span></a></li>
+              <li><a href="/menu#meyve-tatli">Meyveler & Tatlılar <span class="sub-badge">Kapanış</span></a></li>
+              <li><a href="/menu#soft-icecekler">Soft İçecekler <span class="sub-badge">İçecek</span></a></li>
+            </ul>
+          </li>
           <li><a href="/iletisim" class="nav-link">İletişim</a></li>
         </ul>
       </nav>
@@ -141,12 +154,11 @@
     <!-- Mobile Slide Menu Drawer -->
     <div class="mobile-menu" id="mobile-menu" aria-label="Mobil Menü">
       <ul class="mobile-nav-list">
-        <li><a href="/" class="mobile-nav-link">Ana Sayfa</a></li>
-        <li><a href="#menu" class="mobile-nav-link">Menümüz</a></li>
-        <li><a href="#galeri" class="mobile-nav-link">Galerimiz</a></li>
-        <li><a href="#program" class="mobile-nav-link">Canlı Etkinlikler</a></li>
-        <li><a href="#hikaye" class="mobile-nav-link">Mekânımız & Hikâyemiz</a></li>
-        <li><a href="/iletisim" class="mobile-nav-link">İletişim & Konum</a></li>
+        <li><a href="/" class="mobile-nav-link active">Anasayfa</a></li>
+        <li><a href="/hakkimizda" class="mobile-nav-link">Hakkımızda</a></li>
+        <li><a href="/etkinlik-takvimi" class="mobile-nav-link">Etkinlik Takvimi</a></li>
+        <li><a href="/menu" class="mobile-nav-link">Menü</a></li>
+        <li><a href="/iletisim" class="mobile-nav-link">İletişim</a></li>
       </ul>
       <div class="mobile-menu-actions">
         <a href="#rezervasyon" class="btn-primary-editorial" style="width: 100%;">Şimdi Rezervasyon Yap</a>
@@ -803,15 +815,14 @@
 
         <!-- Col 2: Navigation Links -->
         <div>
-          <h4 class="footer-col-title">Hızlı Keşif</h4>
+          <h4 class="footer-col-title">Keşfet</h4>
           <ul class="footer-links-list">
-            <li><a href="/">Ana Sayfa</a></li>
-            <li><a href="#menu">Menümüz</a></li>
-            <li><a href="#galeri">Galerimiz</a></li>
-            <li><a href="#program">Canlı Etkinlikler</a></li>
-            <li><a href="#hikaye">Mekânımız & Hikâyemiz</a></li>
-            <li><a href="#rezervasyon">Masa Rezervasyonu</a></li>
-            <li><a href="/iletisim">İletişim & Konum</a></li>
+            <li><a href="/">Anasayfa</a></li>
+            <li><a href="/hakkimizda">Hakkımızda</a></li>
+            <li><a href="/etkinlik-takvimi">Etkinlik Takvimi</a></li>
+            <li><a href="/menu">Menü</a></li>
+            <li><a href="/rezervasyon">Masa Rezervasyonu</a></li>
+            <li><a href="/iletisim">İletişim</a></li>
           </ul>
         </div>
 

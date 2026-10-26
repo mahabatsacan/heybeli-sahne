@@ -63,24 +63,28 @@ app.get('/llms-full.txt', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'llms-full.txt'));
 });
 
-// Clean URLs for Pages
-app.get('/program', (req, res) => {
+// Clean URLs for Pages (Aligned with HayalMest Structure)
+app.get(['/hakkimizda', '/hakkimizda/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'hakkimizda.html'));
+});
+
+app.get(['/etkinlik-takvimi', '/etkinlik-takvimi/', '/hayalmest-etkinlik-takvimi', '/program', '/sahne-programi'], (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'program.html'));
 });
 
-app.get(['/menu', '/menü', encodeURI('/menü')], (req, res) => {
+app.get(['/menu', '/menü', encodeURI('/menü'), '/menu-listemiz', '/menu-listemiz/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'menu.html'));
 });
 
-app.get('/galeri', (req, res) => {
+app.get(['/galeri', '/galeri/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'galeri.html'));
 });
 
-app.get('/rezervasyon', (req, res) => {
+app.get(['/rezervasyon', '/rezervasyon/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'rezervasyon.html'));
 });
 
-app.get('/iletisim', (req, res) => {
+app.get(['/iletisim', '/iletisim/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'iletisim.html'));
 });
 

@@ -101,18 +101,31 @@
 
       <nav class="desktop-nav" aria-label="Ana Menü">
         <ul class="nav-list">
-          <li><a href="/" class="nav-link">Ana Sayfa</a></li>
-          <li><a href="/program" class="nav-link">Sahne Programı</a></li>
-          <li><a href="/menu" class="nav-link active">Menü</a></li>
-          <li><a href="/galeri" class="nav-link">Galeri</a></li>
-          <li><a href="/rezervasyon" class="nav-link">Rezervasyon</a></li>
+          <li><a href="/" class="nav-link">Anasayfa</a></li>
+          <li><a href="/hakkimizda" class="nav-link">Hakkımızda</a></li>
+          <li><a href="/etkinlik-takvimi" class="nav-link">Etkinlik Takvimi</a></li>
+          <li class="nav-item-dropdown">
+            <a href="/menu" class="nav-link active dropdown-toggle">
+              Menü
+              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/menu#ana-yemek">Ana Yemek <span class="sub-badge">Izgaralar</span></a></li>
+              <li><a href="/menu#ara-sicaklar">Ara Sıcaklar <span class="sub-badge">Sıcaklar</span></a></li>
+              <li><a href="/menu#mezeler">Mezeler <span class="sub-badge">Ege</span></a></li>
+              <li><a href="/menu#salatalar">Salatalar <span class="sub-badge">Taze</span></a></li>
+              <li><a href="/menu#ickiler">Alkollü İçecekler <span class="sub-badge">Rakı & Şarap</span></a></li>
+              <li><a href="/menu#meyve-tatli">Meyveler & Tatlılar <span class="sub-badge">Kapanış</span></a></li>
+              <li><a href="/menu#soft-icecekler">Soft İçecekler <span class="sub-badge">İçecek</span></a></li>
+            </ul>
+          </li>
           <li><a href="/iletisim" class="nav-link">İletişim</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <a href="https://wa.me/905308664321?text=Merhaba,%20Heybeli%20Sahne%20men%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" class="header-whatsapp-link">WhatsApp</a>
-        <a href="/rezervasyon" class="header-reserve-btn">Masa Rezervasyonu</a>
+        <a href="/rezervasyon" class="header-reserve-btn">Şimdi Rezervasyon Yap</a>
         <button class="mobile-toggle" id="mobile-toggle" aria-label="Menüyü Aç/Kapat">
           <span></span><span></span><span></span>
         </button>
@@ -122,15 +135,14 @@
     <!-- Mobile Slide Menu -->
     <div class="mobile-menu" id="mobile-menu">
       <ul class="mobile-nav-list">
-        <li><a href="/" class="mobile-nav-link">Ana Sayfa</a></li>
-        <li><a href="/program" class="mobile-nav-link">Sahne Programı</a></li>
-        <li><a href="/menu" class="mobile-nav-link active">Menü & Mezeler</a></li>
-        <li><a href="/galeri" class="mobile-nav-link">Atmosfer & Galeri</a></li>
-        <li><a href="/rezervasyon" class="mobile-nav-link">Masa Rezervasyonu</a></li>
-        <li><a href="/iletisim" class="mobile-nav-link">İletişim & Konum</a></li>
+        <li><a href="/" class="mobile-nav-link">Anasayfa</a></li>
+        <li><a href="/hakkimizda" class="mobile-nav-link">Hakkımızda</a></li>
+        <li><a href="/etkinlik-takvimi" class="mobile-nav-link">Etkinlik Takvimi</a></li>
+        <li><a href="/menu" class="mobile-nav-link active">Menü</a></li>
+        <li><a href="/iletisim" class="mobile-nav-link">İletişim</a></li>
       </ul>
       <div class="mobile-menu-actions">
-        <a href="/rezervasyon" class="btn-primary-editorial" style="width: 100%;">Masa Rezervasyonu</a>
+        <a href="/rezervasyon" class="btn-primary-editorial" style="width: 100%;">Şimdi Rezervasyon Yap</a>
         <a href="https://wa.me/905308664321?text=Merhaba,%20Heybeli%20Sahne%20men%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" class="btn-secondary-editorial" style="width: 100%;">WhatsApp Hattı (0530 866 43 21)</a>
       </div>
       <div class="mobile-menu-info">
@@ -153,7 +165,7 @@
 
       <!-- HayalMest 6 Visual Menu Categories -->
       <div class="menu-categories-grid">
-        <div class="menu-category-card" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
+        <div class="menu-category-card" id="ana-yemek" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
           <div class="category-card-img-wrap">
             <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80" alt="Ana Yemekler" loading="lazy">
             <div class="category-card-overlay"></div>
@@ -165,7 +177,7 @@
           </div>
         </div>
 
-        <div class="menu-category-card" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
+        <div class="menu-category-card" id="ara-sicaklar" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
           <div class="category-card-img-wrap">
             <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=700&q=80" alt="Ara Sıcaklar" loading="lazy">
             <div class="category-card-overlay"></div>
@@ -177,7 +189,7 @@
           </div>
         </div>
 
-        <div class="menu-category-card" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
+        <div class="menu-category-card" id="mezeler" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
           <div class="category-card-img-wrap">
             <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=700&q=80" alt="Geleneksel Mezeler" loading="lazy">
             <div class="category-card-overlay"></div>
@@ -189,7 +201,7 @@
           </div>
         </div>
 
-        <div class="menu-category-card" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
+        <div class="menu-category-card" id="salatalar" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
           <div class="category-card-img-wrap">
             <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=80" alt="Taze Salatalar" loading="lazy">
             <div class="category-card-overlay"></div>
@@ -201,7 +213,7 @@
           </div>
         </div>
 
-        <div class="menu-category-card" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
+        <div class="menu-category-card" id="meyve-tatli" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
           <div class="category-card-img-wrap">
             <img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=700&q=80" alt="Meyve ve Atıştırmalık" loading="lazy">
             <div class="category-card-overlay"></div>
@@ -213,7 +225,7 @@
           </div>
         </div>
 
-        <div class="menu-category-card" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
+        <div class="menu-category-card" id="ickiler" onclick="window.location.href='/rezervasyon'" style="cursor: pointer;">
           <div class="category-card-img-wrap">
             <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=80" alt="İçkiler ve Rakı Kültürü" loading="lazy">
             <div class="category-card-overlay"></div>
@@ -228,7 +240,7 @@
 
       <!-- Reservation CTA -->
       <div style="text-align: center; margin-top: 56px;">
-        <a href="/rezervasyon" class="btn-primary-editorial" style="padding: 16px 42px; font-size: 13px; letter-spacing: 1.5px; display: inline-block;">MASA REZERVASYONU YAPIN</a>
+        <a href="/rezervasyon" class="btn-primary-editorial" style="padding: 16px 42px; font-size: 13px; letter-spacing: 1.5px; display: inline-block;">ŞİMDİ REZERVASYON YAP</a>
       </div>
     </div>
   </main>
@@ -248,11 +260,12 @@
         <div>
           <h4 class="footer-nav-title">Keşfet</h4>
           <ul class="footer-links-list">
-            <li><a href="/">Ana Sayfa</a></li>
-            <li><a href="/program">Sahne Takvimi</a></li>
+            <li><a href="/">Anasayfa</a></li>
+            <li><a href="/hakkimizda">Hakkımızda</a></li>
+            <li><a href="/etkinlik-takvimi">Etkinlik Takvimi</a></li>
             <li><a href="/menu">Menü & Mezeler</a></li>
-            <li><a href="/galeri">Atmosfer & Galeri</a></li>
             <li><a href="/rezervasyon">Masa Rezervasyonu</a></li>
+            <li><a href="/iletisim">İletişim</a></li>
           </ul>
         </div>
 
