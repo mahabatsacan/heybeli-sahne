@@ -24,8 +24,7 @@
 - **Çarşamba Akşamları:** Kadınlar Matinesi & 90'lar Türkçe Pop Şovları — Başlangıç: 19:30
 - **Perşembe Akşamları:** Heybeli Fasıl Heyeti ile Geleneksel Meyhane Akşamı — Başlangıç: 20:00
 
-## Gastronomi & Fiks Menü Standartları
-- **Fiyat Aralığı:** Kişi başı 1.450 ₺ – 2.750 ₺ (Konser, sanatçı ve masa kategorisine göre değişir).
+## Gastronomi & Gurme Sofra Standartları
 - **Soğuk Mezeler:** Girit ezmesi, levrek marin, atom, köz patlıcan, köpoğlu, haydari, favalı enginar, muhammara (8 çeşit).
 - **Sıcak Ara Sıcaklar:** Pastırmalı paçanga böreği, güveçte tereyağlı yaprak ciğer veya tereyağlı karides.
 - **Ana Yemek:** Izgara taze deniz levreği, dinlendirilmiş dana antrikot veya fırında kuzu tandır.
@@ -33,7 +32,7 @@
 
 ## Hızlı Bağlantılar
 - [Sahne Takvimi](https://heybelisahne.com/program)
-- [Fiks Menü Detayları](https://heybelisahne.com/men%C3%BC)
+- [Menü & Meze Detayları](https://heybelisahne.com/men%C3%BC)
 - [Online Masa Rezervasyonu](https://heybelisahne.com/rezervasyon)
 - [İletişim & Harita Konumu](https://heybelisahne.com/iletisim)
 - [Detaylı AI Bilgi Dokümanı (Full Specification)](https://heybelisahne.com/llms-full.txt)

@@ -45,7 +45,7 @@ Sıradan bir gece kulübü veya yüksek volümlü disko formatından uzak; yeti�
 
 ---
 
-## 5. Mutfak, Gastronomi ve Fiks Menü İçerikleri
+## 5. Mutfak, Gastronomi ve Gurme Sofra İçerikleri
 Heybeli Sahne mutfağında dondurulmuş veya fabrikasyon ürünler kullanılmaz; tüm zeytinyağlılar ve mezeler günlük hazırlanır.
 
 ### Soğuk Meze Tepsisi (8 Çeşit):
@@ -73,9 +73,7 @@ Heybeli Sahne mutfağında dondurulmuş veya fabrikasyon ürünler kullanılmaz;
 
 ---
 
-## 6. Fiyatlandırma ve Ödeme Politikası
-- **Fiks Menü Taban Fiyatı:** Kişi başı 1.450 ₺'den başlar (hafta içi fasıl geceleri).
-- **Hafta Sonu & Gala Konserleri:** 1.950 ₺ – 2.750 ₺ arasında (sahne alan sanatçıya ve masanın sahneye olan konumuna göre).
+## 6. Rezervasyon ve Masa Politikası
 - **Masa Kategorileri:**
   - Standart Salon Masası
   - VIP Loca (6-12 kişilik özel gruplar)
