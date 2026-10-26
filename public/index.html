@@ -521,28 +521,32 @@
       </div>
 
       <div class="reservation-form-container">
+        <div class="form-badge-top">
+          <span>✦ HIZLI VE ANINDA ONAYLI ONLINE MASA REZERVASYONU ✦</span>
+        </div>
+
         <form id="reservation-form">
           <!-- Table Location Preference -->
           <div class="table-preference-wrap">
-            <label class="form-label" style="text-align: center; margin-bottom: 14px;">Masa Konumu Tercihiniz</label>
+            <label class="form-label" style="text-align: center; margin-bottom: 16px; display: block;">Masa Konumu Tercihiniz</label>
             <div class="table-selection-grid">
               <label class="table-option-card active">
                 <input type="radio" name="table_type" value="Sahne Önü VIP Masa" checked>
-                <span class="table-badge">VIP Deneyim</span>
+                <span class="table-badge">★ VIP Deneyim</span>
                 <span class="table-name">Sahne Önü Masa</span>
                 <span class="table-desc">Sanatçıya en yakın konum, özel servis</span>
               </label>
 
               <label class="table-option-card">
                 <input type="radio" name="table_type" value="Salon VIP Loca">
-                <span class="table-badge">Konfor & Prestij</span>
+                <span class="table-badge">👑 Konfor & Prestij</span>
                 <span class="table-name">Salon VIP Loca</span>
                 <span class="table-desc">Geniş oturumlu gruplar ve kutlamalar</span>
               </label>
 
               <label class="table-option-card">
                 <input type="radio" name="table_type" value="Standart Salon Masası">
-                <span class="table-badge">Klasik Meyhane</span>
+                <span class="table-badge">🥂 Klasik Meyhane</span>
                 <span class="table-name">Standart Salon</span>
                 <span class="table-desc">Sahneyi tam gören dengeli sofra</span>
               </label>
@@ -552,7 +556,7 @@
           <div class="form-two-cols">
             <div class="form-group">
               <label class="form-label" for="res-name">Adınız Soyadınız *</label>
-              <input type="text" id="res-name" class="form-control-editorial" placeholder="Örn. Murat Yılmaz" required autocomplete="name">
+              <input type="text" id="res-name" class="form-control-editorial" placeholder="Örn: Murat Yılmaz" required autocomplete="name">
             </div>
 
             <div class="form-group">
@@ -582,23 +586,42 @@
 
           <div class="form-group">
             <label class="form-label" for="res-note">Özel İstek / Kutlama Notu (İsteğe Bağlı)</label>
-            <textarea id="res-note" class="form-control-editorial" rows="3" placeholder="Doğum günü pastası servisi, yıldönümü kutlaması veya alerjen durumları..."></textarea>
+            <textarea id="res-note" class="form-control-editorial" rows="3" placeholder="Doğum günü pastası servisi, yıldönümü kutlaması veya özel tercihleriniz..."></textarea>
           </div>
 
           <div class="form-actions-wrap" style="text-align: center; margin-top: 32px;">
-            <button type="submit" class="btn-primary-editorial" style="min-width: 260px; font-size: 15px; padding: 18px 36px;">
-              Rezervasyon Talebini İlet
+            <button type="submit" class="btn-reserve-submit" id="res-submit-btn">
+              <span>MASA REZERVASYONUNU TAMAMLA</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
+            <div class="reservation-trust-row">
+              <div class="trust-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Anında İletim & Teyit</span>
+              </div>
+              <div class="trust-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>15 Dk. İçinde Telefon Onayı</span>
+              </div>
+              <div class="trust-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                <span>Ücretsiz Vale Park Hizmeti</span>
+              </div>
+            </div>
             <p class="form-guarantee-note">
-              🔒 Rezervasyon talebiniz anında merkezimize iletilir. Yetkili ekibimiz 15 dakika içinde telefonla arayarak masa onayınızı gerçekleştirecektir.
+              🔒 Bilgileriniz gizlilikle korunur. Yetkili rezervasyon ekibimiz en geç 15 dakika içinde sizi arayarak masa konumunuzu kesinleştirecektir.
             </p>
           </div>
         </form>
 
         <div class="whatsapp-direct-box">
-          <span>Hemen masa sormak veya sorularınız için:</span>
+          <div>
+            <span style="display: block; font-weight: 600; font-size: 15px; color: var(--text-primary);">Hemen Masa Durumunu Öğrenmek İster misiniz?</span>
+            <span style="display: block; font-size: 13px; color: var(--text-muted); margin-top: 2px;">Rezervasyon ekibimize WhatsApp üzerinden 7/24 yazabilirsiniz.</span>
+          </div>
           <a href="https://wa.me/905308664321?text=Merhaba,%20Heybeli%20Sahne'de%20bu%20akşam%20için%20masa%20durumunu%20öğrenmek%20istiyorum." target="_blank" rel="noopener" class="whatsapp-pill-btn">
-            WhatsApp ile Hızlıca İletişime Geçin (0530 866 43 21)
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="#FFFFFF"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.28c-.24.68-1.39 1.3-1.92 1.38-.5.08-1.13.11-3.64-.93-2.14-.88-3.52-3.06-3.63-3.21-.11-.15-.86-1.14-.86-2.18s.54-1.55.74-1.76c.19-.21.43-.26.57-.26.15 0 .29 0 .42.01.13.01.32-.05.5.38.19.45.64 1.57.7 1.69.06.12.09.26.02.41-.08.15-.12.24-.24.38-.12.15-.25.32-.36.43-.12.12-.24.26-.1.5.14.24.63 1.04 1.35 1.68.93.83 1.71 1.09 1.95 1.21.24.12.38.1.53-.06.14-.17.62-.72.78-.97.17-.24.33-.21.55-.12.22.08 1.41.67 1.65.79.24.12.4.17.46.28.06.11.06.63-.18 1.31z"/></svg>
+            <span>WhatsApp ile Masa Sor (0530 866 43 21)</span>
           </a>
         </div>
       </div>
@@ -796,20 +819,23 @@
   </div>
 
   <!-- ==========================================================
-       MODAL: INTERACTIVE GALLERY LIGHTBOX
+       FLOATING WHATSAPP BUTTON (Sayfayı Kaydırdıkça Kayan Buton)
        ========================================================== -->
-  <div class="gallery-lightbox-modal" id="gallery-lightbox-modal" aria-hidden="true" role="dialog">
-    <div class="lightbox-overlay" onclick="closeLightbox()"></div>
-    <div class="lightbox-content-box">
-      <button class="lightbox-close-btn" onclick="closeLightbox()" aria-label="Kapat">✕</button>
-      <button class="lightbox-nav-btn lightbox-prev" onclick="prevLightboxImage()" aria-label="Önceki Görsel">‹</button>
-      <div class="lightbox-image-container">
-        <img id="lightbox-image" src="" alt="Heybeli Sahne Fotoğrafı">
-        <div class="lightbox-caption" id="lightbox-caption"></div>
-      </div>
-      <button class="lightbox-nav-btn lightbox-next" onclick="nextLightboxImage()" aria-label="Sonraki Görsel">›</button>
+  <a href="https://wa.me/905308664321?text=Merhaba,%20Heybeli%20Sahne'de%20masa%20rezervasyonu%20ve%20bilgi%20almak%20istiyorum." 
+     class="floating-whatsapp" 
+     target="_blank" 
+     rel="noopener" 
+     aria-label="WhatsApp ile Hızlı İletişim">
+    <div class="whatsapp-tooltip">
+      <span class="status-dot"></span>
+      <span>Masa & Bilgi Hattı</span>
     </div>
-  </div>
+    <div class="whatsapp-icon-circle">
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="#FFFFFF">
+        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.28c-.24.68-1.39 1.3-1.92 1.38-.5.08-1.13.11-3.64-.93-2.14-.88-3.52-3.06-3.63-3.21-.11-.15-.86-1.14-.86-2.18s.54-1.55.74-1.76c.19-.21.43-.26.57-.26.15 0 .29 0 .42.01.13.01.32-.05.5.38.19.45.64 1.57.7 1.69.06.12.09.26.02.41-.08.15-.12.24-.24.38-.12.15-.25.32-.36.43-.12.12-.24.26-.1.5.14.24.63 1.04 1.35 1.68.93.83 1.71 1.09 1.95 1.21.24.12.38.1.53-.06.14-.17.62-.72.78-.97.17-.24.33-.21.55-.12.22.08 1.41.67 1.65.79.24.12.4.17.46.28.06.11.06.63-.18 1.31z"/>
+      </svg>
+    </div>
+  </a>
 
   <script src="/app.js"></script>
 </body>
