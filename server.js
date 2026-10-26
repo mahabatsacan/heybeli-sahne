@@ -77,7 +77,7 @@ app.get(['/menu', '/menü', encodeURI('/menü'), '/menu-listemiz', '/menu-listem
 });
 
 app.get(['/galeri', '/galeri/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'galeri.html'));
+  res.redirect(301, '/');
 });
 
 app.get(['/rezervasyon', '/rezervasyon/'], (req, res) => {
