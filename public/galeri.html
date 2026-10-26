@@ -9,15 +9,15 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://heybelisahne.com/galeri">
 
-  <!-- Geo & Local SEO Tags (GEO) -->
+  <!-- Geo & Local SEO Tags -->
   <meta name="geo.region" content="TR-34">
   <meta name="geo.placename" content="Kadıköy, İstanbul">
   <meta name="geo.position" content="40.963495;29.057388">
   <meta name="ICBM" content="40.963495, 29.057388">
 
-  <!-- Mobile Theme -->
-  <meta name="theme-color" content="#0B0C0E">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Mobile Theme (Warm Ivory) -->
+  <meta name="theme-color" content="#F7F4EE">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <!-- Open Graph -->
   <meta property="og:site_name" content="Heybeli Sahne">
@@ -76,7 +76,7 @@
         <ul class="nav-list">
           <li><a href="/" class="nav-link">Ana Sayfa</a></li>
           <li><a href="/program" class="nav-link">Sahne Programı</a></li>
-          <li><a href="/menu" class="nav-link">Fiks Menü</a></li>
+          <li><a href="/menu" class="nav-link">Menü</a></li>
           <li><a href="/galeri" class="nav-link active">Galeri</a></li>
           <li><a href="/rezervasyon" class="nav-link">Rezervasyon</a></li>
           <li><a href="/iletisim" class="nav-link">İletişim</a></li>
@@ -85,7 +85,7 @@
 
       <div class="header-actions">
         <a href="https://wa.me/905300000000" target="_blank" rel="noopener" class="header-whatsapp-link">WhatsApp</a>
-        <a href="/rezervasyon" class="header-reserve-btn">Masa Ayırın</a>
+        <a href="/rezervasyon" class="header-reserve-btn">Masa Rezervasyonu</a>
         <button class="mobile-toggle" id="mobile-toggle" aria-label="Menüyü Aç/Kapat">
           <span></span><span></span><span></span>
         </button>
@@ -115,87 +115,90 @@
   </header>
 
   <!-- Gallery Main -->
-  <main style="padding-top: 160px; padding-bottom: 120px;">
+  <main style="padding-top: 150px; padding-bottom: 100px;">
     <div class="container">
       <div class="section-header text-center">
         <span class="eyebrow">FOTOĞRAFLAR & DETAYLAR</span>
         <h1 class="section-title">Heybeli Sahne <em>Atmosferi</em></h1>
-        <p class="section-subtitle">Işıkların altında parlayan sahnemiz, samimi masa sohbetleri ve şeflerimizin elinden çıkan Ege meze sofraları.</p>
+        <p class="section-subtitle">Işıkların altında parlayan sahnemiz, samimi masa sohbetleri ve şeflerimizin elinden çıkan Ege meze sofraları. Fotoğraflara tıklayarak detaylı inceleyebilirsiniz.</p>
       </div>
 
-      <!-- Editorial Photo Grid -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 32px;">
+      <!-- Editorial Photo Grid with Lightbox Support -->
+      <div class="gallery-editorial-grid">
         <!-- Photo 1 -->
-        <div style="border: 1px solid var(--border-hairline); background-color: var(--bg-surface);">
-          <div style="height: 300px; overflow: hidden;">
-            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="Meyhane Masası Atmosferi" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div style="padding: 24px;">
-            <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 6px;">Masa & Zarafet</span>
-            <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); font-weight: 500;">Özenle Kurulan Akşam Sofrası</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 300;">Her detayı düşünülmüş masa düzeni ve sıcak salon atmosferi.</p>
+        <div class="gallery-card gallery-col-6">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Özenle Kurulan Akşam Sofrası">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Masa & Zarafet</span>
+            <span class="gallery-caption">Özenle Kurulan Akşam Sofrası</span>
           </div>
         </div>
 
         <!-- Photo 2 -->
-        <div style="border: 1px solid var(--border-hairline); background-color: var(--bg-surface);">
-          <div style="height: 300px; overflow: hidden;">
-            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80" alt="Canlı Sahne Galası" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div style="padding: 24px;">
-            <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 6px;">Canlı Sahne</span>
-            <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); font-weight: 500;">Gala Akşamları & Yıldızlar</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 300;">Akustik dengesi kusursuz sahnede canlı müzik performansı.</p>
+        <div class="gallery-card gallery-col-6">
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80" alt="Gala Akşamları & Canlı Sahne">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Canlı Sahne</span>
+            <span class="gallery-caption">Gala Akşamları & Sanatçılar</span>
           </div>
         </div>
 
         <!-- Photo 3 -->
-        <div style="border: 1px solid var(--border-hairline); background-color: var(--bg-surface);">
-          <div style="height: 300px; overflow: hidden;">
-            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80" alt="Ege Mezeleri" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div style="padding: 24px;">
-            <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 6px;">Gastronomi</span>
-            <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); font-weight: 500;">Günlük Hazırlanan Ege Mezeleri</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 300;">Ayvalık zeytinyağı ve taze otlarla yoğrulmuş lezzet seçkisi.</p>
+        <div class="gallery-card gallery-col-4">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Günlük Hazırlanan Ege Mezeleri">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Gastronomi</span>
+            <span class="gallery-caption">Günlük Ege Mezeleri</span>
           </div>
         </div>
 
         <!-- Photo 4 -->
-        <div style="border: 1px solid var(--border-hairline); background-color: var(--bg-surface);">
-          <div style="height: 300px; overflow: hidden;">
-            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1000&q=80" alt="Geleneksel Fasıl Nağmeleri" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div style="padding: 24px;">
-            <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 6px;">Fasıl & Akustik</span>
-            <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); font-weight: 500;">Keman ve Ud Nağmeleri</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 300;">Akşam saat 20:30'da masaları saran geleneksel fasıl faslı.</p>
+        <div class="gallery-card gallery-col-4">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="Keman ve Ud Nağmeleri ile Fasıl">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Fasıl & Akustik</span>
+            <span class="gallery-caption">Keman ve Ud Nağmeleri</span>
           </div>
         </div>
 
         <!-- Photo 5 -->
-        <div style="border: 1px solid var(--border-hairline); background-color: var(--bg-surface);">
-          <div style="height: 300px; overflow: hidden;">
-            <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=80" alt="Dost Masaları" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div style="padding: 24px;">
-            <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 6px;">Kutlama & Anlar</span>
-            <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); font-weight: 500;">Dost Meclisi & Özel Günler</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 300;">Doğum günleri, kutlamalar ve unutulmaz sohbet anları.</p>
+        <div class="gallery-card gallery-col-4">
+          <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80" alt="Dost Meclisi & Özel Günler">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Kutlama & Anlar</span>
+            <span class="gallery-caption">Dost Meclisi & Kutlamalar</span>
           </div>
         </div>
 
         <!-- Photo 6 -->
-        <div style="border: 1px solid var(--border-hairline); background-color: var(--bg-surface);">
-          <div style="height: 300px; overflow: hidden;">
-            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1000&q=80" alt="Sahne Işıkları" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div style="padding: 24px;">
-            <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 6px;">Loca Deneyimi</span>
-            <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); font-weight: 500;">VIP Loca Ayrıcalığı</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 300;">Özel karşılama, şampanya ikramı ve seçkin servis kadrosu.</p>
+        <div class="gallery-card gallery-col-6">
+          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80" alt="VIP Loca Ayrıcalığı ve Işıklar">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Loca Deneyimi</span>
+            <span class="gallery-caption">VIP Loca Ayrıcalığı</span>
           </div>
         </div>
+
+        <!-- Photo 7 -->
+        <div class="gallery-card gallery-col-6">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80" alt="Kadınlar Matinesi & Eğlence">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Özel Program</span>
+            <span class="gallery-caption">Kadınlar Matinesi & 90'lar Pop</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Reservation CTA Banner -->
+      <div style="margin-top: 80px; text-align: center; padding: 48px; background-color: var(--bg-surface); border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm);">
+        <span class="eyebrow">BU DENEYİMİ YAŞAYIN</span>
+        <h2 style="font-family: var(--font-serif); font-size: 32px; color: var(--text-primary); margin-bottom: 12px; font-weight: 500;">
+          Masanızı Şimdiden Ayırtın
+        </h2>
+        <p style="font-size: 15px; color: var(--text-secondary); max-width: 560px; margin: 0 auto 28px;">
+          Gala akşamları ve hafta sonu programlarında masalar hızla tükenmektedir.
+        </p>
+        <a href="/rezervasyon" class="btn-primary-editorial">Masa Rezervasyonu Yapın</a>
       </div>
     </div>
   </main>
@@ -249,6 +252,15 @@
       </div>
     </div>
   </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Görsel Büyütme">
+    <div class="lightbox-content">
+      <button class="lightbox-close-btn" id="lightbox-close" aria-label="Kapat">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption-text" id="lightbox-caption"></div>
+    </div>
+  </div>
 
   <!-- Sticky Mobile Action Bar -->
   <nav class="mobile-bottom-bar" aria-label="Hızlı İletişim Menüsü">

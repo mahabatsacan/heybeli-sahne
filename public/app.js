@@ -81,12 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.btn-book-event').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const eventName = btn.getAttribute('data-event');
-      const eventDate = btn.getAttribute('data-date');
       const noteInput = document.getElementById('r-note');
-      const dateInput = document.getElementById('r-date');
 
       if (noteInput && eventName) {
-        noteInput.value = `Etkinlik: ${eventName}`;
+        noteInput.value = `Etkinlik Tercihi: ${eventName}`;
       }
       
       const reserveSection = document.getElementById('rezervasyon');
@@ -104,10 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const item = btn.closest('.faq-item');
         const isOpen = item.classList.contains('active');
         
-        // Close all items
+        // Close other items
         document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
         
-        // Toggle current item
+        // Toggle clicked
         if (!isOpen) {
           item.classList.add('active');
         }
@@ -115,7 +113,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Reservation Form Submission
+  // Interactive Lightbox for Gallery Items
+  const lightbox = document.getElementById('lightbox-modal');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+
+  if (lightbox) {
+    document.querySelectorAll('.gallery-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('img');
+        const captionEl = card.querySelector('.gallery-caption');
+        if (img) {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt || 'Heybeli Sahne Fotoğrafı';
+          if (lightboxCaption) {
+            lightboxCaption.textContent = captionEl ? captionEl.textContent : (img.alt || '');
+          }
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  }
+
+  // Reservation Form Submission (Homepage / Section)
   const reserveForm = document.getElementById('reservation-form');
   const formFeedback = document.getElementById('form-feedback');
   const submitBtn = document.getElementById('submit-btn');
@@ -152,14 +195,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok && result.success) {
           formFeedback.className = 'form-feedback success';
-          formFeedback.innerText = `✓ Harika! Rezervasyon talebiniz alındı. Ekibimiz ${formData.phone} üzerinden en kısa sürede masanızı teyit edecektir.`;
+          formFeedback.innerHTML = `✓ <strong>Talebiniz Heybeli Sahne Ekibine Ulaştı!</strong><br>${result.message}`;
           reserveForm.reset();
         } else {
-          throw new Error(result.error || 'Bir hata oluştu.');
+          throw new Error(result.error || 'Rezervasyon iletilirken bir sorun oluştu.');
         }
       } catch (err) {
         formFeedback.className = 'form-feedback error';
-        formFeedback.innerText = `X Hata: ${err.message}`;
+        formFeedback.innerHTML = `✕ <strong>Hata:</strong> ${err.message}`;
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -216,9 +259,9 @@ document.addEventListener('DOMContentLoaded', () => {
         source = 'Mobil Sabit Alt Bar';
       } else if (link.closest('header, #header, .nav-actions')) {
         source = 'Üst Menü (Header)';
-      } else if (link.closest('footer, .site-footer')) {
+      } else if (link.closest('footer, .site-footer-editorial')) {
         source = 'Alt Bilgi (Footer)';
-      } else if (link.closest('#hero, .hero-section')) {
+      } else if (link.closest('#hero, .hero-editorial')) {
         source = 'Hero / Sahne Alanı';
       } else if (link.closest('.schedule-item, .event-card')) {
         source = 'Etkinlik / Program';
@@ -232,4 +275,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
