@@ -19,8 +19,8 @@
       --text-main: #ECEEF2;
       --text-muted: #8E95A5;
       --text-subtle: #5C6272;
-      --border-subtle: rgba(255, 255, 255, 0.07);
-      --border-gold: rgba(196, 154, 85, 0.3);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(196, 154, 85, 0.35);
       --badge-new: #3B82F6;
       --badge-success: #10B981;
       --badge-danger: #EF4444;
@@ -51,7 +51,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Auth Overlay */
+    /* Auth Screen */
     #auth-screen {
       position: fixed;
       inset: 0;
@@ -65,23 +65,23 @@
 
     .auth-card {
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       background: var(--bg-surface);
       border: 1px solid var(--border-gold);
       border-radius: var(--radius-lg);
-      padding: 40px 32px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      padding: 44px 36px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
       text-align: center;
       animation: fadeIn 0.4s ease-out;
     }
 
     .auth-brand {
       font-family: var(--font-serif);
-      font-size: 26px;
+      font-size: 28px;
       letter-spacing: 0.15em;
       color: var(--gold-primary);
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .auth-subtitle {
@@ -99,7 +99,7 @@
 
     .form-group label {
       display: block;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -107,12 +107,12 @@
       margin-bottom: 6px;
     }
 
-    .input-field {
+    .input-field, .select-field, .textarea-field {
       width: 100%;
       background: var(--bg-base);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 12px 14px;
+      padding: 11px 14px;
       color: var(--text-main);
       font-family: var(--font-sans);
       font-size: 14px;
@@ -120,9 +120,14 @@
       transition: all 0.2s ease;
     }
 
-    .input-field:focus {
+    .input-field:focus, .select-field:focus, .textarea-field:focus {
       border-color: var(--gold-primary);
       box-shadow: 0 0 0 3px rgba(196, 154, 85, 0.15);
+    }
+
+    .textarea-field {
+      resize: vertical;
+      min-height: 80px;
     }
 
     .btn {
@@ -130,7 +135,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 11px 18px;
+      padding: 10px 18px;
       border-radius: var(--radius-md);
       font-size: 13px;
       font-weight: 600;
@@ -159,7 +164,7 @@
     .btn-outline:hover {
       border-color: var(--text-main);
       color: var(--text-main);
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     .btn-danger-outline {
@@ -174,7 +179,7 @@
     }
 
     .btn-sm {
-      padding: 6px 10px;
+      padding: 6px 12px;
       font-size: 12px;
       border-radius: var(--radius-sm);
     }
@@ -186,14 +191,13 @@
       margin-top: 8px;
     }
 
-    /* Admin Layout */
+    /* Admin App Layout */
     #admin-app {
       display: none;
       flex-direction: column;
       min-height: 100vh;
     }
 
-    /* Header */
     .admin-header {
       background: var(--bg-surface);
       border-bottom: 1px solid var(--border-subtle);
@@ -215,7 +219,7 @@
 
     .brand-title {
       font-family: var(--font-serif);
-      font-size: 20px;
+      font-size: 22px;
       letter-spacing: 0.12em;
       color: var(--gold-primary);
       text-transform: uppercase;
@@ -226,7 +230,7 @@
       font-size: 11px;
       background: rgba(196, 154, 85, 0.12);
       color: var(--gold-light);
-      padding: 3px 8px;
+      padding: 3px 10px;
       border-radius: 999px;
       border: 1px solid var(--border-gold);
       letter-spacing: 0.05em;
@@ -248,40 +252,28 @@
       gap: 14px;
     }
 
-    .live-clock {
-      color: var(--text-muted);
-      font-size: 12px;
-      font-variant-numeric: tabular-nums;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* Main Container */
     .admin-container {
-      max-width: 1400px;
+      max-width: 1440px;
       width: 100%;
       margin: 0 auto;
-      padding: 28px 24px;
+      padding: 24px;
       flex: 1;
     }
 
-    /* KPI Stat Grid */
+    /* Top KPI Cards */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-      margin-bottom: 28px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
     .stat-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      transition: all 0.2s ease;
     }
 
     .stat-card:hover {
@@ -289,33 +281,18 @@
       transform: translateY(-2px);
     }
 
-    .stat-icon {
-      font-size: 22px;
-      margin-bottom: 12px;
-      display: inline-block;
-    }
-
     .stat-label {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       color: var(--text-muted);
       margin-bottom: 4px;
-      font-weight: 500;
     }
 
     .stat-value {
-      font-size: 32px;
+      font-size: 26px;
       font-weight: 700;
       color: var(--text-main);
-      font-variant-numeric: tabular-nums;
-      line-height: 1.1;
-    }
-
-    .stat-subtext {
-      font-size: 11px;
-      color: var(--text-subtle);
-      margin-top: 6px;
     }
 
     /* Navigation Tabs */
@@ -324,15 +301,16 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border-subtle);
-      margin-bottom: 22px;
-      padding-bottom: 2px;
-      gap: 16px;
+      margin-bottom: 24px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
     .nav-tabs {
       display: flex;
-      gap: 8px;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
     }
 
     .tab-btn {
@@ -340,15 +318,16 @@
       border: none;
       color: var(--text-muted);
       font-family: var(--font-sans);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
-      padding: 10px 18px;
+      padding: 10px 16px;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
       gap: 8px;
+      white-space: nowrap;
     }
 
     .tab-btn:hover {
@@ -374,77 +353,42 @@
       color: var(--gold-light);
     }
 
-    .tab-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* Panels & Tables */
+    .tab-content {
+      display: none;
     }
 
-    /* Filter Toolbar */
-    .filter-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
     }
 
-    .search-box {
-      flex: 1;
-      min-width: 260px;
-      max-width: 440px;
-      position: relative;
-    }
-
-    .search-input {
-      width: 100%;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 10px 14px 10px 36px;
-      color: var(--text-main);
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .search-input:focus {
-      border-color: var(--gold-primary);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      font-size: 14px;
-      pointer-events: none;
-    }
-
-    .filter-select {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
-      color: var(--text-main);
-      font-size: 13px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .filter-select:focus {
-      border-color: var(--gold-primary);
-    }
-
-    /* Card Panels & Tables */
     .panel {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .panel-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--text-main);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .table-responsive {
@@ -465,153 +409,126 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      padding: 14px 18px;
+      padding: 12px 16px;
       border-bottom: 1px solid var(--border-subtle);
       white-space: nowrap;
     }
 
     td {
-      padding: 14px 18px;
+      padding: 12px 16px;
       border-bottom: 1px solid var(--border-subtle);
       vertical-align: middle;
       color: var(--text-main);
     }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
-
     tr:hover td {
-      background: rgba(255, 255, 255, 0.015);
+      background: rgba(255, 255, 255, 0.02);
     }
 
-    /* Status Badges */
+    /* Badges */
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 999px;
       font-size: 11px;
       font-weight: 600;
-      padding: 4px 9px;
-      border-radius: 999px;
-      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .badge-yeni {
-      background: rgba(59, 130, 246, 0.12);
+      background: rgba(59, 130, 246, 0.15);
       color: #60A5FA;
-      border: 1px solid rgba(59, 130, 246, 0.25);
+      border: 1px solid rgba(59, 130, 246, 0.3);
     }
 
     .badge-onaylandi {
-      background: rgba(16, 185, 129, 0.12);
+      background: rgba(16, 185, 129, 0.15);
       color: #34D399;
-      border: 1px solid rgba(16, 185, 129, 0.25);
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
     .badge-iptal {
-      background: rgba(239, 68, 68, 0.12);
+      background: rgba(239, 68, 68, 0.15);
       color: #F87171;
-      border: 1px solid rgba(239, 68, 68, 0.25);
+      border: 1px solid rgba(239, 68, 68, 0.3);
     }
 
-    .badge-wa {
-      background: rgba(37, 211, 102, 0.12);
-      color: #4ADE80;
-      border: 1px solid rgba(37, 211, 102, 0.25);
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
     }
 
-    .badge-call {
-      background: rgba(56, 189, 248, 0.12);
-      color: #38BDF8;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-    }
-
-    /* Action Links & Dropdowns */
-    .guest-name {
-      font-weight: 600;
-      color: #FFFFFF;
-      font-size: 14px;
-    }
-
-    .phone-link {
-      color: var(--text-main);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-weight: 500;
-      transition: color 0.15s ease;
-    }
-
-    .phone-link:hover {
-      color: var(--gold-light);
-    }
-
-    .btn-quick-wa {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(37, 211, 102, 0.12);
-      color: #25D366;
-      border: 1px solid rgba(37, 211, 102, 0.3);
-      padding: 4px 8px;
-      border-radius: var(--radius-sm);
-      font-size: 11px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      margin-left: 6px;
-    }
-
-    .btn-quick-wa:hover {
-      background: #25D366;
-      color: #0A0A0C;
-    }
-
-    .status-select {
-      background: var(--bg-base);
+    .item-card {
+      background: var(--bg-surface-elevated);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      color: var(--text-main);
-      font-size: 12px;
-      padding: 5px 8px;
-      cursor: pointer;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .status-select:focus {
-      border-color: var(--gold-primary);
-    }
-
-    .note-text {
-      color: var(--text-muted);
-      font-size: 12px;
-      max-width: 220px;
-      white-space: nowrap;
+      border-radius: var(--radius-md);
       overflow: hidden;
-      text-overflow: ellipsis;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
     }
 
-    .empty-state {
-      padding: 48px 24px;
-      text-align: center;
+    .item-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-2px);
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .card-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-meta {
+      font-size: 11px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 12px;
       color: var(--text-muted);
-    }
-
-    .empty-icon {
-      font-size: 36px;
       margin-bottom: 12px;
-      opacity: 0.5;
+      line-height: 1.5;
+      flex: 1;
     }
 
-    /* Modal */
-    .modal-overlay {
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 12px;
+      margin-top: auto;
+    }
+
+    /* Modals */
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
       z-index: 999;
       display: none;
       align-items: center;
@@ -619,681 +536,1450 @@
       padding: 20px;
     }
 
+    .modal-backdrop.active {
+      display: flex;
+      animation: fadeIn 0.2s ease-out;
+    }
+
     .modal-card {
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
       background: var(--bg-surface);
       border: 1px solid var(--border-gold);
       border-radius: var(--radius-lg);
-      max-width: 480px;
-      width: 100%;
       padding: 28px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .modal-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 10px;
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--gold-light);
     }
 
-    .modal-desc {
+    .modal-close {
+      background: transparent;
+      border: none;
       color: var(--text-muted);
-      font-size: 13px;
-      margin-bottom: 22px;
-      line-height: 1.5;
+      font-size: 20px;
+      cursor: pointer;
     }
 
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
+    .modal-close:hover {
+      color: #FFF;
     }
 
     /* Toast Notification */
-    #toast {
+    #toast-notification {
       position: fixed;
       bottom: 24px;
       right: 24px;
       background: var(--bg-surface-elevated);
-      border: 1px solid var(--gold-primary);
-      color: var(--text-main);
+      border: 1px solid var(--border-gold);
       padding: 12px 20px;
       border-radius: var(--radius-md);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-      font-size: 13px;
-      font-weight: 500;
-      z-index: 10000;
+      color: var(--text-main);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 99999;
+      transform: translateY(100px);
       opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.3s ease;
-      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    #toast.show {
-      opacity: 1;
+    #toast-notification.show {
       transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Media Grid */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .media-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .media-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .media-card-info {
+      padding: 10px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .copy-url-btn {
+      width: 100%;
+      padding: 5px;
+      font-size: 11px;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.97); }
+      from { opacity: 0; transform: scale(0.98); }
       to { opacity: 1; transform: scale(1); }
-    }
-
-    @media (max-width: 768px) {
-      .admin-header {
-        padding: 12px 16px;
-      }
-      .admin-container {
-        padding: 16px 12px;
-      }
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-      .stat-card {
-        padding: 14px;
-      }
-      .stat-value {
-        font-size: 24px;
-      }
-      .tabs-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .nav-tabs {
-        width: 100%;
-        overflow-x: auto;
-      }
-      .filter-toolbar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .search-box {
-        max-width: 100%;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Auth Screen -->
+  <!-- Auth Screen Overlay -->
   <div id="auth-screen">
     <div class="auth-card">
-      <div class="auth-brand">Heybeli Sahne</div>
-      <div class="auth-subtitle">Yönetici Giriş Paneli &bull; v1.0</div>
-      <form class="auth-form" id="login-form">
+      <h1 class="auth-brand">Heybeli Sahne</h1>
+      <p class="auth-subtitle">Yönetici Paneli Girişi</p>
+
+      <form id="auth-form" class="auth-form">
         <div class="form-group">
-          <label for="admin-password">Yönetici Şifresi</label>
-          <input type="password" id="admin-password" class="input-field" placeholder="Şifrenizi giriniz..." autocomplete="current-password" autofocus required>
+          <label for="admin-pass">Yönetici Şifresi</label>
+          <input type="password" id="admin-pass" class="input-field" placeholder="••••••••" required autofocus>
         </div>
-        <button type="submit" class="btn btn-gold" id="login-btn">
-          <span>Giriş Yap</span>
-          <span>&rarr;</span>
-        </button>
-        <div class="auth-error" id="auth-error">Hatalı şifre. Lütfen tekrar deneyiniz.</div>
+        <button type="submit" class="btn btn-gold" id="btn-login" style="width: 100%; margin-top: 8px;">Giriş Yap</button>
+        <div id="auth-error" class="auth-error">Hatalı yönetici şifresi.</div>
       </form>
     </div>
   </div>
 
-  <!-- Admin Application -->
+  <!-- Main Admin App -->
   <div id="admin-app">
-    <!-- Top Header -->
     <header class="admin-header">
       <div class="brand-wrap">
-        <span class="status-dot"></span>
         <span class="brand-title">Heybeli Sahne</span>
-        <span class="brand-tag">YÖNETİM v1.0</span>
+        <span class="brand-tag"><span class="status-dot"></span>Tam Dinamik Yönetim Paneli</span>
       </div>
+
       <div class="header-actions">
-        <div class="live-clock" id="live-clock">
-          <span>🕒</span>
-          <span id="clock-text">--:--:--</span>
-        </div>
-        <button class="btn btn-outline btn-sm" id="btn-refresh" title="Verileri Yenile">
-          <span>🔄</span>
-          <span>Yenile</span>
-        </button>
-        <button class="btn btn-danger-outline btn-sm" id="btn-logout" title="Oturumu Kapat">
-          <span>Çıkış</span>
-        </button>
+        <a href="/" target="_blank" class="btn btn-outline btn-sm">🌐 Siteyi Aç</a>
+        <button id="btn-logout" class="btn btn-outline btn-sm">Çıkış Yap</button>
       </div>
     </header>
 
-    <!-- Main Content Area -->
     <main class="admin-container">
-      <!-- KPI Stats -->
-      <section class="stats-grid">
+      <!-- Top KPIs -->
+      <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-icon">🍾</div>
           <div class="stat-label">Toplam Rezervasyon</div>
-          <div class="stat-value" id="stat-res-total">0</div>
-          <div class="stat-subtext" id="stat-res-breakdown">0 Yeni &bull; 0 Onaylı</div>
+          <div class="stat-value" id="kpi-total-res">0</div>
         </div>
-
         <div class="stat-card">
-          <div class="stat-icon">📞</div>
-          <div class="stat-label">Telefon Aramaları</div>
-          <div class="stat-value" id="stat-calls-total">0</div>
-          <div class="stat-subtext">tel: Buton Tıklamaları</div>
+          <div class="stat-label">Yeni Talepler</div>
+          <div class="stat-value" id="kpi-new-res" style="color: #60A5FA;">0</div>
         </div>
-
         <div class="stat-card">
-          <div class="stat-icon">💬</div>
-          <div class="stat-label">WhatsApp İletişimleri</div>
-          <div class="stat-value" id="stat-wa-total">0</div>
-          <div class="stat-subtext">wa.me Buton Tıklamaları</div>
+          <div class="stat-label">Aktif Slider Afişleri</div>
+          <div class="stat-value" id="kpi-sliders">0</div>
         </div>
-
         <div class="stat-card">
-          <div class="stat-icon">⚡</div>
-          <div class="stat-label">Bugünkü Hareketlilik</div>
-          <div class="stat-value" id="stat-today-total">0</div>
-          <div class="stat-subtext">Bugün Gelen Form + Tıklama</div>
+          <div class="stat-label">Aylık Etkinlikler</div>
+          <div class="stat-value" id="kpi-events">0</div>
         </div>
-      </section>
+        <div class="stat-card">
+          <div class="stat-label">Menü Ürünleri</div>
+          <div class="stat-value" id="kpi-menu-items">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">WhatsApp & Arama</div>
+          <div class="stat-value" id="kpi-clicks">0</div>
+        </div>
+      </div>
 
-      <!-- Tabs Header -->
-      <section class="tabs-bar">
+      <!-- Navigation Tabs -->
+      <div class="tabs-bar">
         <div class="nav-tabs">
-          <button class="tab-btn active" data-tab="reservations">
-            <span>🍾 Rezervasyon Talepleri</span>
-            <span class="tab-badge" id="tab-res-count">0</span>
-          </button>
-          <button class="tab-btn" data-tab="clicks">
-            <span>📊 İletişim &amp; Tıklama Kayıtları</span>
-            <span class="tab-badge" id="tab-clicks-count">0</span>
-          </button>
+          <button class="tab-btn active" data-tab="tab-reservations">📋 Rezervasyonlar <span class="tab-badge" id="badge-res-count">0</span></button>
+          <button class="tab-btn" data-tab="tab-sliders">🖼️ Slider Afişleri <span class="tab-badge" id="badge-sliders-count">0</span></button>
+          <button class="tab-btn" data-tab="tab-events">📅 Aylık Program & Konserler <span class="tab-badge" id="badge-events-count">0</span></button>
+          <button class="tab-btn" data-tab="tab-menu">🍽️ Menü & Kategoriler <span class="tab-badge" id="badge-menu-count">0</span></button>
+          <button class="tab-btn" data-tab="tab-settings">⚙️ Site & İletişim Ayarları</button>
+          <button class="tab-btn" data-tab="tab-media">📁 Görsel Yükle & Medya</button>
         </div>
+      </div>
 
-        <div class="tab-actions">
-          <button class="btn btn-outline btn-sm" id="btn-export-csv">
-            <span>📥</span>
-            <span>Excel / CSV İndir</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- Tab 1: Reservations -->
-      <section id="view-reservations" class="tab-view">
-        <div class="filter-toolbar">
-          <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="search-res" class="search-input" placeholder="İsim veya telefon numarasıyla ara...">
+      <!-- TAB 1: REZERVASYONLAR -->
+      <div id="tab-reservations" class="tab-content active">
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Gelen Masa Rezervasyon Talepleri</h2>
+            <div style="display: flex; gap: 10px;">
+              <button id="btn-export-csv" class="btn btn-outline btn-sm">📥 Excel / CSV İndir</button>
+              <button onclick="loadDashboardData()" class="btn btn-outline btn-sm">🔄 Yenile</button>
+            </div>
           </div>
-          <div style="display: flex; gap: 10px;">
-            <select id="filter-status" class="filter-select">
+
+          <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+            <input type="text" id="res-search" class="input-field" placeholder="İsim, telefon veya kod ara..." style="max-width: 320px;" oninput="filterReservations()">
+            <select id="res-status-filter" class="select-field" style="max-width: 200px;" onchange="filterReservations()">
               <option value="all">Tüm Durumlar</option>
-              <option value="yeni">Sadece Yeniler</option>
-              <option value="onaylandi">Onaylananlar</option>
-              <option value="iptal">İptal Edilenler</option>
+              <option value="yeni">Yeni (Bekleyen)</option>
+              <option value="onaylandi">Onaylandı</option>
+              <option value="iptal">İptal Edildi</option>
             </select>
           </div>
-        </div>
 
-        <div class="panel">
           <div class="table-responsive">
             <table>
               <thead>
                 <tr>
-                  <th>Talep ID</th>
-                  <th>Misafir</th>
-                  <th>İletişim &amp; Hızlı Mesaj</th>
-                  <th>Tarih</th>
-                  <th>Kişi</th>
-                  <th>Masa Türü</th>
-                  <th>Özel Not</th>
+                  <th>Kod</th>
+                  <th>Müşteri Bilgisi</th>
+                  <th>Tarih & Kişi</th>
+                  <th>Masa Tercihi</th>
+                  <th>Özel İstek / Not</th>
                   <th>Durum</th>
-                  <th style="text-align: right;">İşlem</th>
+                  <th>İşlemler</th>
                 </tr>
               </thead>
-              <tbody id="reservations-table-body">
-                <!-- Dynamically Populated -->
+              <tbody id="reservations-tbody">
+                <tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Yükleniyor...</td></tr>
               </tbody>
             </table>
           </div>
-          <div id="res-empty" class="empty-state" style="display: none;">
-            <div class="empty-icon">📭</div>
-            <div>Henüz eşleşen bir rezervasyon talebi bulunamadı.</div>
-          </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Tab 2: Click Analytics -->
-      <section id="view-clicks" class="tab-view" style="display: none;">
-        <div class="filter-toolbar">
-          <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="search-clicks" class="search-input" placeholder="Sayfa veya kaynak buton ara...">
-          </div>
-          <div>
-            <select id="filter-click-type" class="filter-select">
-              <option value="all">Tüm Butonlar</option>
-              <option value="whatsapp">Sadece WhatsApp</option>
-              <option value="call">Sadece Telefon</option>
-            </select>
-          </div>
-        </div>
-
+      <!-- TAB 2: SLIDER AFİŞLERİ -->
+      <div id="tab-sliders" class="tab-content">
         <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Anasayfa Hero Slider & Manşet Yönetimi</h2>
+            <button onclick="openSliderModal()" class="btn btn-gold btn-sm">➕ Yeni Slider Ekle</button>
+          </div>
+          <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 13px;">
+            Buraya eklediğiniz slider manşetleri sitenizin anasayfasında en üstte görsel ve başlık olarak ziyaretçilere sunulur.
+          </p>
+
+          <div id="sliders-grid" class="cards-grid">
+            <!-- Dynamic Sliders -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: AYLIK PROGRAM & KONSERLER -->
+      <div id="tab-events" class="tab-content">
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Aylık Sahne Programı & Konser Yönetimi</h2>
+            <button onclick="openEventModal()" class="btn btn-gold btn-sm">➕ Yeni Program / Konser Ekle</button>
+          </div>
+          <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 13px;">
+            Canlı müzik konserleri, kadınlar matinesi, gala geceleri ve fasıl programlarını buradan ekleyip güncelleyebilir, afiş görsellerini değiştirebilirsiniz.
+          </p>
+
+          <div id="events-grid" class="cards-grid">
+            <!-- Dynamic Events -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: MENÜ & KATEGORİLER -->
+      <div id="tab-menu" class="tab-content">
+        <!-- Categories Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Menü Kategorileri</h2>
+            <button onclick="openCategoryModal()" class="btn btn-gold btn-sm">➕ Yeni Kategori Ekle</button>
+          </div>
+          <div id="categories-grid" class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+            <!-- Dynamic Categories -->
+          </div>
+        </div>
+
+        <!-- Menu Items Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Menü Ürünleri & Mezeler</h2>
+            <div style="display: flex; gap: 10px;">
+              <select id="menu-cat-filter" class="select-field" style="width: auto;" onchange="renderMenuItems()">
+                <option value="all">Tüm Kategoriler</option>
+              </select>
+              <button onclick="openMenuItemModal()" class="btn btn-gold btn-sm">➕ Yeni Ürün Ekle</button>
+            </div>
+          </div>
           <div class="table-responsive">
             <table>
               <thead>
                 <tr>
-                  <th>Kayıt ID</th>
-                  <th>Eylem Türü</th>
-                  <th>Kaynak Buton</th>
-                  <th>Sayfa</th>
-                  <th>Cihaz</th>
-                  <th>Zaman</th>
+                  <th>Görsel</th>
+                  <th>Ürün Adı</th>
+                  <th>Kategori</th>
+                  <th>Fiyat / Etiket</th>
+                  <th>Açıklama</th>
+                  <th>Rozet</th>
+                  <th>İşlemler</th>
                 </tr>
               </thead>
-              <tbody id="clicks-table-body">
-                <!-- Dynamically Populated -->
+              <tbody id="menu-items-tbody">
+                <!-- Dynamic Items -->
               </tbody>
             </table>
           </div>
-          <div id="clicks-empty" class="empty-state" style="display: none;">
-            <div class="empty-icon">📊</div>
-            <div>Henüz tıklama kaydı bulunmuyor.</div>
+        </div>
+      </div>
+
+      <!-- TAB 5: SİTE & İLETİŞİM AYARLARI -->
+      <div id="tab-settings" class="tab-content">
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Site Genel Bilgileri & İletişim Ayarları</h2>
+            <button onclick="saveSiteSettings()" class="btn btn-gold">💾 Tüm Ayarları Kaydet</button>
+          </div>
+          <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 13px;">
+            Burada yapacağınız tüm değişiklikler (telefon, WhatsApp, adres, çalışma saatleri, duyurular) sitenin her yerinde otomatik ve anlık olarak güncellenir.
+          </p>
+
+          <form id="settings-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <label>Mekan Adı</label>
+              <input type="text" id="set-venueName" class="input-field" required>
+            </div>
+            <div class="form-group">
+              <label>Slogan / Alt Başlık</label>
+              <input type="text" id="set-tagline" class="input-field">
+            </div>
+
+            <div class="form-group">
+              <label>Rezervasyon Telefonu</label>
+              <input type="text" id="set-phone" class="input-field" placeholder="0530 527 91 77" required>
+            </div>
+            <div class="form-group">
+              <label>WhatsApp Numarası (Görünen)</label>
+              <input type="text" id="set-whatsapp" class="input-field" placeholder="0530 866 43 21" required>
+            </div>
+
+            <div class="form-group">
+              <label>WhatsApp Numarası (Sayısal - Uluslararası Format)</label>
+              <input type="text" id="set-whatsappDirect" class="input-field" placeholder="905308664321" required>
+            </div>
+            <div class="form-group">
+              <label>E-Posta Adresi</label>
+              <input type="email" id="set-email" class="input-field">
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+              <label>Açık Adres</label>
+              <input type="text" id="set-address" class="input-field" placeholder="Kordonboyu, Turgut Özal Blv. NO:53/A, 34860 Kartal / İstanbul" required>
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+              <label>Google Haritalar Linki (Maps URL)</label>
+              <input type="text" id="set-mapUrl" class="input-field">
+            </div>
+
+            <div class="form-group">
+              <label>Çalışma Gün ve Saatleri</label>
+              <input type="text" id="set-workingHours" class="input-field" placeholder="Çarşamba - Pazar: 19:30 - 02:00">
+            </div>
+            <div class="form-group">
+              <label>Canlı Müzik & Sahne Saatleri</label>
+              <input type="text" id="set-musicHours" class="input-field" placeholder="20:30 Fasıl & DJ | 21:45 Canlı Sahne">
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+              <label>Üst Bant / Duyuru Metni</label>
+              <input type="text" id="set-announcementText" class="input-field" placeholder="Kartal Sahil'de Ege Lezzetleri ve Canlı Performanslar...">
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+              <label>Instagram Profil Linki</label>
+              <input type="text" id="set-instagram" class="input-field" placeholder="https://instagram.com/heybelisahne">
+            </div>
+          </form>
+          <div style="margin-top: 24px; text-align: right;">
+            <button onclick="saveSiteSettings()" class="btn btn-gold">💾 Tüm Ayarları Kaydet</button>
           </div>
         </div>
-      </section>
+      </div>
+
+      <!-- TAB 6: GÖRSEL YÜKLE & MEDYA -->
+      <div id="tab-media" class="tab-content">
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Görsel Yükleme & Medya Kütüphanesi</h2>
+          </div>
+          <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 13px;">
+            Bilgisayarınızdan afiş, meze veya sahne fotoğrafları yükleyebilir, tek tıkla kopyalayarak slider, program ve menü ürünlerinde kullanabilirsiniz.
+          </p>
+
+          <!-- Upload Box -->
+          <div style="border: 2px dashed var(--border-gold); border-radius: var(--radius-md); padding: 32px; text-align: center; margin-bottom: 24px; background: rgba(196,154,85,0.03);">
+            <input type="file" id="media-file-input" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
+            <p style="font-size: 16px; color: var(--gold-light); margin-bottom: 8px;">Görsel Dosyası Seçin veya Buraya Sürükleyin</p>
+            <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 16px;">Desteklenen formatlar: JPG, PNG, WEBP, GIF, SVG (Maks. 20MB)</p>
+            <button onclick="document.getElementById('media-file-input').click()" class="btn btn-gold">📂 Dosya Seç ve Yükle</button>
+          </div>
+
+          <!-- Media Grid -->
+          <div id="media-library-grid" class="media-grid">
+            <!-- Dynamic uploaded media -->
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 
-  <!-- Delete Confirm Modal -->
-  <div class="modal-overlay" id="delete-modal">
+  <!-- MODAL: SLIDER EKLE / DÜZENLE -->
+  <div id="slider-modal" class="modal-backdrop">
     <div class="modal-card">
-      <div class="modal-title">Rezervasyonu Sil</div>
-      <div class="modal-desc" id="delete-modal-text">Bu rezervasyon kaydını kalıcı olarak silmek istediğinizden emin misiniz?</div>
-      <div class="modal-actions">
-        <button class="btn btn-outline btn-sm" id="btn-modal-cancel">Vazgeç</button>
-        <button class="btn btn-danger-outline btn-sm" id="btn-modal-confirm">Evet, Sil</button>
+      <div class="modal-header">
+        <h3 class="modal-title" id="slider-modal-title">Yeni Slider Manşeti Ekle</h3>
+        <button class="modal-close" onclick="closeModal('slider-modal')">✕</button>
       </div>
+      <form id="slider-form" onsubmit="handleSliderSubmit(event)">
+        <input type="hidden" id="slider-id">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Üst Küçük Başlık (Eyebrow)</label>
+          <input type="text" id="slider-subtitle" class="input-field" placeholder="Örn: KARTAL SAHİL'DE HER AKŞAM YENİ BİR HİKAYE">
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Ana Manşet Başlığı *</label>
+          <input type="text" id="slider-title" class="input-field" placeholder="Örn: İstanbul Meyhane Zarafeti & Canlı Sahne" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Açıklama Metni</label>
+          <textarea id="slider-desc" class="textarea-field" placeholder="Kısa tanıtım yazısı..."></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Görsel URL veya Yükle *</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="slider-image" class="input-field" placeholder="https://... veya /uploads/..." required>
+            <button type="button" class="btn btn-outline btn-sm" onclick="triggerQuickUpload('slider-image')">Yükle</button>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+          <div class="form-group">
+            <label>Buton Metni</label>
+            <input type="text" id="slider-btnText" class="input-field" placeholder="Masa Rezervasyonu">
+          </div>
+          <div class="form-group">
+            <label>Buton Linki</label>
+            <input type="text" id="slider-btnLink" class="input-field" placeholder="#rezervasyon veya /program">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;">
+          <div class="form-group">
+            <label>Sıralama</label>
+            <input type="number" id="slider-order" class="input-field" value="1">
+          </div>
+          <div class="form-group" style="display: flex; align-items: center; margin-top: 20px;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none;">
+              <input type="checkbox" id="slider-isActive" checked> Yayında / Aktif
+            </label>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('slider-modal')">İptal</button>
+          <button type="submit" class="btn btn-gold">Kaydet</button>
+        </div>
+      </form>
     </div>
   </div>
 
-  <!-- Toast -->
-  <div id="toast">Bildirim mesajı</div>
+  <!-- MODAL: ETKİNLİK / PROGRAM EKLE / DÜZENLE -->
+  <div id="event-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="event-modal-title">Yeni Sahne Programı Ekle</h3>
+        <button class="modal-close" onclick="closeModal('event-modal')">✕</button>
+      </div>
+      <form id="event-form" onsubmit="handleEventSubmit(event)">
+        <input type="hidden" id="event-id">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Program / Konser Başlığı *</label>
+          <input type="text" id="event-title" class="input-field" placeholder="Örn: Sakiler Canlı Sahne & Büyük Gala" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+          <div class="form-group">
+            <label>Sanatçı / Grup Adı</label>
+            <input type="text" id="event-artist" class="input-field" placeholder="Örn: Sakiler">
+          </div>
+          <div class="form-group">
+            <label>Kategori</label>
+            <select id="event-category" class="select-field">
+              <option value="canli-muzik">Canlı Müzik</option>
+              <option value="unlu-sanatcilar">Büyük Gala & Ünlü Sanatçı</option>
+              <option value="matine">Kadınlar Matinesi</option>
+              <option value="meyhane">Geleneksel Fasıl</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+          <div class="form-group">
+            <label>Tarih *</label>
+            <input type="text" id="event-date" class="input-field" placeholder="Örn: 25 Ekim Cuma" required>
+          </div>
+          <div class="form-group">
+            <label>Saat</label>
+            <input type="text" id="event-time" class="input-field" placeholder="21:30" value="21:30">
+          </div>
+          <div class="form-group">
+            <label>Rozet (Badge)</label>
+            <input type="text" id="event-badge" class="input-field" placeholder="Bu Cuma, Gala vb.">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Afiş Görseli URL veya Yükle *</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="event-image" class="input-field" placeholder="https://... veya /uploads/..." required>
+            <button type="button" class="btn btn-outline btn-sm" onclick="triggerQuickUpload('event-image')">Yükle</button>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Program Detay Açıklaması</label>
+          <textarea id="event-description" class="textarea-field" placeholder="Gecenin ayrıntıları ve atmosferi..."></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Öne Çıkan Özellikler (Her satıra bir özellik)</label>
+          <textarea id="event-highlights" class="textarea-field" placeholder="Özel Fiks Menü Dahil&#10;Canlı Fasıl Açılışı&#10;DJ Performans"></textarea>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;">
+          <div class="form-group">
+            <label>Rezervasyon Notu / Bilet Bilgisi</label>
+            <input type="text" id="event-ticketInfo" class="input-field" placeholder="Fiks Menü + Konser Girişi Dahil">
+          </div>
+          <div class="form-group" style="display: flex; align-items: center; margin-top: 20px;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none;">
+              <input type="checkbox" id="event-isSoldOut"> Yerler Tükendi (Sold Out)
+            </label>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('event-modal')">İptal</button>
+          <button type="submit" class="btn btn-gold">Kaydet</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
+  <!-- MODAL: KATEGORİ EKLE / DÜZENLE -->
+  <div id="category-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="category-modal-title">Yeni Menü Kategorisi Ekle</h3>
+        <button class="modal-close" onclick="closeModal('category-modal')">✕</button>
+      </div>
+      <form id="category-form" onsubmit="handleCategorySubmit(event)">
+        <input type="hidden" id="category-id">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Kategori Adı *</label>
+          <input type="text" id="category-name" class="input-field" placeholder="Örn: MEZELER" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Etiket / Üst Başlık</label>
+          <input type="text" id="category-tag" class="input-field" placeholder="Örn: EGE & AKDENİZ">
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Kısa Açıklama</label>
+          <input type="text" id="category-desc" class="input-field" placeholder="Örn: Girit ezmesi, atom, köz patlıcan...">
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Kategori Kart Görseli *</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="category-image" class="input-field" placeholder="https://... veya /uploads/..." required>
+            <button type="button" class="btn btn-outline btn-sm" onclick="triggerQuickUpload('category-image')">Yükle</button>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label>Sıralama Numarası</label>
+          <input type="number" id="category-order" class="input-field" value="1">
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('category-modal')">İptal</button>
+          <button type="submit" class="btn btn-gold">Kaydet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: MENÜ ÜRÜNÜ EKLE / DÜZENLE -->
+  <div id="menu-item-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="menu-item-modal-title">Yeni Menü Ürünü Ekle</h3>
+        <button class="modal-close" onclick="closeModal('menu-item-modal')">✕</button>
+      </div>
+      <form id="menu-item-form" onsubmit="handleMenuItemSubmit(event)">
+        <input type="hidden" id="menu-item-id">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+          <div class="form-group">
+            <label>Kategori *</label>
+            <select id="menu-item-category" class="select-field" required>
+              <!-- Dynamic Categories -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ürün Adı *</label>
+            <input type="text" id="menu-item-name" class="input-field" placeholder="Örn: Girit Ezmesi" required>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Açıklama / Malzemeler</label>
+          <textarea id="menu-item-desc" class="textarea-field" placeholder="Ezine peyniri, ceviz, taze fesleğen ve sızma zeytinyağı..."></textarea>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+          <div class="form-group">
+            <label>Fiyat veya Etiket</label>
+            <input type="text" id="menu-item-price" class="input-field" placeholder="Örn: Günlük Taze veya ₺240">
+          </div>
+          <div class="form-group">
+            <label>Özel Rozet (Opsiyonel)</label>
+            <input type="text" id="menu-item-badge" class="input-field" placeholder="Şefin İmzası, Popüler vb.">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Ürün Görseli (Opsiyonel)</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="menu-item-image" class="input-field" placeholder="https://... veya /uploads/...">
+            <button type="button" class="btn btn-outline btn-sm" onclick="triggerQuickUpload('menu-item-image')">Yükle</button>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;">
+          <div class="form-group">
+            <label>Sıralama</label>
+            <input type="number" id="menu-item-order" class="input-field" value="1">
+          </div>
+          <div class="form-group" style="display: flex; align-items: center; margin-top: 20px;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none;">
+              <input type="checkbox" id="menu-item-isAvailable" checked> Menüde Mevcut
+            </label>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('menu-item-modal')">İptal</button>
+          <button type="submit" class="btn btn-gold">Kaydet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hidden Quick Uploader Input -->
+  <input type="file" id="quick-uploader-input" accept="image/*" style="display: none;" onchange="handleQuickUpload(event)">
+
+  <!-- Toast Notification -->
+  <div id="toast-notification">✓ İşlem Başarıyla Tamamlandı</div>
+
+  <!-- Admin JavaScript -->
   <script>
-    // State
-    let authToken = sessionStorage.getItem('heybeli_admin_token') || '';
-    let currentData = { stats: {}, reservations: [], clicks: [] };
-    let deleteTargetId = null;
+    let appToken = localStorage.getItem('heybeli_admin_token') || '';
+    let dashboardData = null;
+    let targetUploadFieldId = null;
 
-    // Elements
-    const authScreen = document.getElementById('auth-screen');
-    const adminApp = document.getElementById('admin-app');
-    const loginForm = document.getElementById('login-form');
-    const adminPasswordInput = document.getElementById('admin-password');
-    const authError = document.getElementById('auth-error');
-    const btnLogout = document.getElementById('btn-logout');
-    const btnRefresh = document.getElementById('btn-refresh');
-    const btnExportCsv = document.getElementById('btn-export-csv');
-    const clockText = document.getElementById('clock-text');
-    const toast = document.getElementById('toast');
-
-    // Live Clock
-    function updateClock() {
-      const now = new Date();
-      clockText.textContent = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // Toast
-    function showToast(msg) {
-      toast.textContent = msg;
+    // Toast Notification Helper
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toast-notification');
+      toast.textContent = message;
+      toast.style.borderColor = isError ? 'rgba(239, 68, 68, 0.5)' : 'var(--border-gold)';
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
+      setTimeout(() => toast.classList.remove('show'), 3500);
     }
 
-    // Format Date & Relative Time
-    function formatDate(isoStr) {
-      if (!isoStr) return '-';
-      const d = new Date(isoStr);
-      if (isNaN(d.getTime())) return isoStr;
-      return d.toLocaleDateString('tr-TR', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    // Modal Helpers
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
     }
 
-    function formatResDate(dateStr) {
-      if (!dateStr) return '-';
-      const parts = dateStr.split('-');
-      if (parts.length === 3) {
-        return `${parts[2]}.${parts[1]}.${parts[0]}`;
+    // Quick Image Upload for Modals
+    function triggerQuickUpload(targetInputId) {
+      targetUploadFieldId = targetInputId;
+      document.getElementById('quick-uploader-input').click();
+    }
+
+    async function handleQuickUpload(e) {
+      const file = e.target.files[0];
+      if (!file || !targetUploadFieldId) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        showToast('Görsel yükleniyor...');
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${appToken}` },
+          body: formData
+        });
+        const data = await res.json();
+        if (data.success && data.url) {
+          document.getElementById(targetUploadFieldId).value = data.url;
+          showToast('✓ Görsel yüklendi ve alana eklendi!');
+          loadDashboardData();
+        } else {
+          showToast('✕ Yükleme başarısız: ' + (data.error || 'Hata'), true);
+        }
+      } catch (err) {
+        showToast('✕ Yükleme hatası: ' + err.message, true);
+      } finally {
+        e.target.value = '';
       }
-      return dateStr;
     }
 
-    // Auth Check
-    function checkAuth() {
-      if (authToken) {
-        authScreen.style.display = 'none';
-        adminApp.style.display = 'flex';
-        loadDashboardData();
-      } else {
-        authScreen.style.display = 'flex';
-        adminApp.style.display = 'none';
-        adminPasswordInput.focus();
+    // Media tab file upload
+    async function handleFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        showToast('Görsel yükleniyor...');
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${appToken}` },
+          body: formData
+        });
+        const data = await res.json();
+        if (data.success && data.url) {
+          showToast('✓ Görsel başarıyla yüklendi!');
+          loadDashboardData();
+        } else {
+          showToast('✕ Hata: ' + (data.error || 'Yüklenemedi'), true);
+        }
+      } catch (err) {
+        showToast('✕ Yükleme hatası: ' + err.message, true);
+      } finally {
+        e.target.value = '';
       }
     }
 
-    // Login Form Submit
-    loginForm.addEventListener('submit', async (e) => {
+    // Tab Switcher
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-tab');
+        const target = document.getElementById(tabId);
+        if (target) target.classList.add('active');
+      });
+    });
+
+    // Authentication Handlers
+    document.getElementById('auth-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      authError.style.display = 'none';
-      const password = adminPasswordInput.value;
+      const pass = document.getElementById('admin-pass').value;
+      const errorDiv = document.getElementById('auth-error');
 
       try {
         const res = await fetch('/api/admin/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password })
+          body: JSON.stringify({ password: pass })
         });
         const data = await res.json();
 
         if (res.ok && data.success) {
-          authToken = data.token;
-          sessionStorage.setItem('heybeli_admin_token', authToken);
-          checkAuth();
-          showToast('✓ Giriş başarılı.');
+          appToken = data.token;
+          localStorage.setItem('heybeli_admin_token', appToken);
+          document.getElementById('auth-screen').style.display = 'none';
+          document.getElementById('admin-app').style.display = 'flex';
+          loadDashboardData();
         } else {
-          authError.style.display = 'block';
+          errorDiv.style.display = 'block';
         }
       } catch (err) {
-        authError.textContent = 'Bağlantı hatası: ' + err.message;
-        authError.style.display = 'block';
+        errorDiv.textContent = 'Bağlantı hatası oluştu.';
+        errorDiv.style.display = 'block';
       }
     });
 
-    // Logout
-    btnLogout.addEventListener('click', () => {
-      sessionStorage.removeItem('heybeli_admin_token');
-      authToken = '';
-      checkAuth();
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      localStorage.removeItem('heybeli_admin_token');
+      window.location.reload();
     });
 
-    // Fetch Dashboard Data
+    // Load All Dashboard Data
     async function loadDashboardData() {
-      if (!authToken) return;
+      if (!appToken) return;
 
       try {
         const res = await fetch('/api/admin/data', {
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
+          headers: { 'Authorization': `Bearer ${appToken}` }
         });
 
         if (res.status === 401) {
-          sessionStorage.removeItem('heybeli_admin_token');
-          authToken = '';
-          checkAuth();
+          localStorage.removeItem('heybeli_admin_token');
+          document.getElementById('auth-screen').style.display = 'flex';
+          document.getElementById('admin-app').style.display = 'none';
           return;
         }
 
         const data = await res.json();
         if (data.success) {
-          currentData = data;
-          renderStats(data.stats);
-          renderReservations();
-          renderClicks();
+          dashboardData = data;
+          renderKPIs(data.stats);
+          renderReservations(data.reservations);
+          renderSliders(data.sliders);
+          renderEvents(data.events);
+          renderCategories(data.categories);
+          renderMenuItems(data.menuItems);
+          renderSettings(data.settings);
+          renderMedia(data.media);
         }
       } catch (err) {
-        showToast('Veri çekilemedi: ' + err.message);
+        console.error('Data load error:', err);
       }
     }
 
-    btnRefresh.addEventListener('click', () => {
-      loadDashboardData();
-      showToast('Veriler güncellendi.');
-    });
-
-    // Auto-refresh every 30s
-    setInterval(() => {
-      if (authToken) loadDashboardData();
-    }, 30000);
-
-    // Render Stats
-    function renderStats(stats) {
+    // Render KPIs
+    function renderKPIs(stats) {
       if (!stats) return;
-      document.getElementById('stat-res-total').textContent = stats.totalReservations || 0;
-      document.getElementById('stat-res-breakdown').textContent = 
-        `${stats.reservationsByStatus?.yeni || 0} Yeni • ${stats.reservationsByStatus?.onaylandi || 0} Onaylı`;
+      document.getElementById('kpi-total-res').textContent = stats.totalReservations || 0;
+      document.getElementById('kpi-new-res').textContent = (stats.reservationsByStatus && stats.reservationsByStatus.yeni) || 0;
+      document.getElementById('kpi-sliders').textContent = stats.totalSliders || 0;
+      document.getElementById('kpi-events').textContent = stats.totalEvents || 0;
+      document.getElementById('kpi-menu-items').textContent = stats.totalMenuItems || 0;
+      document.getElementById('kpi-clicks').textContent = stats.totalClicks || 0;
 
-      document.getElementById('stat-calls-total').textContent = stats.totalCalls || 0;
-      document.getElementById('stat-wa-total').textContent = stats.totalWhatsApp || 0;
-
-      const todayActivity = (stats.todayReservations || 0) + (stats.todayClicks || 0);
-      document.getElementById('stat-today-total').textContent = todayActivity;
-
-      document.getElementById('tab-res-count').textContent = stats.totalReservations || 0;
-      document.getElementById('tab-clicks-count').textContent = stats.totalClicks || 0;
+      document.getElementById('badge-res-count').textContent = stats.totalReservations || 0;
+      document.getElementById('badge-sliders-count').textContent = stats.totalSliders || 0;
+      document.getElementById('badge-events-count').textContent = stats.totalEvents || 0;
+      document.getElementById('badge-menu-count').textContent = stats.totalMenuItems || 0;
     }
 
-    // Render Reservations Table
-    function renderReservations() {
-      const tbody = document.getElementById('reservations-table-body');
-      const emptyState = document.getElementById('res-empty');
-      const search = (document.getElementById('search-res').value || '').toLowerCase().trim();
-      const statusFilter = document.getElementById('filter-status').value;
-
-      let list = currentData.reservations || [];
-
-      // Filter
-      if (statusFilter !== 'all') {
-        list = list.filter(r => r.status === statusFilter);
-      }
-
-      if (search) {
-        list = list.filter(r => 
-          (r.name && r.name.toLowerCase().includes(search)) ||
-          (r.phone && r.phone.toLowerCase().includes(search)) ||
-          (r.id && r.id.toLowerCase().includes(search)) ||
-          (r.note && r.note.toLowerCase().includes(search))
-        );
-      }
-
-      if (list.length === 0) {
-        tbody.innerHTML = '';
-        emptyState.style.display = 'block';
+    // 1. REZERVASYONLAR
+    function renderReservations(list) {
+      const tbody = document.getElementById('reservations-tbody');
+      if (!list || list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">Kayıtlı rezervasyon talebi bulunmuyor.</td></tr>';
         return;
       }
 
-      emptyState.style.display = 'none';
-
-      tbody.innerHTML = list.map(item => {
-        const cleanPhone = (item.phone || '').replace(/[^0-9]/g, '');
-        const waPhone = cleanPhone.startsWith('0') ? '9' + cleanPhone : (cleanPhone.startsWith('90') ? cleanPhone : '90' + cleanPhone);
-        const waMsg = encodeURIComponent(`Merhaba ${item.name} Bey/Hanım, Heybeli Sahne rezervasyon talebiniz (${formatResDate(item.date)} - ${item.guests}) hakkında bilgi vermek için iletişime geçiyoruz.`);
-        const waUrl = `https://wa.me/${waPhone}?text=${waMsg}`;
-
-        let statusBadgeClass = 'badge-yeni';
-        let statusLabel = 'Yeni Talep';
-        if (item.status === 'onaylandi') {
-          statusBadgeClass = 'badge-onaylandi';
-          statusLabel = 'Onaylandı';
-        } else if (item.status === 'iptal') {
-          statusBadgeClass = 'badge-iptal';
-          statusLabel = 'İptal';
-        }
-
-        return `
-          <tr data-id="${item.id}">
-            <td style="font-family: monospace; font-size: 12px; color: var(--gold-light);">#${item.id}</td>
-            <td>
-              <div class="guest-name">${escapeHtml(item.name)}</div>
-              <div style="font-size: 11px; color: var(--text-subtle);">${formatDate(item.createdAt)}</div>
-            </td>
-            <td>
-              <div style="display: flex; align-items: center; gap: 4px;">
-                <a href="tel:${escapeHtml(item.phone)}" class="phone-link">📞 ${escapeHtml(item.phone)}</a>
-                <a href="${waUrl}" target="_blank" rel="noopener" class="btn-quick-wa" title="WhatsApp üzerinden yaz">💬 Yaz</a>
-              </div>
-            </td>
-            <td style="white-space: nowrap; font-weight: 500;">📅 ${formatResDate(item.date)}</td>
-            <td style="white-space: nowrap;">👥 ${escapeHtml(item.guests || '2 Kişi')}</td>
-            <td style="white-space: nowrap; font-size: 12px; color: var(--gold-light);">🍸 ${escapeHtml(item.tableType || 'Standart')}</td>
-            <td>
-              <div class="note-text" title="${escapeHtml(item.note || '-')}">${escapeHtml(item.note || '-')}</div>
-            </td>
-            <td>
-              <select class="status-select" data-id="${item.id}" onchange="updateStatus('${item.id}', this.value)">
-                <option value="yeni" ${item.status === 'yeni' ? 'selected' : ''}>🔵 Yeni</option>
-                <option value="onaylandi" ${item.status === 'onaylandi' ? 'selected' : ''}>🟢 Onaylandı</option>
-                <option value="iptal" ${item.status === 'iptal' ? 'selected' : ''}>🔴 İptal</option>
-              </select>
-            </td>
-            <td style="text-align: right; white-space: nowrap;">
-              <button class="btn btn-danger-outline btn-sm" onclick="promptDelete('${item.id}', '${escapeHtml(item.name)}')">
-                Sil
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join('');
+      tbody.innerHTML = list.map(r => `
+        <tr>
+          <td><strong style="color: var(--gold-light);">${r.id}</strong></td>
+          <td>
+            <div style="font-weight: 600;">${escapeHtml(r.name)}</div>
+            <div style="font-size: 12px; color: var(--text-muted);"><a href="tel:${r.phone}" style="color: inherit;">📞 ${r.phone}</a></div>
+          </td>
+          <td>
+            <div>📅 ${r.date}</div>
+            <div style="font-size: 12px; color: var(--text-muted);">👥 ${r.guests || '2 Kişi'}</div>
+          </td>
+          <td><span style="font-size: 12px; color: var(--gold-primary); font-weight: 500;">${escapeHtml(r.tableType)}</span></td>
+          <td style="max-width: 220px; font-size: 12px; color: var(--text-muted); line-height: 1.4;">${escapeHtml(r.note || '-')}</td>
+          <td><span class="badge badge-${r.status}">${r.status}</span></td>
+          <td>
+            <div style="display: flex; gap: 6px;">
+              ${r.status === 'yeni' ? `
+                <button onclick="updateReservationStatus('${r.id}', 'onaylandi')" class="btn btn-outline btn-sm" style="color: #34D399;" title="Onayla">✓</button>
+                <button onclick="updateReservationStatus('${r.id}', 'iptal')" class="btn btn-outline btn-sm" style="color: #F87171;" title="İptal Et">✕</button>
+              ` : ''}
+              <button onclick="deleteReservation('${r.id}')" class="btn btn-danger-outline btn-sm" title="Sil">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
     }
 
-    // Render Clicks Table
-    function renderClicks() {
-      const tbody = document.getElementById('clicks-table-body');
-      const emptyState = document.getElementById('clicks-empty');
-      const search = (document.getElementById('search-clicks').value || '').toLowerCase().trim();
-      const typeFilter = document.getElementById('filter-click-type').value;
+    function filterReservations() {
+      if (!dashboardData || !dashboardData.reservations) return;
+      const q = document.getElementById('res-search').value.toLowerCase();
+      const status = document.getElementById('res-status-filter').value;
 
-      let list = currentData.clicks || [];
-
-      if (typeFilter !== 'all') {
-        list = list.filter(c => c.type === typeFilter);
+      let filtered = dashboardData.reservations;
+      if (status !== 'all') {
+        filtered = filtered.filter(r => r.status === status);
       }
-
-      if (search) {
-        list = list.filter(c => 
-          (c.source && c.source.toLowerCase().includes(search)) ||
-          (c.page && c.page.toLowerCase().includes(search)) ||
-          (c.device && c.device.toLowerCase().includes(search))
+      if (q) {
+        filtered = filtered.filter(r => 
+          (r.name && r.name.toLowerCase().includes(q)) || 
+          (r.phone && r.phone.includes(q)) ||
+          (r.id && r.id.toLowerCase().includes(q))
         );
       }
-
-      if (list.length === 0) {
-        tbody.innerHTML = '';
-        emptyState.style.display = 'block';
-        return;
-      }
-
-      emptyState.style.display = 'none';
-
-      tbody.innerHTML = list.map(c => {
-        const isWa = c.type === 'whatsapp';
-        const typeBadge = isWa 
-          ? `<span class="badge badge-wa">💬 WhatsApp Tıklama</span>`
-          : `<span class="badge badge-call">📞 Telefon Arama</span>`;
-
-        return `
-          <tr>
-            <td style="font-family: monospace; font-size: 12px; color: var(--text-muted);">${c.id || '-'}</td>
-            <td>${typeBadge}</td>
-            <td style="font-weight: 600; color: var(--text-main);">${escapeHtml(c.source || 'Bilinmiyor')}</td>
-            <td style="font-family: monospace; font-size: 12px; color: var(--gold-light);">${escapeHtml(c.page || '/')}</td>
-            <td style="font-size: 12px; color: var(--text-muted);">${escapeHtml(c.device || 'Cihaz')}</td>
-            <td style="white-space: nowrap; font-size: 12px; color: var(--text-muted);">${formatDate(c.timestamp)}</td>
-          </tr>
-        `;
-      }).join('');
+      renderReservations(filtered);
     }
 
-    // Update Reservation Status
-    window.updateStatus = async function(id, newStatus) {
+    async function updateReservationStatus(id, newStatus) {
       try {
         const res = await fetch(`/api/admin/reservations/${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${authToken}`
+            'Authorization': `Bearer ${appToken}`
           },
           body: JSON.stringify({ status: newStatus })
         });
-        const data = await res.json();
-        if (res.ok && data.success) {
-          showToast(`Rezervasyon durumu güncellendi: ${newStatus}`);
+        if (res.ok) {
+          showToast(`Rezervasyon durumu "${newStatus}" yapıldı.`);
           loadDashboardData();
-        } else {
-          showToast('Hata: ' + (data.error || 'Güncellenemedi.'));
         }
       } catch (err) {
-        showToast('Bağlantı hatası: ' + err.message);
+        showToast('Durum güncellenemedi', true);
       }
-    };
+    }
 
-    // Delete Reservation Flow
-    window.promptDelete = function(id, name) {
-      deleteTargetId = id;
-      document.getElementById('delete-modal-text').textContent = `#${id} numaralı (${name}) rezervasyonunu kalıcı olarak silmek istediğinizden emin misiniz?`;
-      document.getElementById('delete-modal').style.display = 'flex';
-    };
-
-    document.getElementById('btn-modal-cancel').addEventListener('click', () => {
-      document.getElementById('delete-modal').style.display = 'none';
-      deleteTargetId = null;
-    });
-
-    document.getElementById('btn-modal-confirm').addEventListener('click', async () => {
-      if (!deleteTargetId) return;
-
+    async function deleteReservation(id) {
+      if (!confirm(`${id} nolu rezervasyonu silmek istediğinize emin misiniz?`)) return;
       try {
-        const res = await fetch(`/api/admin/reservations/${deleteTargetId}`, {
+        const res = await fetch(`/api/admin/reservations/${id}`, {
           method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
+          headers: { 'Authorization': `Bearer ${appToken}` }
         });
-        const data = await res.json();
-        if (res.ok && data.success) {
-          showToast('Rezervasyon kaydı silindi.');
-          document.getElementById('delete-modal').style.display = 'none';
-          deleteTargetId = null;
+        if (res.ok) {
+          showToast('Rezervasyon silindi.');
           loadDashboardData();
-        } else {
-          showToast('Hata: ' + (data.error || 'Silinemedi.'));
         }
       } catch (err) {
-        showToast('Bağlantı hatası: ' + err.message);
+        showToast('Silme hatası', true);
       }
-    });
+    }
 
     // Export CSV
-    btnExportCsv.addEventListener('click', () => {
-      if (!authToken) return;
-      window.open(`/api/admin/export?token=${encodeURIComponent(authToken)}`, '_blank');
+    document.getElementById('btn-export-csv').addEventListener('click', () => {
+      window.location.href = `/api/admin/export?token=${appToken}`;
     });
 
-    // Tabs Switching
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    // 2. SLIDERS CRUD
+    function renderSliders(sliders) {
+      const container = document.getElementById('sliders-grid');
+      if (!sliders || sliders.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted); grid-column: span 3;">Henüz kayıtlı slider bulunmuyor.</p>';
+        return;
+      }
 
-        const tab = btn.getAttribute('data-tab');
-        if (tab === 'reservations') {
-          document.getElementById('view-reservations').style.display = 'block';
-          document.getElementById('view-clicks').style.display = 'none';
-        } else {
-          document.getElementById('view-reservations').style.display = 'none';
-          document.getElementById('view-clicks').style.display = 'block';
+      container.innerHTML = sliders.map(s => `
+        <div class="item-card">
+          <img src="${s.image}" class="card-thumb" alt="${escapeHtml(s.title)}" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80'">
+          <div class="card-body">
+            <span class="card-meta">Sıra: ${s.order || 1} • ${s.isActive !== false ? '🟢 Yayında' : '⚪ Pasif'}</span>
+            <h4 class="card-title">${escapeHtml(s.title)}</h4>
+            <p class="card-desc">${escapeHtml(s.subtitle || '')}<br>${escapeHtml(s.desc || '')}</p>
+            <div class="card-footer">
+              <span style="font-size: 11px; color: var(--gold-light);">Buton: ${s.btnText || '-'}</span>
+              <div style="display: flex; gap: 6px;">
+                <button onclick="editSlider('${s.id}')" class="btn btn-outline btn-sm">Düzenle</button>
+                <button onclick="deleteSlider('${s.id}')" class="btn btn-danger-outline btn-sm">Sil</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openSliderModal(slider = null) {
+      document.getElementById('slider-form').reset();
+      if (slider) {
+        document.getElementById('slider-modal-title').textContent = 'Slider Manşetini Düzenle';
+        document.getElementById('slider-id').value = slider.id;
+        document.getElementById('slider-title').value = slider.title || '';
+        document.getElementById('slider-subtitle').value = slider.subtitle || '';
+        document.getElementById('slider-desc').value = slider.desc || '';
+        document.getElementById('slider-image').value = slider.image || '';
+        document.getElementById('slider-btnText').value = slider.btnText || '';
+        document.getElementById('slider-btnLink').value = slider.btnLink || '';
+        document.getElementById('slider-order').value = slider.order || 1;
+        document.getElementById('slider-isActive').checked = slider.isActive !== false;
+      } else {
+        document.getElementById('slider-modal-title').textContent = 'Yeni Slider Manşeti Ekle';
+        document.getElementById('slider-id').value = '';
+        document.getElementById('slider-order').value = (dashboardData.sliders ? dashboardData.sliders.length + 1 : 1);
+        document.getElementById('slider-isActive').checked = true;
+      }
+      openModal('slider-modal');
+    }
+
+    function editSlider(id) {
+      const slider = dashboardData.sliders.find(s => s.id === id);
+      if (slider) openSliderModal(slider);
+    }
+
+    async function handleSliderSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('slider-id').value;
+      const payload = {
+        title: document.getElementById('slider-title').value.trim(),
+        subtitle: document.getElementById('slider-subtitle').value.trim(),
+        desc: document.getElementById('slider-desc').value.trim(),
+        image: document.getElementById('slider-image').value.trim(),
+        btnText: document.getElementById('slider-btnText').value.trim(),
+        btnLink: document.getElementById('slider-btnLink').value.trim(),
+        order: parseInt(document.getElementById('slider-order').value, 10) || 1,
+        isActive: document.getElementById('slider-isActive').checked
+      };
+
+      const url = id ? `/api/admin/sliders/${id}` : '/api/admin/sliders';
+      const method = id ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${appToken}` },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          closeModal('slider-modal');
+          showToast('✓ Slider başarıyla kaydedildi!');
+          loadDashboardData();
         }
+      } catch (err) {
+        showToast('Kayıt başarısız', true);
+      }
+    }
+
+    async function deleteSlider(id) {
+      if (!confirm('Bu slider manşetini silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch(`/api/admin/sliders/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${appToken}` }
+        });
+        if (res.ok) {
+          showToast('Slider silindi.');
+          loadDashboardData();
+        }
+      } catch (err) {
+        showToast('Silme hatası', true);
+      }
+    }
+
+    // 3. EVENTS CRUD
+    function renderEvents(events) {
+      const container = document.getElementById('events-grid');
+      if (!events || events.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted); grid-column: span 3;">Henüz kayıtlı etkinlik bulunmuyor.</p>';
+        return;
+      }
+
+      container.innerHTML = events.map(ev => `
+        <div class="item-card">
+          <img src="${ev.image}" class="card-thumb" alt="${escapeHtml(ev.title)}" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80'">
+          <div class="card-body">
+            <span class="card-meta">📅 ${escapeHtml(ev.date)} • ⏰ ${escapeHtml(ev.time || '21:30')}</span>
+            <h4 class="card-title">${escapeHtml(ev.title)}</h4>
+            <div style="font-size: 12px; color: var(--gold-primary); margin-bottom: 6px;">${ev.artist ? '🎤 ' + escapeHtml(ev.artist) : ''}</div>
+            <p class="card-desc">${escapeHtml(ev.description || '')}</p>
+            <div class="card-footer">
+              <span class="badge ${ev.isSoldOut ? 'badge-iptal' : 'badge-onaylandi'}">${ev.isSoldOut ? 'Tükendi' : (ev.badge || 'Yayında')}</span>
+              <div style="display: flex; gap: 6px;">
+                <button onclick="editEvent('${ev.id}')" class="btn btn-outline btn-sm">Düzenle</button>
+                <button onclick="deleteEvent('${ev.id}')" class="btn btn-danger-outline btn-sm">Sil</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openEventModal(eventItem = null) {
+      document.getElementById('event-form').reset();
+      if (eventItem) {
+        document.getElementById('event-modal-title').textContent = 'Program / Konser Düzenle';
+        document.getElementById('event-id').value = eventItem.id;
+        document.getElementById('event-title').value = eventItem.title || '';
+        document.getElementById('event-artist').value = eventItem.artist || '';
+        document.getElementById('event-category').value = eventItem.category || 'canli-muzik';
+        document.getElementById('event-date').value = eventItem.date || '';
+        document.getElementById('event-time').value = eventItem.time || '21:30';
+        document.getElementById('event-badge').value = eventItem.badge || '';
+        document.getElementById('event-image').value = eventItem.image || '';
+        document.getElementById('event-description').value = eventItem.description || '';
+        document.getElementById('event-highlights').value = eventItem.highlights || '';
+        document.getElementById('event-ticketInfo').value = eventItem.ticketInfo || '';
+        document.getElementById('event-isSoldOut').checked = eventItem.isSoldOut === true;
+      } else {
+        document.getElementById('event-modal-title').textContent = 'Yeni Sahne Programı Ekle';
+        document.getElementById('event-id').value = '';
+      }
+      openModal('event-modal');
+    }
+
+    function editEvent(id) {
+      const item = dashboardData.events.find(e => e.id === id);
+      if (item) openEventModal(item);
+    }
+
+    async function handleEventSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('event-id').value;
+      const payload = {
+        title: document.getElementById('event-title').value.trim(),
+        artist: document.getElementById('event-artist').value.trim(),
+        category: document.getElementById('event-category').value,
+        date: document.getElementById('event-date').value.trim(),
+        time: document.getElementById('event-time').value.trim(),
+        badge: document.getElementById('event-badge').value.trim(),
+        image: document.getElementById('event-image').value.trim(),
+        description: document.getElementById('event-description').value.trim(),
+        highlights: document.getElementById('event-highlights').value.trim(),
+        ticketInfo: document.getElementById('event-ticketInfo').value.trim(),
+        isSoldOut: document.getElementById('event-isSoldOut').checked
+      };
+
+      const url = id ? `/api/admin/events/${id}` : '/api/admin/events';
+      const method = id ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${appToken}` },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          closeModal('event-modal');
+          showToast('✓ Sahne programı kaydedildi!');
+          loadDashboardData();
+        }
+      } catch (err) {
+        showToast('Kayıt başarısız', true);
+      }
+    }
+
+    async function deleteEvent(id) {
+      if (!confirm('Bu sahne programını silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch(`/api/admin/events/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${appToken}` }
+        });
+        if (res.ok) {
+          showToast('Etkinlik silindi.');
+          loadDashboardData();
+        }
+      } catch (err) {
+        showToast('Silme hatası', true);
+      }
+    }
+
+    // 4. CATEGORIES CRUD
+    function renderCategories(categories) {
+      const container = document.getElementById('categories-grid');
+      const selectFilter = document.getElementById('menu-cat-filter');
+      const itemModalSelect = document.getElementById('menu-item-category');
+
+      if (!categories || categories.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted);">Henüz kategori yok.</p>';
+        return;
+      }
+
+      // Update select dropdowns
+      selectFilter.innerHTML = '<option value="all">Tüm Kategoriler</option>' + 
+        categories.map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+
+      itemModalSelect.innerHTML = categories.map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+
+      container.innerHTML = categories.map(cat => `
+        <div class="item-card">
+          <img src="${cat.image}" class="card-thumb" style="height: 120px;" alt="${escapeHtml(cat.name)}" onerror="this.src='https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80'">
+          <div class="card-body">
+            <span class="card-meta">${escapeHtml(cat.tag || 'KATEGORİ')}</span>
+            <h4 class="card-title">${escapeHtml(cat.name)}</h4>
+            <p class="card-desc">${escapeHtml(cat.desc || '')}</p>
+            <div class="card-footer">
+              <span style="font-size: 11px; color: var(--text-muted);">Sıra: ${cat.order || 1}</span>
+              <div style="display: flex; gap: 6px;">
+                <button onclick="editCategory('${cat.id}')" class="btn btn-outline btn-sm">Düzenle</button>
+                <button onclick="deleteCategory('${cat.id}')" class="btn btn-danger-outline btn-sm">Sil</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openCategoryModal(cat = null) {
+      document.getElementById('category-form').reset();
+      if (cat) {
+        document.getElementById('category-modal-title').textContent = 'Kategoriyi Düzenle';
+        document.getElementById('category-id').value = cat.id;
+        document.getElementById('category-name').value = cat.name || '';
+        document.getElementById('category-tag').value = cat.tag || '';
+        document.getElementById('category-desc').value = cat.desc || '';
+        document.getElementById('category-image').value = cat.image || '';
+        document.getElementById('category-order').value = cat.order || 1;
+      } else {
+        document.getElementById('category-modal-title').textContent = 'Yeni Kategori Ekle';
+        document.getElementById('category-id').value = '';
+      }
+      openModal('category-modal');
+    }
+
+    function editCategory(id) {
+      const cat = dashboardData.categories.find(c => c.id === id);
+      if (cat) openCategoryModal(cat);
+    }
+
+    async function handleCategorySubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('category-id').value;
+      const payload = {
+        name: document.getElementById('category-name').value.trim(),
+        tag: document.getElementById('category-tag').value.trim(),
+        desc: document.getElementById('category-desc').value.trim(),
+        image: document.getElementById('category-image').value.trim(),
+        order: parseInt(document.getElementById('category-order').value, 10) || 1
+      };
+
+      const url = id ? `/api/admin/categories/${id}` : '/api/admin/categories';
+      const method = id ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${appToken}` },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          closeModal('category-modal');
+          showToast('✓ Kategori kaydedildi!');
+          loadDashboardData();
+        }
+      } catch (err) {
+        showToast('Kayıt başarısız', true);
+      }
+    }
+
+    async function deleteCategory(id) {
+      if (!confirm('Bu kategoriyi ve içindeki ürünleri silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch(`/api/admin/categories/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${appToken}` }
+        });
+        if (res.ok) {
+          showToast('Kategori silindi.');
+          loadDashboardData();
+        }
+      } catch (err) {
+        showToast('Silme hatası', true);
+      }
+    }
+
+    // 5. MENU ITEMS CRUD
+    function renderMenuItems(items = null) {
+      const list = items || (dashboardData ? dashboardData.menuItems : []);
+      const tbody = document.getElementById('menu-items-tbody');
+      const catFilter = document.getElementById('menu-cat-filter').value;
+
+      let displayList = list || [];
+      if (catFilter && catFilter !== 'all') {
+        displayList = displayList.filter(i => i.categoryId === catFilter);
+      }
+
+      if (!displayList || displayList.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">Bu kategoride ürün bulunamadı.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = displayList.map(item => `
+        <tr>
+          <td>
+            <img src="${item.image || 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=120&q=80'}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;" alt="">
+          </td>
+          <td><strong>${escapeHtml(item.name)}</strong></td>
+          <td><span class="badge" style="background: rgba(196,154,85,0.15); color: var(--gold-light);">${escapeHtml(item.categoryId)}</span></td>
+          <td><span style="color: var(--gold-primary); font-weight: 600;">${escapeHtml(item.price || 'Günlük')}</span></td>
+          <td style="max-width: 250px; font-size: 12px; color: var(--text-muted);">${escapeHtml(item.desc || '-')}</td>
+          <td>${item.badge ? `<span class="badge badge-onaylandi">${escapeHtml(item.badge)}</span>` : '-'}</td>
+          <td>
+            <div style="display: flex; gap: 6px;">
+              <button onclick="editMenuItem('${item.id}')" class="btn btn-outline btn-sm">Düzenle</button>
+              <button onclick="deleteMenuItem('${item.id}')" class="btn btn-danger-outline btn-sm">Sil</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openMenuItemModal(item = null) {
+      document.getElementById('menu-item-form').reset();
+      if (item) {
+        document.getElementById('menu-item-modal-title').textContent = 'Menü Ürününü Düzenle';
+        document.getElementById('menu-item-id').value = item.id;
+        document.getElementById('menu-item-category').value = item.categoryId || '';
+        document.getElementById('menu-item-name').value = item.name || '';
+        document.getElementById('menu-item-desc').value = item.desc || '';
+        document.getElementById('menu-item-price').value = item.price || '';
+        document.getElementById('menu-item-badge').value = item.badge || '';
+        document.getElementById('menu-item-image').value = item.image || '';
+        document.getElementById('menu-item-order').value = item.order || 1;
+        document.getElementById('menu-item-isAvailable').checked = item.isAvailable !== false;
+      } else {
+        document.getElementById('menu-item-modal-title').textContent = 'Yeni Menü Ürünü Ekle';
+        document.getElementById('menu-item-id').value = '';
+      }
+      openModal('menu-item-modal');
+    }
+
+    function editMenuItem(id) {
+      const item = dashboardData.menuItems.find(m => m.id === id);
+      if (item) openMenuItemModal(item);
+    }
+
+    async function handleMenuItemSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('menu-item-id').value;
+      const payload = {
+        categoryId: document.getElementById('menu-item-category').value,
+        name: document.getElementById('menu-item-name').value.trim(),
+        desc: document.getElementById('menu-item-desc').value.trim(),
+        price: document.getElementById('menu-item-price').value.trim(),
+        badge: document.getElementById('menu-item-badge').value.trim(),
+        image: document.getElementById('menu-item-image').value.trim(),
+        order: parseInt(document.getElementById('menu-item-order').value, 10) || 1,
+        isAvailable: document.getElementById('menu-item-isAvailable').checked
+      };
+
+      const url = id ? `/api/admin/menu-items/${id}` : '/api/admin/menu-items';
+      const method = id ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${appToken}` },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          closeModal('menu-item-modal');
+          showToast('✓ Menü ürünü kaydedildi!');
+          loadDashboardData();
+        }
+      } catch (err) {
+        showToast('Kayıt başarısız', true);
+      }
+    }
+
+    async function deleteMenuItem(id) {
+      if (!confirm('Bu menü ürününü silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch(`/api/admin/menu-items/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${appToken}` }
+        });
+        if (res.ok) {
+          showToast('Ürün silindi.');
+          loadDashboardData();
+        }
+      } catch (err) {
+        showToast('Silme hatası', true);
+      }
+    }
+
+    // 6. SITE SETTINGS
+    function renderSettings(settings) {
+      if (!settings) return;
+      document.getElementById('set-venueName').value = settings.venueName || '';
+      document.getElementById('set-tagline').value = settings.tagline || '';
+      document.getElementById('set-phone').value = settings.phone || '';
+      document.getElementById('set-whatsapp').value = settings.whatsapp || '';
+      document.getElementById('set-whatsappDirect').value = settings.whatsappDirect || '';
+      document.getElementById('set-address').value = settings.address || '';
+      document.getElementById('set-mapUrl').value = settings.mapUrl || '';
+      document.getElementById('set-email').value = settings.email || '';
+      document.getElementById('set-workingHours').value = settings.workingHours || '';
+      document.getElementById('set-musicHours').value = settings.musicHours || '';
+      document.getElementById('set-announcementText').value = settings.announcementText || '';
+      document.getElementById('set-instagram').value = settings.instagram || '';
+    }
+
+    async function saveSiteSettings() {
+      const payload = {
+        venueName: document.getElementById('set-venueName').value.trim(),
+        tagline: document.getElementById('set-tagline').value.trim(),
+        phone: document.getElementById('set-phone').value.trim(),
+        whatsapp: document.getElementById('set-whatsapp').value.trim(),
+        whatsappDirect: document.getElementById('set-whatsappDirect').value.trim(),
+        address: document.getElementById('set-address').value.trim(),
+        mapUrl: document.getElementById('set-mapUrl').value.trim(),
+        email: document.getElementById('set-email').value.trim(),
+        workingHours: document.getElementById('set-workingHours').value.trim(),
+        musicHours: document.getElementById('set-musicHours').value.trim(),
+        announcementText: document.getElementById('set-announcementText').value.trim(),
+        instagram: document.getElementById('set-instagram').value.trim()
+      };
+
+      try {
+        const res = await fetch('/api/admin/settings', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${appToken}` },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          showToast('✓ Tüm site ayarları kaydedildi ve canlıya yansıdı!');
+          loadDashboardData();
+        }
+      } catch (err) {
+        showToast('Ayarlar kaydedilemedi', true);
+      }
+    }
+
+    // 7. MEDIA LIBRARY
+    function renderMedia(mediaList) {
+      const container = document.getElementById('media-library-grid');
+      if (!mediaList || mediaList.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted); grid-column: span 4;">Henüz yüklenmiş görsel bulunmuyor. Yukarıdaki alandan yükleme yapabilirsiniz.</p>';
+        return;
+      }
+
+      container.innerHTML = mediaList.map(m => `
+        <div class="media-card">
+          <img src="${m.url}" alt="${m.filename}">
+          <div class="media-card-info">
+            <span style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${m.filename}</span>
+            <span style="color: var(--text-muted); font-size: 10px;">${Math.round((m.size || 0)/1024)} KB</span>
+            <button onclick="copyToClipboard('${m.url}')" class="btn btn-outline copy-url-btn">📋 Linki Kopyala</button>
+            <button onclick="deleteMediaItem('${m.id}')" class="btn btn-danger-outline copy-url-btn">Sil</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('✓ Görsel URL kopyalandı!');
       });
-    });
+    }
 
-    // Search and Filter Listeners
-    document.getElementById('search-res').addEventListener('input', renderReservations);
-    document.getElementById('filter-status').addEventListener('change', renderReservations);
-    document.getElementById('search-clicks').addEventListener('input', renderClicks);
-    document.getElementById('filter-click-type').addEventListener('change', renderClicks);
+    async function deleteMediaItem(id) {
+      if (!confirm('Bu görseli silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch(`/api/admin/media/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${appToken}` }
+        });
+        if (res.ok) {
+          showToast('Görsel silindi.');
+          loadDashboardData();
+        }
+      } catch (err) {
+        showToast('Görsel silinemedi', true);
+      }
+    }
 
-    // Escape HTML Helper
-    function escapeHtml(text) {
-      if (!text) return '';
-      return String(text)
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -1301,8 +1987,12 @@
         .replace(/'/g, '&#039;');
     }
 
-    // Init
-    checkAuth();
+    // Auto-login if token exists
+    if (appToken) {
+      document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('admin-app').style.display = 'flex';
+      loadDashboardData();
+    }
   </script>
 </body>
 </html>

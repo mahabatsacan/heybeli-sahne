@@ -1,64 +1,8 @@
 // ==========================================================
-// GALLERY LIGHTBOX MODAL HANDLERS (Defined globally at top)
+// HEYBELİ SAHNE - DİNAMİK CLIENT SCRIPT (v2.0 CMS)
 // ==========================================================
-const galleryImages = [
-  { src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=85", title: "Ana Sahne & Oturma Düzeni" },
-  { src: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=85", title: "Canlı Konser Anı" },
-  { src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=85", title: "Usta Meze Çeşitleri & Sofra" },
-  { src: "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=85", title: "Özel VIP Loca Masaları" },
-  { src: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=1200&q=85", title: "Şefin Sıcak Mezeleri & Güveç Karides" },
-  { src: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=85", title: "Dost Sohbetleri & Müzik Ahengi" }
-];
-
-let currentLightboxIndex = 0;
-
-window.openLightbox = function(index) {
-  currentLightboxIndex = index;
-  const modal = document.getElementById('gallery-lightbox-modal');
-  const img = document.getElementById('lightbox-image');
-  const caption = document.getElementById('lightbox-caption');
-  if (modal && img && galleryImages[index]) {
-    img.src = galleryImages[index].src;
-    if (caption) caption.textContent = galleryImages[index].title;
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-};
-
-window.closeLightbox = function() {
-  const modal = document.getElementById('gallery-lightbox-modal');
-  if (modal) {
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-};
-
-window.nextLightboxImage = function() {
-  currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
-  window.openLightbox(currentLightboxIndex);
-};
-
-window.prevLightboxImage = function() {
-  currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
-  window.openLightbox(currentLightboxIndex);
-};
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') window.closeLightbox();
-  if (e.key === 'ArrowRight') window.nextLightboxImage();
-  if (e.key === 'ArrowLeft') window.prevLightboxImage();
-});
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Bind gallery cells dynamically
-  document.querySelectorAll('.gallery-cell').forEach((cell, idx) => {
-    cell.addEventListener('click', () => {
-      window.openLightbox(idx);
-    });
-  });
-
   // 1. STICKY HEADER SCROLL EFFECT
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
@@ -89,108 +33,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. EVENTS CATEGORY FILTERS (Tümü, Hafta Sonu, Galalar, Matine, Fasıl)
-  const eventFilters = document.querySelectorAll('.filter-btn, .schedule-filter-tab');
-  const eventCards = document.querySelectorAll('.event-card, .schedule-item');
-
-  if (eventFilters.length > 0 && eventCards.length > 0) {
-    eventFilters.forEach(btn => {
-      btn.addEventListener('click', () => {
-        eventFilters.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const category = btn.getAttribute('data-category');
-
-        eventCards.forEach(card => {
-          const cardCat = card.getAttribute('data-category');
-          if (category === 'all' || cardCat === category) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+  // 3. TABLE OPTION RADIO SELECTOR CARDS
+  function bindTableOptionCards() {
+    document.querySelectorAll('.table-option-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.table-option-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        const radio = card.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
       });
     });
   }
+  bindTableOptionCards();
 
-  // 4. MENU VIEW SWITCHER (Fiks Menüler vs Alakart)
-  const menuSwitcherBtns = document.querySelectorAll('.menu-switcher-btn, .menu-tab-btn');
-  const menuTabContents = document.querySelectorAll('.menu-tab-content');
-  const fixSection = document.getElementById('fix-menu-section');
-  const alacarteSection = document.getElementById('alacarte-section');
-
-  if (menuSwitcherBtns.length > 0) {
-    menuSwitcherBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        menuSwitcherBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const tabKey = btn.getAttribute('data-tab') || btn.getAttribute('data-target');
-
-        if (tabKey === 'prixfixe' || tabKey === 'fix') {
-          menuTabContents.forEach(c => c.classList.remove('active'));
-          const pTarget = document.getElementById('tab-prixfixe');
-          if (pTarget) pTarget.classList.add('active');
-          if (fixSection) fixSection.style.display = '';
-          if (alacarteSection) alacarteSection.style.display = 'none';
-        } else if (tabKey === 'alacarte') {
-          menuTabContents.forEach(c => c.classList.remove('active'));
-          const aTarget = document.getElementById('tab-alacarte');
-          if (aTarget) aTarget.classList.add('active');
-          if (fixSection) fixSection.style.display = 'none';
-          if (alacarteSection) alacarteSection.style.display = '';
-        }
-      });
-    });
-  }
-
-  // 5. QUICK BOOK BUTTONS (Pre-fills event in reservation form)
-  document.querySelectorAll('.quick-book-btn, .btn-book-event').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const eventName = btn.getAttribute('data-event-name') || btn.getAttribute('data-event');
-      const eventDate = btn.getAttribute('data-event-date');
-      const noteInput = document.getElementById('res-note') || document.getElementById('r-note');
-      const dateInput = document.getElementById('res-date') || document.getElementById('r-date');
-
-      if (noteInput && eventName) {
-        noteInput.value = `Etkinlik Tercihi: ${eventName}`;
-      }
-      if (dateInput && eventDate) {
-        dateInput.value = eventDate;
-      }
-
-      const reserveSection = document.getElementById('rezervasyon');
-      if (reserveSection) {
-        reserveSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-
-  // 6. TABLE OPTION RADIO SELECTOR CARDS
-  document.querySelectorAll('.table-option-card').forEach(card => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('.table-option-card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      const radio = card.querySelector('input[type="radio"]');
-      if (radio) radio.checked = true;
-    });
-  });
-
-  // 7. SIKÇA SORULAN SORULAR (FAQ ACCORDION)
+  // 4. FAQ ACCORDION
   document.querySelectorAll('.faq-question-btn, .faq-question').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
       if (!item) return;
       const isOpen = item.classList.contains('active');
 
-      // Close other items
       document.querySelectorAll('.faq-item').forEach(i => {
         i.classList.remove('active');
         const qBtn = i.querySelector('.faq-question-btn, .faq-question');
         if (qBtn) qBtn.setAttribute('aria-expanded', 'false');
       });
 
-      // Toggle current item
       if (!isOpen) {
         item.classList.add('active');
         btn.setAttribute('aria-expanded', 'true');
@@ -198,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 8. RESERVATION FORM SUBMISSION (AJAX to /api/reservation)
+  // 5. RESERVATION FORM SUBMISSION
   const reservationForm = document.getElementById('reservation-form');
   const resModal = document.getElementById('reservation-modal');
   const modalDetails = document.getElementById('modal-details');
@@ -209,15 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
 
       const submitBtn = reservationForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerText : 'Gönder';
+      const originalText = submitBtn ? submitBtn.innerText : 'Rezervasyon Talebini Gönder';
 
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.style.opacity = '0.7';
-        submitBtn.innerText = 'Rezervasyon Gönderiliyor...';
+        submitBtn.innerText = 'Rezervasyon İletiliyor...';
       }
 
-      // Collect data safely
       const nameInput = document.getElementById('res-name') || document.getElementById('r-name');
       const phoneInput = document.getElementById('res-phone') || document.getElementById('r-phone');
       const dateInput = document.getElementById('res-date') || document.getElementById('r-date');
@@ -229,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         name: nameInput ? nameInput.value.trim() : '',
         phone: phoneInput ? phoneInput.value.trim() : '',
         date: dateInput ? dateInput.value : '',
-        guests: guestsInput ? guestsInput.value : '4 Kişi',
+        guests: guestsInput ? guestsInput.value : '2 Kişi',
         tableType: checkedTable ? checkedTable.value : 'Standart Meyhane Masası',
         note: noteInput ? noteInput.value.trim() : ''
       };
@@ -249,9 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
               modalDetails.innerHTML = `
                 <div style="font-size: 13px; line-height: 1.8; color: var(--text-primary);">
                   <p><strong>Rezervasyon Kodu:</strong> <span style="color: var(--accent-gold); font-weight: 700;">${result.id || 'RES-' + Math.floor(Math.random()*9000+1000)}</span></p>
-                  <p><strong>İsim:</strong> ${payload.name}</p>
-                  <p><strong>Tarih & Kişi:</strong> ${payload.date} (${payload.guests})</p>
-                  <p><strong>Masa Türü:</strong> ${payload.tableType}</p>
+                  <p><strong>İsim:</strong> ${escapeHtml(payload.name)}</p>
+                  <p><strong>Tarih & Kişi:</strong> ${escapeHtml(payload.date)} (${escapeHtml(payload.guests)})</p>
+                  <p><strong>Masa Tercihi:</strong> ${escapeHtml(payload.tableType)}</p>
                 </div>
               `;
             }
@@ -259,14 +126,14 @@ document.addEventListener('DOMContentLoaded', () => {
             resModal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
           } else {
-            alert(`✓ Rezervasyon Talebiniz Alındı!\nKod: ${result.id}\nEkibimiz en kısa sürede sizinle iletişime geçecektir.`);
+            alert(`✓ Rezervasyon Talebiniz Alındı!\nKod: ${result.id}\nEkibimiz ${payload.phone} üzerinden sizinle iletişime geçecektir.`);
           }
           reservationForm.reset();
         } else {
           throw new Error(result.error || 'Rezervasyon iletilirken bir hata oluştu.');
         }
       } catch (err) {
-        alert(`✕ Rezervasyon Gönderilemedi: ${err.message}\nLütfen doğrudan telefon veya WhatsApp ile iletişime geçiniz.`);
+        alert(`✕ Rezervasyon Gönderilemedi: ${err.message}\nLütfen doğrudan 0530 527 91 77 veya WhatsApp ile iletişime geçiniz.`);
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -277,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Close reservation modal
   if (modalCloseBtn && resModal) {
     modalCloseBtn.addEventListener('click', () => {
       resModal.classList.remove('active');
@@ -296,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 9. CONVERSION & CLICK TRACKING (tel: and wa.me)
+  // 6. CONVERSION & CLICK TRACKING
   function trackClick(type, source) {
     try {
       const payload = JSON.stringify({
@@ -316,9 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
           keepalive: true
         }).catch(() => {});
       }
-    } catch (err) {
-      // Non-blocking silently
-    }
+    } catch (err) {}
   }
 
   document.addEventListener('click', (e) => {
@@ -345,10 +209,336 @@ document.addEventListener('DOMContentLoaded', () => {
         source = 'Hero Alanı';
       } else if (link.closest('.schedule-item, .event-card')) {
         source = 'Etkinlik Kartı';
-      } else if (link.closest('#menu, .section-menu-editorial')) {
-        source = 'Menü Bölümü';
+      } else if (link.closest('.floating-whatsapp')) {
+        source = 'Sabit WhatsApp Butonu';
       }
       trackClick(type, source);
     }
   });
+
+  // ==========================================================
+  // DİNAMİK SİTE YÖNETİMİ & API ENTEGRASYONLARI
+  // ==========================================================
+
+  // A. Dinamik Genel Bilgiler & İletişim (Tüm Sayfalar)
+  async function loadDynamicSettings() {
+    try {
+      const res = await fetch('/api/settings');
+      if (!res.ok) return;
+      const s = await res.json();
+      if (!s) return;
+
+      // Update phone numbers
+      if (s.phone) {
+        document.querySelectorAll('a[href^="tel:"]').forEach(el => {
+          el.href = `tel:+90${s.phone.replace(/[^0-9]/g, '').slice(-10)}`;
+          if (el.innerText.includes('0530') || el.innerText.includes('05')) {
+            el.innerText = s.phone;
+          }
+        });
+      }
+
+      // Update WhatsApp links & numbers
+      if (s.whatsappDirect || s.whatsapp) {
+        const cleanWa = (s.whatsappDirect || s.whatsapp || '').replace(/[^0-9]/g, '');
+        document.querySelectorAll('a[href*="wa.me"]').forEach(el => {
+          const oldHref = el.getAttribute('href') || '';
+          const matchText = oldHref.match(/text=([^&]+)/);
+          const textParam = matchText ? `?text=${matchText[1]}` : '';
+          el.href = `https://wa.me/${cleanWa}${textParam}`;
+        });
+      }
+
+      // Update Address
+      if (s.address) {
+        document.querySelectorAll('.footer-contact-details p, .mobile-menu-info p').forEach(p => {
+          if (p.textContent.includes('Kordonboyu') || p.textContent.includes('Kartal')) {
+            p.textContent = s.address;
+          }
+        });
+      }
+
+      // Update Working Hours
+      if (s.workingHours) {
+        document.querySelectorAll('.footer-hours-badge, .mobile-menu-info p').forEach(el => {
+          if (el.textContent.includes('Çarşamba') || el.textContent.includes('19:30')) {
+            el.textContent = s.workingHours;
+          }
+        });
+      }
+    } catch (e) {
+      console.warn('Ayarlar yüklenemedi:', e);
+    }
+  }
+
+  // B. Dinamik Hero Slider (Anasayfa)
+  async function loadDynamicHeroSlider() {
+    const heroSection = document.getElementById('hero');
+    if (!heroSection) return;
+
+    try {
+      const res = await fetch('/api/sliders');
+      if (!res.ok) return;
+      const sliders = await res.json();
+      if (!sliders || sliders.length === 0) return;
+
+      let currentSlide = 0;
+      let slideTimer = null;
+
+      function renderSlide(idx) {
+        const s = sliders[idx];
+        if (!s) return;
+
+        // Background Image
+        const bgImg = heroSection.querySelector('.hero-background-wrap img');
+        if (bgImg && s.image) {
+          bgImg.src = s.image;
+        }
+
+        // Eyebrow
+        const eyebrow = heroSection.querySelector('.hero-eyebrow');
+        if (eyebrow && s.subtitle) {
+          eyebrow.textContent = s.subtitle;
+        }
+
+        // Title
+        const titleEl = heroSection.querySelector('.hero-title');
+        if (titleEl && s.title) {
+          titleEl.innerHTML = s.title.replace('&', '&<br>');
+        }
+
+        // Description
+        const descEls = heroSection.querySelectorAll('.hero-description');
+        if (descEls.length > 0 && s.desc) {
+          descEls[descEls.length - 1].textContent = s.desc;
+        }
+
+        // CTA Button
+        const primaryBtn = heroSection.querySelector('.hero-actions-row .btn-primary-editorial');
+        if (primaryBtn && s.btnText) {
+          primaryBtn.textContent = s.btnText;
+          if (s.btnLink) primaryBtn.href = s.btnLink;
+        }
+
+        // Update Dots
+        const dots = heroSection.querySelectorAll('.slider-dot');
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === idx);
+        });
+      }
+
+      // If more than 1 slider, inject dot indicators
+      if (sliders.length > 1) {
+        let dotsWrap = heroSection.querySelector('.slider-dots-row');
+        if (!dotsWrap) {
+          dotsWrap = document.createElement('div');
+          dotsWrap.className = 'slider-dots-row';
+          const content = heroSection.querySelector('.hero-content');
+          if (content) content.appendChild(dotsWrap);
+        }
+
+        dotsWrap.innerHTML = sliders.map((_, i) => `
+          <button class="slider-dot ${i === 0 ? 'active' : ''}" data-idx="${i}" aria-label="Slide ${i+1}"></button>
+        `).join('');
+
+        dotsWrap.querySelectorAll('.slider-dot').forEach(dot => {
+          dot.addEventListener('click', (e) => {
+            const idx = parseInt(e.target.getAttribute('data-idx'), 10);
+            currentSlide = idx;
+            renderSlide(currentSlide);
+            resetTimer();
+          });
+        });
+
+        function resetTimer() {
+          if (slideTimer) clearInterval(slideTimer);
+          slideTimer = setInterval(() => {
+            currentSlide = (currentSlide + 1) % sliders.length;
+            renderSlide(currentSlide);
+          }, 6500);
+        }
+
+        resetTimer();
+      }
+
+      // Initial render
+      renderSlide(0);
+
+    } catch (e) {
+      console.warn('Slider yüklenemedi:', e);
+    }
+  }
+
+  // C. Dinamik Sahne Programı & Konserler (Anasayfa & Program Sayfası)
+  async function loadDynamicEvents() {
+    const scheduleContainer = document.querySelector('.editorial-schedule-list');
+    if (!scheduleContainer) return;
+
+    try {
+      const res = await fetch('/api/events');
+      if (!res.ok) return;
+      const events = await res.json();
+      if (!events || events.length === 0) return;
+
+      scheduleContainer.innerHTML = events.map(ev => `
+        <article class="schedule-item event-card" data-category="${ev.category || 'canli-muzik'}">
+          <div class="schedule-date-col">
+            <span class="schedule-date-main">${escapeHtml(ev.date)}</span>
+            <span class="schedule-date-sub">⏰ ${escapeHtml(ev.time || '21:30')} Sahne</span>
+          </div>
+          <div class="schedule-thumb-col">
+            <img src="${ev.image || 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80'}" alt="${escapeHtml(ev.title)}" width="600" height="400" loading="lazy" decoding="async">
+          </div>
+          <div class="schedule-artist-col">
+            <h3 class="schedule-artist-name">${escapeHtml(ev.artist || ev.title)}</h3>
+            <span class="schedule-event-title">${escapeHtml(ev.title)}</span>
+          </div>
+          <div class="schedule-meta-col">
+            <span class="schedule-tag-text">${escapeHtml(ev.badge || 'Gala Gecesi')}</span>
+            <span class="schedule-note-text">${escapeHtml(ev.ticketInfo || 'Rezervasyon Açıldı')}</span>
+          </div>
+          <div class="schedule-action-col">
+            <button class="btn-primary-editorial quick-book-btn" data-event-name="${escapeHtml(ev.artist || ev.title)}" data-event-date="${escapeHtml(ev.date)}">
+              ${ev.isSoldOut ? 'Tükendi' : 'Masa Ayır'}
+            </button>
+          </div>
+        </article>
+      `).join('');
+
+      // Bind quick-book buttons to scroll to form and prefill
+      scheduleContainer.querySelectorAll('.quick-book-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const eventName = btn.getAttribute('data-event-name');
+          const eventDate = btn.getAttribute('data-event-date');
+          const noteInput = document.getElementById('res-note') || document.getElementById('r-note');
+          const dateInput = document.getElementById('res-date') || document.getElementById('r-date');
+
+          if (noteInput && eventName) {
+            noteInput.value = `Etkinlik Tercihi: ${eventName}`;
+          }
+          if (dateInput && eventDate) {
+            dateInput.value = eventDate;
+          }
+
+          const reserveSection = document.getElementById('rezervasyon');
+          if (reserveSection) {
+            reserveSection.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.location.href = `/rezervasyon?event=${encodeURIComponent(eventName)}`;
+          }
+        });
+      });
+
+      // Bind category filter buttons
+      document.querySelectorAll('.filter-btn, .schedule-filter-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn, .schedule-filter-tab').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const category = btn.getAttribute('data-category');
+          document.querySelectorAll('.event-card, .schedule-item').forEach(card => {
+            const cardCat = card.getAttribute('data-category');
+            if (category === 'all' || cardCat === category) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+    } catch (e) {
+      console.warn('Etkinlikler yüklenemedi:', e);
+    }
+  }
+
+  // D. Dinamik Menü Kategorileri & Ürünleri (Anasayfa & Menü Sayfası)
+  async function loadDynamicCategories() {
+    const grid = document.querySelector('.menu-categories-grid');
+    if (!grid) return;
+
+    try {
+      const res = await fetch('/api/categories');
+      if (!res.ok) return;
+      const categories = await res.json();
+      if (!categories || categories.length === 0) return;
+
+      grid.innerHTML = categories.map(cat => `
+        <div class="menu-category-card" onclick="window.location.href='/menu#${cat.id}'" style="cursor: pointer;">
+          <div class="category-card-img-wrap">
+            <img src="${cat.image || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80'}" alt="${escapeHtml(cat.name)}" loading="lazy">
+            <div class="category-card-overlay"></div>
+          </div>
+          <div class="category-card-content">
+            <span class="category-card-tag">${escapeHtml(cat.tag || 'ÖZEL SEÇKİ')}</span>
+            <h3 class="category-card-title">${escapeHtml(cat.name)}</h3>
+            <p class="category-card-desc">${escapeHtml(cat.desc || '')}</p>
+          </div>
+        </div>
+      `).join('');
+    } catch (e) {
+      console.warn('Kategoriler yüklenemedi:', e);
+    }
+  }
+
+  // E. Dinamik Menü Sayfası Detayları (menu.html)
+  async function loadDynamicMenuDetails() {
+    const isMenuPage = window.location.pathname.includes('/menu');
+    if (!isMenuPage) return;
+
+    const dynamicMenuContainer = document.getElementById('dynamic-menu-container');
+    if (dynamicMenuContainer) {
+      try {
+        const res = await fetch('/api/menu');
+        if (!res.ok) return;
+        const data = await res.json();
+        const categories = data.categories || [];
+
+        dynamicMenuContainer.innerHTML = categories.map(cat => `
+          <div class="menu-category-section" id="${cat.id}" style="margin-bottom: 50px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-hairline); padding-bottom: 12px; margin-bottom: 24px;">
+              <div>
+                <span class="eyebrow">${escapeHtml(cat.tag || 'LEZZET SEÇKİSİ')}</span>
+                <h2 style="font-family: var(--font-serif); font-size: 28px; color: var(--text-primary); margin-top: 4px;">${escapeHtml(cat.name)}</h2>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+              ${(cat.items || []).map(item => `
+                <div style="background: var(--bg-surface); border: 1px solid var(--border-hairline); border-radius: 8px; padding: 18px; display: flex; gap: 14px; align-items: center;">
+                  ${item.image ? `<img src="${item.image}" style="width: 70px; height: 70px; border-radius: 6px; object-fit: cover;" alt="">` : ''}
+                  <div style="flex: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                      <h4 style="font-size: 15px; font-weight: 600; color: var(--text-primary);">${escapeHtml(item.name)}</h4>
+                      <span style="font-size: 13px; color: var(--accent-gold); font-weight: 700;">${escapeHtml(item.price || '')}</span>
+                    </div>
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">${escapeHtml(item.desc || '')}</p>
+                    ${item.badge ? `<span style="font-size: 10px; color: var(--accent-gold); border: 1px solid var(--border-hairline); border-radius: 4px; padding: 2px 6px; display: inline-block; margin-top: 6px;">${escapeHtml(item.badge)}</span>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      } catch (e) {
+        console.warn('Menü detayları yüklenemedi:', e);
+      }
+    }
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // Run dynamic loaders
+  loadDynamicSettings();
+  loadDynamicHeroSlider();
+  loadDynamicEvents();
+  loadDynamicCategories();
+  loadDynamicMenuDetails();
 });

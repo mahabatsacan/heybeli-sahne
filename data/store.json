@@ -1,6 +1,18 @@
 {
   "reservations": [
     {
+      "id": "RES-8373",
+      "name": "Test Misafir",
+      "phone": "05301234567",
+      "date": "2026-10-30",
+      "guests": "4 Kişi",
+      "tableType": "Sahne Önü VIP Masa",
+      "note": "Test rezervasyonu",
+      "status": "yeni",
+      "createdAt": "2026-10-26T14:14:24.715Z",
+      "ip": "127.0.0.1"
+    },
+    {
       "id": "RES-8921",
       "name": "Murat Yılmaz",
       "phone": "0532 450 11 22",
@@ -42,5 +54,334 @@
       "device": "Mobil (Android)",
       "timestamp": "2026-09-23T11:10:00.000Z"
     }
-  ]
+  ],
+  "sliders": [
+    {
+      "id": "slide-1",
+      "title": "İstanbul Meyhane Zarafeti & Canlı Sahne",
+      "subtitle": "KARTAL SAHİL'DE HER AKŞAM YENİ BİR HİKAYE",
+      "desc": "İstanbul meyhane kültürünün zarafetini, usta sanatçıların canlı performansları ve Ege lezzetleriyle taçlandıran özel bir buluşma adresi.",
+      "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=85",
+      "btnText": "Masa Rezervasyonu",
+      "btnLink": "#rezervasyon",
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "slide-2",
+      "title": "Gala Konserleri & Usta Sanatçılar",
+      "subtitle": "HER CUMA & CUMARTESİ YILDIZLAR GEÇİDİ",
+      "desc": "Sakiler, Rubato, Serkan Kaya ve dev orkestralarla unutulmaz sahil akşamları sizleri bekliyor.",
+      "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1600&q=85",
+      "btnText": "Etkinlik Takvimi",
+      "btnLink": "/program",
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "slide-3",
+      "title": "Ege’nin Taptaze Mezeleri & Seçkin Sofra",
+      "subtitle": "GÜNLÜK HAZIRLANAN MEZELER & TAŞ FIRIN LEZZETLERİ",
+      "desc": "Girit ezmesi, tereyağlı sıcak karides güveç, kömür ateşinde ızgaralar ve seçkin meyhane muhabbeti.",
+      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=85",
+      "btnText": "Menüyü Keşfet",
+      "btnLink": "/menu",
+      "order": 3,
+      "isActive": true
+    }
+  ],
+  "categories": [
+    {
+      "id": "ana-yemek",
+      "name": "ANA YEMEK",
+      "tag": "USTALIKLA PİŞİRİLEN",
+      "desc": "Kömür ateşinde ızgara levrek, çipura, dana antrikot & kasap köfte",
+      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80",
+      "order": 1
+    },
+    {
+      "id": "ara-sicaklar",
+      "name": "ARA SICAKLAR",
+      "tag": "SICAK LEZZETLER",
+      "desc": "Güveçte tereyağlı karides, yaprak ciğer & çıtır paçanga böreği",
+      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=700&q=80",
+      "order": 2
+    },
+    {
+      "id": "mezeler",
+      "name": "MEZELER",
+      "tag": "EGE & AKDENİZ",
+      "desc": "Girit ezmesi, atom, köz patlıcanlı köpoğlu, levrek marin & haydari",
+      "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=700&q=80",
+      "order": 3
+    },
+    {
+      "id": "salatalar",
+      "name": "SALATALAR",
+      "tag": "BAHÇEDEN SOFRAYA",
+      "desc": "Cevizli Gavurdağı salatası, nar ekşili Ege yeşillikleri, tulum peynirli roka",
+      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=80",
+      "order": 4
+    },
+    {
+      "id": "meyve-tatli",
+      "name": "MEYVE VE ATIŞTIRMALIK",
+      "tag": "TATLI KAPANIŞ",
+      "desc": "Buzlu mevsim meyveleri seçkisi, tahinli sıcak sufle & çerez tabağı",
+      "image": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=700&q=80",
+      "order": 5
+    },
+    {
+      "id": "ickiler",
+      "name": "İÇKİLER",
+      "tag": "SOFRA KÜLTÜRÜ",
+      "desc": "Geleneksel yaş üzüm rakıları, altın seriler, seçkin şaraplar & kokteyller",
+      "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=80",
+      "order": 6
+    }
+  ],
+  "menuItems": [
+    {
+      "id": "item-1",
+      "categoryId": "mezeler",
+      "name": "Girit Ezmesi",
+      "desc": "Ezine peyniri, ceviz, taze fesleğen ve fıstık dokunuşu ile zeytinyağlı meze",
+      "price": "Günlük Taze",
+      "badge": "Şefin İmzası",
+      "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80",
+      "order": 1,
+      "isAvailable": true
+    },
+    {
+      "id": "item-2",
+      "categoryId": "mezeler",
+      "name": "Köz Patlıcanlı Atom",
+      "desc": "Süzme yoğurt, acı tereyağlı çıtır biberler ile közlenmiş patlıcan",
+      "price": "Günlük Taze",
+      "badge": "Popüler",
+      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+      "order": 2,
+      "isAvailable": true
+    },
+    {
+      "id": "item-3",
+      "categoryId": "mezeler",
+      "name": "Ege Deniz Börülcesi",
+      "desc": "Zeytinyağı, sarımsak ve limon emülsiyonu eşliğinde taze börülce",
+      "price": "Günlük Taze",
+      "badge": "Ege Klasiği",
+      "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80",
+      "order": 3,
+      "isAvailable": true
+    },
+    {
+      "id": "item-4",
+      "categoryId": "mezeler",
+      "name": "Levrek Marin",
+      "desc": "Hardal tohumu, kişniş, taze narenciye ve sızma zeytinyağında marine edilmiş deniz levreği",
+      "price": "Gurme Seçki",
+      "badge": "Özel Meze",
+      "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
+      "order": 4,
+      "isAvailable": true
+    },
+    {
+      "id": "item-5",
+      "categoryId": "ara-sicaklar",
+      "name": "Tereyağında Karides Güveç",
+      "desc": "Sarımsak, pul biber ve domates soslu tereyağlı taze deniz karidesi",
+      "price": "Sıcak Başlangıç",
+      "badge": "Günün Favorisi",
+      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+      "order": 1,
+      "isAvailable": true
+    },
+    {
+      "id": "item-6",
+      "categoryId": "ara-sicaklar",
+      "name": "Yaprak Ciğer (Edirne Usulü)",
+      "desc": "İnce kıyım dana ciğer, sumaklı soğan söğüş ve çıtır biber ile",
+      "price": "Sıcak Başlangıç",
+      "badge": "Geleneksel",
+      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+      "order": 2,
+      "isAvailable": true
+    },
+    {
+      "id": "item-7",
+      "categoryId": "ara-sicaklar",
+      "name": "Çıtır Paçanga Böreği",
+      "desc": "Kayseri pastırması, kaşar peyniri ve domates ile çıtır çıtır yufka",
+      "price": "Sıcak Başlangıç",
+      "badge": "",
+      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+      "order": 3,
+      "isAvailable": true
+    },
+    {
+      "id": "item-8",
+      "categoryId": "ana-yemek",
+      "name": "Izgara Deniz Levreği",
+      "desc": "Kömür ateşinde nar gibi kızarmış taze levrek, roka, kırmızı soğan ve limon eşliğinde",
+      "price": "Ana Yemek",
+      "badge": "Taze Balık",
+      "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
+      "order": 1,
+      "isAvailable": true
+    },
+    {
+      "id": "item-9",
+      "categoryId": "ana-yemek",
+      "name": "Özel Kasap Köfte & Antrikot",
+      "desc": "Kömürde pişirilmiş dana antrikot ve usta köftesi, köz biber ve domates ile",
+      "price": "Ana Yemek",
+      "badge": "Izgara Seçimi",
+      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+      "order": 2,
+      "isAvailable": true
+    },
+    {
+      "id": "item-10",
+      "categoryId": "salatalar",
+      "name": "Cevizli Gavurdağı Salatası",
+      "desc": "Küp doğranmış domates, salatalık, taze nane, ceviz içi ve Antakya nar ekşisi sosu",
+      "price": "Salata",
+      "badge": "Meyhane Klasiği",
+      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+      "order": 1,
+      "isAvailable": true
+    },
+    {
+      "id": "item-11",
+      "categoryId": "meyve-tatli",
+      "name": "Buzlu Mevsim Meyveleri & Sıcak Sufle",
+      "desc": "Kavun, karpuz, ananas, çilek ve yanında Belçika çikolatalı sıcak sufle",
+      "price": "Tatlı Kapanış",
+      "badge": "İkramlık",
+      "image": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=600&q=80",
+      "order": 1,
+      "isAvailable": true
+    },
+    {
+      "id": "item-12",
+      "categoryId": "ickiler",
+      "name": "Yaş Üzüm Rakısı & Altın Seri",
+      "desc": "Geleneksel damıtım yaş üzüm rakıları, buz ve şalgam ikramı ile",
+      "price": "Sofranın Eşliği",
+      "badge": "Seçkin Koleksiyon",
+      "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80",
+      "order": 1,
+      "isAvailable": true
+    }
+  ],
+  "events": [
+    {
+      "id": "sakiler-canli",
+      "title": "Sakiler Canlı Sahne & Büyük Gala",
+      "artist": "Sakiler",
+      "date": "25 Eylül Cuma",
+      "time": "21:30",
+      "category": "canli-muzik",
+      "badge": "Bu Cuma",
+      "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80",
+      "description": "Modern arabesk ve pop müziğin sevilen grubu Sakiler, Heybeli Sahne'de en hit şarkıları ve eşsiz sahne enerjisiyle sizlerle buluşuyor.",
+      "highlights": "Özel Fiks Menü Dahil\nCanlı Fasıl Açılışı (20:00)\nGece Boyu DJ Performans",
+      "ticketInfo": "Fiks Menü + Konser Girişi Dahil",
+      "isSoldOut": false,
+      "order": 1
+    },
+    {
+      "id": "rubato-sahne",
+      "title": "Rubato ile Akustik Gece",
+      "artist": "Rubato",
+      "date": "26 Eylül Cumartesi",
+      "time": "22:00",
+      "category": "canli-muzik",
+      "badge": "Hafta Sonu Özel",
+      "image": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=80",
+      "description": "Enstrümanların virtüözleri Rubato; hüzünlü ve coşkulu melodileriyle Heybeli Sahne dinleyicilerine unutulmaz bir müzik ziyafeti yaşatacak.",
+      "highlights": "Sahne Önü VIP Masalar\nZengin Meze Seçkisi\nÖzel Kokteyl İkramı",
+      "ticketInfo": "Sınırlı Sayıda Rezervasyon",
+      "isSoldOut": false,
+      "order": 2
+    },
+    {
+      "id": "serkan-kaya-gecesi",
+      "title": "Serkan Kaya & Arabesk Gecesi",
+      "artist": "Serkan Kaya",
+      "date": "02 Ekim Cuma",
+      "time": "21:30",
+      "category": "unlu-sanatcilar",
+      "badge": "Büyük Gala",
+      "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1000&q=80",
+      "description": "Arabesk müziğin güçlü sesi Serkan Kaya, dev orkestrası ve dillerden düşmeyen şarkılarıyla Heybeli Sahne'de sahne alıyor.",
+      "highlights": "Gala Fiks Menüsü\nVIP Loca Hizmeti\nVale & Karşılama İkramı",
+      "ticketInfo": "Ön Satışta Yoğun Talep",
+      "isSoldOut": false,
+      "order": 3
+    },
+    {
+      "id": "kadinlar-matinesi",
+      "title": "Çarşamba Kadınlar Matinesi & 90'lar Türkçe Pop",
+      "artist": "DJ Ece & Oryantal Şov",
+      "date": "Her Çarşamba",
+      "time": "19:30",
+      "category": "matine",
+      "badge": "Her Çarşamba",
+      "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80",
+      "description": "Kadınlar matinesinde 90'lar Türkçe Pop nostaljisi, modern fasıl ekibi ve dans gösterileri eşliğinde sınırsız eğlence.",
+      "highlights": "Kadınlara Özel İndirimli Fiks Menü\nSürpriz Dans Şovları\nSınırsız Eğlence",
+      "ticketInfo": "Grup Rezervasyonlarında Özel İndirim",
+      "isSoldOut": false,
+      "order": 4
+    },
+    {
+      "id": "dilan-citak",
+      "title": "Dilan Çıtak ile Pop & Alaturka",
+      "artist": "Dilan Çıtak",
+      "date": "09 Ekim Cuma",
+      "time": "21:30",
+      "category": "canli-muzik",
+      "badge": "Yeni Program",
+      "image": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1000&q=80",
+      "description": "Güçlü yorumu ve dinamik sahne şovuyla Dilan Çıtak, hem nostaljik hem enerjik şarkılarla Heybeli Sahne'yi coşturuyor.",
+      "highlights": "Özel Şef Menüsü\nFasıl & Keman Resitali\nGece Boyu İkramlar",
+      "ticketInfo": "Rezervasyon Açıldı",
+      "isSoldOut": false,
+      "order": 5
+    },
+    {
+      "id": "fasli-alaturka",
+      "title": "Geleneksel Modern Fasıl & Meyhane Akşamı",
+      "artist": "Heybeli Fasıl Heyeti",
+      "date": "Her Perşembe",
+      "time": "20:00",
+      "category": "meyhane",
+      "badge": "Her Perşembe",
+      "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1000&q=80",
+      "description": "Eski İstanbul meyhane kültürünü modern bir çizgide yaşatan Heybeli Fasıl Heyeti ile masanızda ud, kanun ve klarnet nağmeleri.",
+      "highlights": "Klasik Ege Mezeleri\nTaş Fırın Sıcakları\nSamimi Meyhane Muhabbeti",
+      "ticketInfo": "Hafta İçi Fiks Menü Fırsatı",
+      "isSoldOut": false,
+      "order": 6
+    }
+  ],
+  "settings": {
+    "venueName": "Heybeli Sahne",
+    "tagline": "Anadolu Meyhanesi & Canlı Performans Sahnesi",
+    "phone": "0530 527 91 77",
+    "whatsapp": "0530 866 43 21",
+    "whatsappDirect": "905308664321",
+    "address": "Kordonboyu, Turgut Özal Blv. NO:53/A, 34860 Kartal / İstanbul",
+    "mapUrl": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x14cac71cab646a87:0x9968fa4cab653899?sa=X&ved=1t:8290&ictx=111",
+    "email": "rezervasyon@heybelisahne.com",
+    "workingHours": "Çarşamba - Pazar: 19:30 - 02:00",
+    "musicHours": "20:30 Fasıl & DJ | 21:45 Canlı Sahne",
+    "announcementText": "Kartal Sahil'de Ege Lezzetleri ve Canlı Performanslar | Rezervasyon: 0530 527 91 77",
+    "instagram": "https://instagram.com/heybelisahne",
+    "heroEyebrow": "KARTAL SAHİL'DE HER AKŞAM YENİ BİR HİKAYE",
+    "heroTitle": "İstanbul Meyhane Zarafeti & Canlı Sahne",
+    "heroDesc": "İstanbul meyhane kültürünün zarafetini, usta sanatçıların canlı performansları ve Ege lezzetleriyle taçlandıran özel bir buluşma adresi."
+  },
+  "media": []
 }
