@@ -60,10 +60,60 @@ const upload = multer({
   }
 });
 
-app.use(express.static(path.join(__dirname, 'public'), {
+// ==========================================
+// SAYFA SUNUMU: CSS/JS için otomatik sürüm (cache-busting)
+// Dosya değiştiğinde ?v= değeri değişir; ziyaretçi her zaman güncel dosyayı alır,
+// değişmeyen dosyalar ise tarayıcı önbelleğinden anında yüklenir.
+// ==========================================
+const PUBLIC_DIR = path.join(__dirname, 'public');
+const pageCache = new Map();
+
+function assetVersion(file) {
+  try {
+    return Math.floor(fs.statSync(path.join(PUBLIC_DIR, file)).mtimeMs).toString(36);
+  } catch (e) {
+    return '1';
+  }
+}
+
+function sendPage(res, file) {
+  const filePath = path.join(PUBLIC_DIR, file);
+  let stat;
+  try {
+    stat = fs.statSync(filePath);
+  } catch (e) {
+    return res.status(404).send('Sayfa bulunamadı');
+  }
+
+  const cssV = assetVersion('style.css');
+  const jsV = assetVersion('app.js');
+  const key = `${stat.mtimeMs}:${cssV}:${jsV}`;
+
+  let cached = pageCache.get(file);
+  if (!cached || cached.key !== key) {
+    const body = fs.readFileSync(filePath, 'utf8')
+      .replace(/href="\/style\.css(\?v=[^"]*)?"/g, `href="/style.css?v=${cssV}"`)
+      .replace(/src="\/app\.js(\?v=[^"]*)?"/g, `src="/app.js?v=${jsV}"`);
+    cached = { key, body };
+    pageCache.set(file, cached);
+  }
+
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+  res.send(cached.body);
+}
+
+// Ana sayfa ve doğrudan .html erişimleri statik sunucudan önce yakalanır
+app.get(['/', '/index.html'], (req, res) => sendPage(res, 'index.html'));
+app.get(/^\/(hakkimizda|program|menu|rezervasyon|iletisim|cerez-politikasi)\.html$/, (req, res) => {
+  sendPage(res, `${req.params[0]}.html`);
+});
+
+app.use(express.static(PUBLIC_DIR, {
   maxAge: '7d',
   etag: true,
   lastModified: true,
+  index: false,
   setHeaders: (res, filePath) => {
     if (filePath.endsWith('.html')) {
       res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
@@ -96,15 +146,15 @@ app.get('/llms-full.txt', (req, res) => {
 
 // Clean URLs for Pages (Aligned with HayalMest Structure)
 app.get(['/hakkimizda', '/hakkimizda/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'hakkimizda.html'));
+  sendPage(res, 'hakkimizda.html');
 });
 
 app.get(['/etkinlik-takvimi', '/etkinlik-takvimi/', '/hayalmest-etkinlik-takvimi', '/program', '/sahne-programi'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'program.html'));
+  sendPage(res, 'program.html');
 });
 
 app.get(['/menu', '/menü', encodeURI('/menü'), '/menu-listemiz', '/menu-listemiz/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'menu.html'));
+  sendPage(res, 'menu.html');
 });
 
 app.get(['/galeri', '/galeri/'], (req, res) => {
@@ -112,11 +162,15 @@ app.get(['/galeri', '/galeri/'], (req, res) => {
 });
 
 app.get(['/rezervasyon', '/rezervasyon/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'rezervasyon.html'));
+  sendPage(res, 'rezervasyon.html');
+});
+
+app.get(['/cerez-politikasi', '/cerez-politikasi/', '/gizlilik'], (req, res) => {
+  sendPage(res, 'cerez-politikasi.html');
 });
 
 app.get(['/iletisim', '/iletisim/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'iletisim.html'));
+  sendPage(res, 'iletisim.html');
 });
 
 // Admin Dashboard Route
@@ -514,7 +568,7 @@ app.delete('/api/admin/media/:id', requireAdmin, (req, res) => {
 
 // Fallback to index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  sendPage(res, 'index.html');
 });
 
 // Global error handler

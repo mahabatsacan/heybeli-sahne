@@ -3,6 +3,54 @@
 // ==========================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  // 0. ÇEREZ ONAYI (KVKK) — ilk girişte sorulur, tercih tarayıcıda saklanır
+  const CONSENT_KEY = 'hs_cookie_consent_v1';
+
+  function getConsent() {
+    try { return JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null'); } catch (e) { return null; }
+  }
+
+  function saveConsent(analytics) {
+    try {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify({ necessary: true, analytics, date: new Date().toISOString() }));
+    } catch (e) {}
+  }
+
+  function showCookieBanner() {
+    if (document.getElementById('cookie-banner')) return;
+    const banner = document.createElement('div');
+    banner.id = 'cookie-banner';
+    banner.className = 'cookie-banner';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-live', 'polite');
+    banner.setAttribute('aria-label', 'Çerez tercihleri');
+    banner.innerHTML = `
+      <div class="cookie-banner-text">
+        <strong class="cookie-banner-title">🍪 Çerez Tercihleriniz</strong>
+        <p>Sitemizin düzgün çalışması için zorunlu çerezler, deneyiminizi iyileştirmek için ise isteğe bağlı analiz çerezleri kullanıyoruz. Detaylar için <a href="/cerez-politikasi">Çerez Politikamızı</a> inceleyebilirsiniz.</p>
+      </div>
+      <div class="cookie-banner-actions">
+        <button type="button" class="cookie-btn cookie-btn-secondary" id="cookie-reject">Sadece Zorunlu</button>
+        <button type="button" class="cookie-btn cookie-btn-primary" id="cookie-accept">Tümünü Kabul Et</button>
+      </div>`;
+    document.body.appendChild(banner);
+    requestAnimationFrame(() => banner.classList.add('visible'));
+
+    const close = (analytics) => {
+      saveConsent(analytics);
+      banner.classList.remove('visible');
+      setTimeout(() => banner.remove(), 300);
+    };
+    banner.querySelector('#cookie-accept').addEventListener('click', () => close(true));
+    banner.querySelector('#cookie-reject').addEventListener('click', () => close(false));
+  }
+
+  if (!getConsent()) {
+    // Sayfa içeriği çizildikten sonra göster (ilk boyamayı geciktirmez)
+    setTimeout(showCookieBanner, 600);
+  }
+  document.querySelectorAll('.cookie-settings-btn').forEach(btn => btn.addEventListener('click', showCookieBanner));
+
   // 1. STICKY HEADER SCROLL EFFECT (60fps requestAnimationFrame throttled)
   const header = document.getElementById('header');
   let isScrolled = false;
@@ -150,6 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 6. CONVERSION & CLICK TRACKING
   function trackClick(type, source) {
+    // İstatistik yalnızca ziyaretçi analiz çerezlerine onay verdiyse gönderilir
+    const consent = getConsent();
+    if (!consent || !consent.analytics) return;
     try {
       const payload = JSON.stringify({
         type,
@@ -255,13 +306,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSection = document.getElementById('hero');
     if (!heroSection || !sliders || sliders.length === 0) return;
 
-    // Arka plan görsellerini belleğe ön yükle (kasma ve gecikmeyi önler)
-    sliders.forEach(s => {
-      if (s.image) {
-        const preImg = new Image();
-        preImg.src = s.image;
-      }
-    });
+    // Diğer slayt görsellerini sayfa tamamen yüklendikten sonra boşta ön yükle
+    // (ilk açılışta görünür içerikle bant genişliği yarışmasın)
+    const preloadRest = () => {
+      const run = () => sliders.slice(1).forEach(s => {
+        if (s.image) { const im = new Image(); im.decoding = 'async'; im.src = s.image; }
+      });
+      if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 4000 });
+      else setTimeout(run, 2000);
+    };
+    if (document.readyState === 'complete') preloadRest();
+    else window.addEventListener('load', preloadRest, { once: true });
 
     let currentSlide = 0;
     let slideTimer = null;
@@ -327,9 +382,18 @@ document.addEventListener('DOMContentLoaded', () => {
       function resetTimer() {
         if (slideTimer) clearInterval(slideTimer);
         slideTimer = setInterval(() => {
+          // Hero ekranda değilse veya sekme gizliyse DOM'a dokunma
+          if (heroHidden || document.hidden) return;
           currentSlide = (currentSlide + 1) % sliders.length;
           renderSlide(currentSlide);
         }, 7000);
+      }
+
+      let heroHidden = false;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(entries => {
+          heroHidden = !entries[0].isIntersecting;
+        }).observe(heroSection);
       }
 
       resetTimer();
@@ -345,6 +409,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isProgramPage = window.location.pathname.includes('/program') || window.location.pathname.includes('/etkinlik-takvimi');
     const eventsToRender = isProgramPage ? events : events.slice(0, 6);
+
+    // Sayfadaki HTML zaten güncel veriyi içeriyorsa yeniden çizme (titreme/kasma önlenir)
+    const domSig = Array.from(scheduleContainer.querySelectorAll('.schedule-item')).map(card => [
+      card.querySelector('.schedule-date-main')?.textContent.trim(),
+      card.querySelector('.schedule-artist-name')?.textContent.trim(),
+      card.querySelector('.schedule-thumb-col img')?.getAttribute('src'),
+      card.querySelector('.schedule-event-desc')?.textContent.trim() || ''
+    ].join('|')).join('||');
+    const dataSig = eventsToRender.map(ev => [
+      ev.date, ev.artist || ev.title, ev.image, ev.description || ''
+    ].join('|')).join('||');
+    if (domSig === dataSig) { bindScheduleActions(scheduleContainer); return; }
 
     scheduleContainer.innerHTML = eventsToRender.map(ev => `
       <article class="schedule-item event-card" data-category="${ev.category || 'canli-muzik'}">
@@ -372,43 +448,24 @@ document.addEventListener('DOMContentLoaded', () => {
       </article>
     `).join('');
 
-    scheduleContainer.querySelectorAll('.quick-book-btn').forEach(btn => {
+    bindScheduleActions(scheduleContainer);
+  }
+
+  // "Masa Ayır" butonları: ana sayfada forma kaydırır, diğer sayfalarda rezervasyon sayfasına gider
+  function bindScheduleActions(container) {
+    container.querySelectorAll('.quick-book-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const eventName = btn.getAttribute('data-event-name');
         const eventDate = btn.getAttribute('data-event-date');
         const noteInput = document.getElementById('res-note') || document.getElementById('r-note');
-        const dateInput = document.getElementById('res-date') || document.getElementById('r-date');
-
-        if (noteInput && eventName) {
-          noteInput.value = `Etkinlik Tercihi: ${eventName}`;
-        }
-        if (dateInput && eventDate) {
-          dateInput.value = eventDate;
-        }
-
         const reserveSection = document.getElementById('rezervasyon');
+
         if (reserveSection) {
+          if (noteInput && eventName) noteInput.value = `Etkinlik Tercihi: ${eventName} (${eventDate || ''})`;
           reserveSection.scrollIntoView({ behavior: 'smooth' });
         } else {
           window.location.href = `/rezervasyon?event=${encodeURIComponent(eventName)}`;
         }
-      });
-    });
-
-    document.querySelectorAll('.filter-btn, .schedule-filter-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn, .schedule-filter-tab').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const category = btn.getAttribute('data-category');
-        document.querySelectorAll('.event-card, .schedule-item').forEach(card => {
-          const cardCat = card.getAttribute('data-category');
-          if (category === 'all' || cardCat === category) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
       });
     });
   }
@@ -429,6 +486,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ickiler && !selected.includes(ickiler)) selected.push(ickiler);
 
     const catsToRender = selected.length === 3 ? selected : categories.slice(0, 3);
+
+    const domSig = Array.from(grid.querySelectorAll('.menu-category-card')).map(c =>
+      `${c.querySelector('.category-card-title')?.textContent.trim()}|${c.querySelector('img')?.getAttribute('src')}`
+    ).join('||');
+    const dataSig = catsToRender.map(c => `${c.name}|${c.image}`).join('||');
+    if (domSig === dataSig) return;
 
     grid.innerHTML = catsToRender.map(cat => `
       <div class="menu-category-card" onclick="window.location.href='/menu#${cat.id}'" style="cursor: pointer;">
