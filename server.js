@@ -143,6 +143,17 @@ app.get('/api/health', (req, res) => {
 // PUBLIC DYNAMIC CONTENT APIs
 // ==========================================
 
+// Unified Bootstrap API (Fast 1-roundtrip initial data for client, reduces latency)
+app.get('/api/bootstrap', (req, res) => {
+  res.setHeader('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
+  res.json({
+    settings: store.getSettings(),
+    sliders: store.getSliders().filter(s => s.isActive !== false),
+    events: store.getEvents(),
+    categories: store.getCategories()
+  });
+});
+
 // Global Site Settings
 app.get('/api/settings', (req, res) => {
   res.json(store.getSettings());

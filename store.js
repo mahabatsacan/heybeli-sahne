@@ -397,12 +397,17 @@ function initStore() {
   }
 }
 
-// Read data
+// In-memory cache for ultra-fast response times
+let cachedData = null;
+
+// Read data (cached in-memory, zero disk-latency on repeated reads)
 function readData() {
+  if (cachedData) return cachedData;
   try {
     initStore();
     const raw = fs.readFileSync(STORE_FILE, 'utf-8');
-    return JSON.parse(raw);
+    cachedData = JSON.parse(raw);
+    return cachedData;
   } catch (err) {
     console.error('Store read error:', err);
     return {
@@ -418,8 +423,9 @@ function readData() {
   }
 }
 
-// Write data
+// Write data (updates cache immediately and persists to disk)
 function writeData(data) {
+  cachedData = data;
   try {
     initStore();
     fs.writeFileSync(STORE_FILE, JSON.stringify(data, null, 2), 'utf-8');
