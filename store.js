@@ -799,16 +799,27 @@ function writeData(data) {
 // ==========================================
 // 1. RESERVATIONS
 // ==========================================
+function generateReservationId(list) {
+  let id;
+  do {
+    id = 'RES-' + Math.floor(1000 + Math.random() * 9000);
+  } while (list.some(r => r.id === id));
+  return id;
+}
+
 function addReservation(item) {
   const data = readData();
   const newReservation = {
-    id: 'RES-' + Math.floor(1000 + Math.random() * 9000),
+    id: generateReservationId(data.reservations),
     name: item.name,
     phone: item.phone,
     date: item.date,
     guests: item.guests || '2 Kişi',
     tableType: item.tableType || 'Standart Meyhane Masası',
+    event: item.event || '',
+    menu: item.menu || '',
     note: item.note || '',
+    page: item.page || '/',
     status: 'yeni', // 'yeni' | 'onaylandi' | 'iptal'
     createdAt: new Date().toISOString(),
     ip: item.ip || 'Bilinmiyor'
@@ -863,23 +874,60 @@ function deleteReservation(id) {
 // ==========================================
 // 2. CLICKS & STATS
 // ==========================================
+// Tıklama kayıtları için ertelenmiş (debounced) disk yazımı:
+// Yoğun trafikte her tıklamada tüm dosyayı senkron yazmak sunucuyu yavaşlatır.
+const MAX_CLICK_RECORDS = 5000;
+let clickWriteTimer = null;
+
+function scheduleClickWrite() {
+  if (clickWriteTimer) return;
+  clickWriteTimer = setTimeout(() => {
+    clickWriteTimer = null;
+    if (cachedData) writeData(cachedData);
+  }, 1500);
+}
+
+function flushPendingWrites() {
+  if (clickWriteTimer) {
+    clearTimeout(clickWriteTimer);
+    clickWriteTimer = null;
+    if (cachedData) writeData(cachedData);
+  }
+}
+
+function ensureClickTotals(data) {
+  if (!data.clickTotals || typeof data.clickTotals !== 'object') {
+    // Mevcut kayıtlardan tüm zamanlar sayaçlarını tohumla
+    data.clickTotals = {};
+    (data.clicks || []).forEach(c => {
+      const t = c.type || 'whatsapp';
+      data.clickTotals[t] = (data.clickTotals[t] || 0) + 1;
+      delete c.ip; // eski kayıtları da anonimleştir
+    });
+  }
+  return data.clickTotals;
+}
+
 function addClick(clickItem) {
   const data = readData();
   const newClick = {
-    id: 'CLK-' + Math.floor(1000 + Math.random() * 9000),
+    id: 'CLK-' + Date.now().toString(36) + Math.floor(Math.random() * 1296).toString(36),
     type: clickItem.type || 'whatsapp',
-    source: clickItem.source || 'bilinmiyor',
+    source: clickItem.source || 'Bilinmiyor',
+    label: clickItem.label || '',
     page: clickItem.page || '/',
     device: clickItem.device || 'Bilinmiyor',
-    timestamp: new Date().toISOString(),
-    ip: clickItem.ip || 'Bilinmiyor'
+    timestamp: new Date().toISOString()
   };
 
+  const totals = ensureClickTotals(data);
+  totals[newClick.type] = (totals[newClick.type] || 0) + 1;
+
   data.clicks.unshift(newClick);
-  if (data.clicks.length > 1000) {
-    data.clicks = data.clicks.slice(0, 1000);
+  if (data.clicks.length > MAX_CLICK_RECORDS) {
+    data.clicks.length = MAX_CLICK_RECORDS;
   }
-  writeData(data);
+  scheduleClickWrite();
   return newClick;
 }
 
@@ -888,22 +936,97 @@ function getClicks(limit = 100) {
   return data.clicks.slice(0, limit);
 }
 
+// Yerel (İstanbul) tarih anahtarı: YYYY-MM-DD
+function localDayKey(date) {
+  const d = new Date(date.getTime() + 3 * 60 * 60 * 1000); // UTC+3
+  return d.toISOString().slice(0, 10);
+}
+
+function getClickStats() {
+  const data = readData();
+  const totals = ensureClickTotals(data);
+  const now = new Date();
+  const todayKey = localDayKey(now);
+  const weekAgo = now.getTime() - 7 * 24 * 60 * 60 * 1000;
+
+  const byType = {};
+  const bySource = {};
+  const byPage = {};
+  const byLabel = {};
+  const byDevice = {};
+  const daily = {};
+
+  // Son 14 gün iskeleti
+  for (let i = 13; i >= 0; i--) {
+    daily[localDayKey(new Date(now.getTime() - i * 24 * 60 * 60 * 1000))] = 0;
+  }
+
+  data.clicks.forEach(c => {
+    const type = c.type || 'whatsapp';
+    const ts = c.timestamp ? new Date(c.timestamp) : null;
+    const dayKey = ts ? localDayKey(ts) : null;
+
+    if (!byType[type]) byType[type] = { total: totals[type] || 0, today: 0, week: 0 };
+    if (dayKey === todayKey) byType[type].today++;
+    if (ts && ts.getTime() >= weekAgo) byType[type].week++;
+
+    const srcKey = c.source || 'Bilinmiyor';
+    bySource[srcKey] = (bySource[srcKey] || 0) + 1;
+    const pageKey = c.page || '/';
+    byPage[pageKey] = (byPage[pageKey] || 0) + 1;
+    if (c.label) {
+      const lblKey = `${type}|${c.label}`;
+      byLabel[lblKey] = (byLabel[lblKey] || 0) + 1;
+    }
+    const devKey = c.device || 'Bilinmiyor';
+    byDevice[devKey] = (byDevice[devKey] || 0) + 1;
+    if (dayKey && dayKey in daily) daily[dayKey]++;
+  });
+
+  // Kayıt listesinde artık bulunmayan ama sayacı olan türler
+  Object.keys(totals).forEach(t => {
+    if (!byType[t]) byType[t] = { total: totals[t], today: 0, week: 0 };
+  });
+
+  const toSorted = (obj, limit = 15) => Object.entries(obj)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([key, count]) => ({ key, count }));
+
+  // Rezervasyon formu gönderimleri doğrudan kayıtlardan sayılır (çerez onayından bağımsız, %100 doğru)
+  const resToday = data.reservations.filter(r => r.createdAt && localDayKey(new Date(r.createdAt)) === todayKey).length;
+  const resWeek = data.reservations.filter(r => r.createdAt && new Date(r.createdAt).getTime() >= weekAgo).length;
+
+  return {
+    byType,
+    reservationSubmits: { total: data.reservations.length, today: resToday, week: resWeek },
+    bySource: toSorted(bySource),
+    byPage: toSorted(byPage),
+    byLabel: toSorted(byLabel, 20),
+    byDevice: toSorted(byDevice),
+    daily: Object.entries(daily).map(([day, count]) => ({ day, count })),
+    recordedClicks: data.clicks.length,
+    allTimeClicks: Object.values(totals).reduce((s, n) => s + n, 0)
+  };
+}
+
 function getStats() {
   const data = readData();
   const now = new Date();
-  const todayStr = now.toISOString().split('T')[0];
+  const todayKey = localDayKey(now);
+  const totals = ensureClickTotals(data);
 
   const totalReservations = data.reservations.length;
   const newReservations = data.reservations.filter(r => r.status === 'yeni').length;
   const confirmedReservations = data.reservations.filter(r => r.status === 'onaylandi').length;
   const canceledReservations = data.reservations.filter(r => r.status === 'iptal').length;
 
-  const totalCalls = data.clicks.filter(c => c.type === 'call').length;
-  const totalWhatsapp = data.clicks.filter(c => c.type === 'whatsapp').length;
+  const totalCalls = totals.call || 0;
+  const totalWhatsapp = totals.whatsapp || 0;
+  const totalClicks = Object.values(totals).reduce((s, n) => s + n, 0);
 
-  const todayReservations = data.reservations.filter(r => r.createdAt && r.createdAt.startsWith(todayStr)).length;
-  const todayCalls = data.clicks.filter(c => c.type === 'call' && c.timestamp && c.timestamp.startsWith(todayStr)).length;
-  const todayWhatsapp = data.clicks.filter(c => c.type === 'whatsapp' && c.timestamp && c.timestamp.startsWith(todayStr)).length;
+  const todayReservations = data.reservations.filter(r => r.createdAt && localDayKey(new Date(r.createdAt)) === todayKey).length;
+  const todayClicks = data.clicks.filter(c => c.timestamp && localDayKey(new Date(c.timestamp)) === todayKey).length;
 
   return {
     totalReservations,
@@ -911,9 +1034,9 @@ function getStats() {
     totalCalls,
     totalWhatsApp: totalWhatsapp,
     todayReservations,
-    todayClicks: todayCalls + todayWhatsapp,
-    todayTotal: todayReservations + todayCalls + todayWhatsapp,
-    totalClicks: totalCalls + totalWhatsapp,
+    todayClicks,
+    todayTotal: todayReservations + todayClicks,
+    totalClicks,
     totalSliders: (data.sliders || []).length,
     totalEvents: (data.events || []).length,
     totalCategories: (data.categories || []).length,
@@ -1188,18 +1311,22 @@ function deleteMedia(id) {
 // ==========================================
 function exportReservationsCSV() {
   const data = readData();
-  const header = ['ID', 'Müşteri Adı', 'Telefon', 'Rezervasyon Tarihi', 'Kişi Sayısı', 'Masa Tipi', 'Durum', 'Kayıt Zamanı', 'Özel Not'];
+  const header = ['ID', 'Müşteri Adı', 'Telefon', 'Rezervasyon Tarihi', 'Kişi Sayısı', 'Masa Tipi', 'Program', 'Menü', 'Durum', 'Kayıt Zamanı', 'Form Sayfası', 'Özel Not'];
+  const esc = (v) => `"${String(v || '').replace(/"/g, '""').replace(/\r?\n/g, ' ')}"`;
   
   const rows = data.reservations.map(r => [
-    `"${r.id}"`,
-    `"${(r.name || '').replace(/"/g, '""')}"`,
-    `"${r.phone || ''}"`,
-    `"${r.date || ''}"`,
-    `"${r.guests || ''}"`,
-    `"${(r.tableType || '').replace(/"/g, '""')}"`,
-    `"${r.status || ''}"`,
-    `"${r.createdAt || ''}"`,
-    `"${(r.note || '').replace(/"/g, '""').replace(/\n/g, ' ')}"`
+    esc(r.id),
+    esc(r.name),
+    esc(r.phone),
+    esc(r.date),
+    esc(r.guests),
+    esc(r.tableType),
+    esc(r.event),
+    esc(r.menu),
+    esc(r.status),
+    esc(r.createdAt),
+    esc(r.page),
+    esc(r.note)
   ]);
 
   return '\uFEFF' + [header.join(','), ...rows.map(row => row.join(','))].join('\r\n');
@@ -1217,7 +1344,9 @@ module.exports = {
   // Clicks & Stats
   addClick,
   getClicks,
+  getClickStats,
   getStats,
+  flushPendingWrites,
   // Sliders
   getSliders,
   addSlider,

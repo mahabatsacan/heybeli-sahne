@@ -123,37 +123,159 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5. RESERVATION FORM SUBMISSION
-  const reservationForm = document.getElementById('reservation-form');
+  // 5. RESERVATION FORM SUBMISSION (Anasayfa #reservation-form + /rezervasyon #pageReservationForm)
+  // Talep: 1) yönetim paneline kaydedilir  2) Heybeli Sahne WhatsApp hattına hazır mesaj olarak iletilir
+  //        3) ziyaretçi isterse onay bilgisini kendi WhatsApp'ına kaydeder
+  let venueWa = '905308664321';
+  const VENUE_ADDRESS = 'Kordonboyu, Turgut Özal Blv. No:53/A, Kartal / İstanbul';
+  let venuePhoneDisplay = '0530 527 91 77';
 
-  if (reservationForm) {
-    reservationForm.addEventListener('submit', async (e) => {
+  // Türkiye numaralarını WhatsApp formatına (90XXXXXXXXXX) çevirir
+  function toWaNumber(raw) {
+    let d = String(raw || '').replace(/\D/g, '');
+    if (d.startsWith('00')) d = d.slice(2);
+    if (d.length === 11 && d.startsWith('0')) d = '9' + d;
+    else if (d.length === 10 && d.startsWith('5')) d = '90' + d;
+    return d.length >= 11 ? d : '';
+  }
+
+  function formatTrDate(iso) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+    if (!m) return iso || '';
+    const dt = new Date(+m[1], +m[2] - 1, +m[3]);
+    return dt.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
+  }
+
+  function waLink(number, text) {
+    return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+  }
+
+  function buildVenueMessage(r) {
+    const lines = [
+      'Merhaba Heybeli Sahne, web sitenizden masa rezervasyonu talebi oluşturdum:',
+      '',
+      `📌 Talep Kodu: ${r.id}`,
+      `👤 Ad Soyad: ${r.name}`,
+      `📞 Telefon: ${r.phone}`,
+      `📅 Tarih: ${formatTrDate(r.date)}`,
+      `👥 Kişi Sayısı: ${r.guests}`,
+      `🪑 Masa Tercihi: ${r.tableType}`
+    ];
+    if (r.event && r.event !== 'Genel Rezervasyon') lines.push(`🎤 Program: ${r.event}`);
+    if (r.menu) lines.push(`🍽️ Menü: ${r.menu}`);
+    if (r.note) lines.push(`📝 Not: ${r.note}`);
+    lines.push('', 'Rezervasyonumun onayını bekliyorum, teşekkürler.');
+    return lines.join('\n');
+  }
+
+  function buildSelfMessage(r) {
+    return [
+      '✅ Heybeli Sahne rezervasyon talebim alındı',
+      '',
+      `📌 Talep Kodu: ${r.id}`,
+      `📅 Tarih: ${formatTrDate(r.date)}`,
+      `👥 Kişi: ${r.guests}`,
+      `🪑 Masa: ${r.tableType}`,
+      '',
+      '🚪 Kapı açılış 20:00 · 🎤 Sahne 22:00',
+      `📍 ${VENUE_ADDRESS}`,
+      `☎️ Rezervasyon Hattı: ${venuePhoneDisplay}`
+    ].join('\n');
+  }
+
+  const WA_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.28c-.24.68-1.39 1.3-1.92 1.38-.5.08-1.13.11-3.64-.93-2.14-.88-3.52-3.06-3.63-3.21-.11-.15-.86-1.14-.86-2.18s.54-1.55.74-1.76c.19-.21.43-.26.57-.26.15 0 .29 0 .42.01.13.01.32-.05.5.38.19.45.64 1.57.7 1.69.06.12.09.26.02.41-.08.15-.12.24-.24.38-.12.15-.25.32-.36.43-.12.12-.24.26-.1.5.14.24.63 1.04 1.35 1.68.93.83 1.71 1.09 1.95 1.21.24.12.38.1.53-.06.14-.17.62-.72.78-.97.17-.24.33-.21.55-.12.22.08 1.41.67 1.65.79.24.12.4.17.46.28.06.11.06.63-.18 1.31z"/></svg>';
+
+  function renderReservationSuccess(feedback, r) {
+    const venueUrl = waLink(venueWa, buildVenueMessage(r));
+    const selfNumber = toWaNumber(r.phone);
+    const selfUrl = selfNumber ? waLink(selfNumber, buildSelfMessage(r)) : '';
+
+    feedback.className = 'form-feedback res-success-wrap';
+    feedback.style.display = 'block';
+    feedback.innerHTML = `
+      <div class="res-success" role="status">
+        <div class="res-success-head">
+          <span class="res-success-icon" aria-hidden="true">✓</span>
+          <div>
+            <strong class="res-success-title">Rezervasyon talebiniz alındı</strong>
+            <span class="res-success-code">Talep Kodu: ${escapeHtml(r.id)}</span>
+          </div>
+        </div>
+        <p class="res-success-text">Talebiniz rezervasyon ekibimize ulaştı. Masanızın hemen ayrılması için talebinizi <strong>WhatsApp</strong> üzerinden de iletin — açılan sohbette yalnızca <strong>Gönder</strong>'e dokunmanız yeterli.</p>
+        <ul class="res-success-summary">
+          <li><span>Tarih</span><strong>${escapeHtml(formatTrDate(r.date))}</strong></li>
+          <li><span>Kişi</span><strong>${escapeHtml(r.guests)}</strong></li>
+          <li><span>Masa</span><strong>${escapeHtml(r.tableType)}</strong></li>
+        </ul>
+        <div class="res-success-actions">
+          <a href="${venueUrl}" target="_blank" rel="noopener" class="res-wa-btn res-wa-primary" data-wa-fixed data-track="reservation_whatsapp" data-track-source="Rezervasyon Formu Sonrası" data-track-label="Talebi WhatsApp ile Gönder">
+            ${WA_ICON}<span>Talebi WhatsApp ile Gönder</span>
+          </a>
+          ${selfUrl ? `
+          <a href="${selfUrl}" target="_blank" rel="noopener" class="res-wa-btn res-wa-secondary" data-wa-fixed data-track="reservation_self_whatsapp" data-track-source="Rezervasyon Formu Sonrası" data-track-label="Onay Bilgisini WhatsApp'ıma Kaydet">
+            ${WA_ICON}<span>Onay Bilgisini WhatsApp'ıma Kaydet</span>
+          </a>` : ''}
+        </div>
+        <p class="res-success-foot">Yetkilimiz en geç 15 dakika içinde <strong>${escapeHtml(r.phone)}</strong> numarasından size dönüş yapacaktır.</p>
+      </div>`;
+    feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return venueUrl;
+  }
+
+  function bindReservationForm(form) {
+    if (!form) return;
+    const q = (sel) => form.querySelector(sel);
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const submitBtn = reservationForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerText : 'Rezervasyon Talebini Gönder';
+      const submitBtn = q('button[type="submit"]');
+      const originalHtml = submitBtn ? submitBtn.innerHTML : '';
+      const feedback = form.querySelector('.form-feedback') || document.getElementById('resStatusMsg');
 
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = '0.7';
-        submitBtn.innerText = 'Rezervasyon İletiliyor...';
-      }
-
-      const nameInput = document.getElementById('res-name') || document.getElementById('r-name');
-      const phoneInput = document.getElementById('res-phone') || document.getElementById('r-phone');
-      const dateInput = document.getElementById('res-date') || document.getElementById('r-date');
-      const guestsInput = document.getElementById('res-guests') || document.getElementById('r-guests');
-      const noteInput = document.getElementById('res-note') || document.getElementById('r-note');
-      const checkedTable = document.querySelector('input[name="table_type"]:checked, input[name="tableType"]:checked');
+      const nameInput = q('#res-name, #r-name, #fullName');
+      const phoneInput = q('#res-phone, #r-phone, #phone');
+      const dateInput = q('#res-date, #r-date, #resDate');
+      const guestsInput = q('#res-guests, #r-guests, #guests');
+      const noteInput = q('#res-note, #r-note, #notes');
+      const areaSelect = q('#area');
+      const eventSelect = q('#eventSelect');
+      const menuSelect = q('#menuSelect');
+      const checkedTable = q('input[name="table_type"]:checked, input[name="tableType"]:checked');
 
       const payload = {
         name: nameInput ? nameInput.value.trim() : '',
         phone: phoneInput ? phoneInput.value.trim() : '',
         date: dateInput ? dateInput.value : '',
         guests: guestsInput ? guestsInput.value : '2 Kişi',
-        tableType: checkedTable ? checkedTable.value : 'Standart Meyhane Masası',
-        note: noteInput ? noteInput.value.trim() : ''
+        tableType: checkedTable ? checkedTable.value : (areaSelect ? areaSelect.value : 'Standart Meyhane Masası'),
+        event: eventSelect ? eventSelect.value : (form.dataset.event || ''),
+        menu: menuSelect ? menuSelect.value : '',
+        note: noteInput ? noteInput.value.trim() : '',
+        page: window.location.pathname || '/'
       };
+
+      const showError = (msg) => {
+        if (feedback) {
+          feedback.className = 'form-feedback error';
+          feedback.style.display = 'block';
+          feedback.innerHTML = `✕ <strong>Rezervasyon gönderilemedi:</strong> ${escapeHtml(msg)}<br>Lütfen doğrudan <a href="tel:+905305279177">${venuePhoneDisplay}</a> numarasını arayınız.`;
+        } else {
+          alert(`Rezervasyon gönderilemedi: ${msg}`);
+        }
+      };
+
+      if (payload.phone.replace(/\D/g, '').length < 10) {
+        showError('Lütfen geçerli bir telefon numarası giriniz (Örn: 0532 123 45 67).');
+        if (phoneInput) phoneInput.focus();
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        submitBtn.textContent = 'Rezervasyon İletiliyor...';
+      }
 
       try {
         const response = await fetch('/api/reservation', {
@@ -161,50 +283,58 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-
         const result = await response.json();
 
-        if (response.ok && result.success) {
-          const feedback = document.getElementById('resStatusMsg') || reservationForm.querySelector('.form-feedback');
-          if (feedback) {
-            feedback.className = 'form-feedback success';
-            feedback.style.display = 'block';
-            feedback.innerHTML = `
-              <strong>✓ Rezervasyon Talebiniz Başarıyla Alındı! (Kod: ${result.id || 'RES-' + Math.floor(Math.random()*9000+1000)})</strong><br>
-              Talebiniz ekibimize iletilmiştir. Yetkilimiz masa onayınızı iletmek üzere 15 dakika içinde <strong>${escapeHtml(payload.phone)}</strong> numarasından sizinle iletişime geçecektir.<br>
-              <a href="https://wa.me/905308664321?text=Merhaba,%20${result.id}%20numaralı%20rezervasyonum%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" style="display: inline-block; margin-top: 10px; color: #128C7E; font-weight: 700; text-decoration: underline;">
-                WhatsApp Üzerinden Hızlı Teyit Al (0530 866 43 21) ↗
-              </a>
-            `;
-            feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          } else {
-            alert(`✓ Rezervasyon Talebiniz Alındı!\nKod: ${result.id}\nEkibimiz ${payload.phone} üzerinden sizinle iletişime geçecektir.`);
-          }
-          reservationForm.reset();
-        } else {
+        if (!response.ok || !result.success) {
           throw new Error(result.error || 'Rezervasyon iletilirken bir hata oluştu.');
         }
+
+        const saved = Object.assign({}, payload, result.reservation || {}, { id: result.id });
+        let venueUrl = '';
+        if (feedback) {
+          venueUrl = renderReservationSuccess(feedback, saved);
+        } else {
+          venueUrl = waLink(venueWa, buildVenueMessage(saved));
+        }
+
+        // WhatsApp sohbetini otomatik aç (tarayıcı engellerse ekrandaki yeşil buton hazır)
+        const waWindow = window.open(venueUrl, '_blank', 'noopener');
+        if (waWindow !== null || !feedback) {
+          trackClick('reservation_whatsapp', 'Rezervasyon Formu (Otomatik Açılış)', 'Form gönderimi sonrası otomatik');
+        }
+
+        form.reset();
+        delete form.dataset.event;
+        // Masa seçim kartlarını varsayılan seçime senkronla
+        form.querySelectorAll('.table-option-card').forEach(card => {
+          const radio = card.querySelector('input[type="radio"]');
+          card.classList.toggle('active', !!(radio && radio.checked));
+        });
       } catch (err) {
-        alert(`✕ Rezervasyon Gönderilemedi: ${err.message}\nLütfen doğrudan 0530 527 91 77 veya WhatsApp ile iletişime geçiniz.`);
+        showError(err.message);
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.style.opacity = '1';
-          submitBtn.innerText = originalText;
+          submitBtn.innerHTML = originalHtml;
         }
       }
     });
   }
 
-  // 6. CONVERSION & CLICK TRACKING
-  function trackClick(type, source) {
-    // İstatistik yalnızca ziyaretçi analiz çerezlerine onay verdiyse gönderilir
+  bindReservationForm(document.getElementById('reservation-form'));
+  bindReservationForm(document.getElementById('pageReservationForm'));
+
+  // 6. CONVERSION & CLICK TRACKING — sitedeki tüm dinamik butonlar
+  function trackClick(type, source, label) {
+    // İstatistik yalnızca ziyaretçi analiz çerezlerine onay verdiyse gönderilir (KVKK)
     const consent = getConsent();
     if (!consent || !consent.analytics) return;
     try {
       const payload = JSON.stringify({
         type,
         source,
+        label: label || '',
         page: window.location.pathname || '/'
       });
 
@@ -222,36 +352,76 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {}
   }
 
+  function detectSource(el) {
+    if (el.dataset.trackSource) return el.dataset.trackSource;
+    const map = [
+      ['#mobile-bottom-bar, .mobile-bottom-bar', 'Mobil Sabit Alt Bar'],
+      ['.floating-whatsapp', 'Sabit WhatsApp Butonu'],
+      ['#mobile-menu, .mobile-menu', 'Mobil Menü'],
+      ['header, #header', 'Üst Menü (Header)'],
+      ['footer, .site-footer', 'Alt Bilgi (Footer)'],
+      ['#hero, .hero-editorial', 'Hero / Slider'],
+      ['.res-success', 'Rezervasyon Formu Sonrası'],
+      ['#rezervasyon, .reservation-form-container, .section-reservation-editorial', 'Rezervasyon Bölümü'],
+      ['.schedule-item, .event-card, #program, .section-schedule', 'Etkinlik Takvimi'],
+      ['#menu, .section-menu-editorial, .menu-category-card', 'Menü Bölümü'],
+      ['#yorumlar, .section-reviews', 'Misafir Yorumları'],
+      ['#sss, .section-faq', 'Sıkça Sorulan Sorular']
+    ];
+    for (const [sel, name] of map) {
+      if (el.closest(sel)) return name;
+    }
+    return 'Sayfa İçi Buton';
+  }
+
+  function detectLabel(el) {
+    if (el.dataset.trackLabel) return el.dataset.trackLabel;
+    const aria = el.getAttribute('aria-label');
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    const titleEl = el.querySelector && el.querySelector('.category-card-title');
+    if (titleEl) return titleEl.textContent.trim();
+    if (el.classList.contains('quick-book-btn') && el.dataset.eventName) {
+      return `Masa Ayır – ${el.dataset.eventName}`;
+    }
+    return (aria || text).slice(0, 80);
+  }
+
+  function classifyClick(el) {
+    if (el.dataset.track) return el.dataset.track;
+    if (el.classList.contains('quick-book-btn')) return 'reservation_click';
+    if (el.classList.contains('menu-category-card')) return 'menu';
+    if (el.matches('.faq-question-btn, .faq-question')) return 'faq';
+
+    const href = el.getAttribute('href');
+    if (!href || el.tagName !== 'A') return null;
+
+    if (href.startsWith('tel:')) return 'call';
+    if (/wa\.me|whatsapp\.com/i.test(href)) return 'whatsapp';
+    if (href.startsWith('mailto:')) return 'email';
+    if (/instagram\.com|facebook\.com|youtube\.com|tiktok\.com|twitter\.com|x\.com\//i.test(href)) return 'social';
+    if (/google\.[a-z.]+\/maps|maps\.google|maps\.app\.goo\.gl|goo\.gl\/maps/i.test(href)) return 'map';
+    if (/google\.[a-z.]+\/search|g\.page|search\.google/i.test(href)) return 'review';
+
+    let url;
+    try { url = new URL(href, window.location.href); } catch (e) { return null; }
+    if (url.origin !== window.location.origin) return 'other';
+
+    const path = decodeURIComponent(url.pathname).toLowerCase();
+    const hash = url.hash.toLowerCase();
+    if (hash === '#rezervasyon' || hash === '#pagereservationform' || path.startsWith('/rezervasyon')) return 'reservation_click';
+    if (hash === '#menu' || path.startsWith('/menu') || path.startsWith('/menü')) return 'menu';
+    if (hash === '#program' || path.startsWith('/etkinlik-takvimi') || path.startsWith('/program')) return 'program';
+    if (el.closest('#cookie-banner')) return null;
+    return 'page';
+  }
+
   document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    if (!link) return;
-    const href = link.getAttribute('href') || '';
-
-    let type = null;
-    if (href.startsWith('tel:')) {
-      type = 'call';
-    } else if (href.includes('wa.me') || href.includes('whatsapp.com')) {
-      type = 'whatsapp';
-    }
-
-    if (type) {
-      let source = 'Sayfa İçi Buton';
-      if (link.closest('#mobile-bottom-bar, .mobile-bottom-bar')) {
-        source = 'Mobil Sabit Alt Bar';
-      } else if (link.closest('header, #header, .header-actions')) {
-        source = 'Üst Menü (Header)';
-      } else if (link.closest('footer, .site-footer')) {
-        source = 'Alt Bilgi (Footer)';
-      } else if (link.closest('#hero, .hero-editorial')) {
-        source = 'Hero Alanı';
-      } else if (link.closest('.schedule-item, .event-card')) {
-        source = 'Etkinlik Kartı';
-      } else if (link.closest('.floating-whatsapp')) {
-        source = 'Sabit WhatsApp Butonu';
-      }
-      trackClick(type, source);
-    }
-  });
+    const el = e.target.closest('a, button, .menu-category-card, [data-track]');
+    if (!el) return;
+    const type = classifyClick(el);
+    if (!type) return;
+    trackClick(type, detectSource(el), detectLabel(el));
+  }, { passive: true });
 
   // ==========================================================
   // DİNAMİK SİTE YÖNETİMİ & API ENTEGRASYONLARI (Ultra-Hızlı Bootstrap)
@@ -263,6 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Telefon Numaraları
     if (s.phone) {
+      venuePhoneDisplay = s.phone;
       document.querySelectorAll('a[href^="tel:"]').forEach(el => {
         el.href = `tel:+90${s.phone.replace(/[^0-9]/g, '').slice(-10)}`;
         if (el.innerText.includes('0530') || el.innerText.includes('05')) {
@@ -274,7 +445,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // WhatsApp Bağlantıları
     if (s.whatsappDirect || s.whatsapp) {
       const cleanWa = (s.whatsappDirect || s.whatsapp || '').replace(/[^0-9]/g, '');
-      document.querySelectorAll('a[href*="wa.me"]').forEach(el => {
+      if (cleanWa) venueWa = cleanWa;
+      document.querySelectorAll('a[href*="wa.me"]:not([data-wa-fixed])').forEach(el => {
         const oldHref = el.getAttribute('href') || '';
         const matchText = oldHref.match(/text=([^&]+)/);
         const textParam = matchText ? `?text=${matchText[1]}` : '';

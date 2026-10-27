@@ -284,20 +284,30 @@ app.get('/api/menu', (req, res) => {
 // TRACKING & CONVERSION API
 // ==========================================
 
-// Click Tracking: Phone Calls & WhatsApp Inquiries
+// Click Tracking: tüm dinamik butonlar (WhatsApp, arama, rezervasyon, menü, sosyal medya, harita...)
+// Not: IP adresi SAKLANMAZ — kayıtlar anonimdir (Çerez Politikası ile uyumlu).
+const ALLOWED_CLICK_TYPES = new Set([
+  'whatsapp', 'call', 'reservation_click', 'reservation_whatsapp', 'reservation_self_whatsapp',
+  'menu', 'program', 'social', 'map', 'review', 'email', 'page', 'faq', 'other'
+]);
+const cleanText = (v, max) => String(v || '').replace(/[\u0000-\u001F<>]/g, '').trim().slice(0, max);
+
 app.post('/api/track', (req, res) => {
-  const { type, source, page } = req.body || {};
+  const { type, source, page, label } = req.body || {};
   const userAgent = req.headers['user-agent'] || '';
+  if (/bot|crawl|spider|headless|lighthouse/i.test(userAgent)) {
+    return res.status(204).end();
+  }
   const isMobile = /mobile|iphone|android|ipad/i.test(userAgent);
   const device = isMobile ? 'Mobil' : 'Masaüstü';
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+  const safeType = ALLOWED_CLICK_TYPES.has(type) ? type : 'other';
 
   const tracked = store.addClick({
-    type: type || 'whatsapp',
-    source: source || 'sayfa-ici',
-    page: page || '/',
-    device,
-    ip
+    type: safeType,
+    source: cleanText(source, 60) || 'Sayfa İçi Buton',
+    label: cleanText(label, 80),
+    page: cleanText(page, 80) || '/',
+    device
   });
 
   res.status(200).json({ success: true, id: tracked.id });
@@ -305,7 +315,16 @@ app.post('/api/track', (req, res) => {
 
 // Reservation Form API: Saves to persistent store
 app.post('/api/reservation', (req, res) => {
-  const { name, phone, date, guests, tableType, note } = req.body;
+  const body = req.body || {};
+  const name = cleanText(body.name, 80);
+  const phone = cleanText(body.phone, 30);
+  const date = cleanText(body.date, 20);
+  const guests = cleanText(body.guests, 40);
+  const tableType = cleanText(body.tableType, 60);
+  const eventName = cleanText(body.event, 80);
+  const menu = cleanText(body.menu, 80);
+  const note = cleanText(body.note, 600);
+  const page = cleanText(body.page, 80);
 
   if (!name || !phone || !date) {
     return res.status(400).json({
@@ -313,15 +332,24 @@ app.post('/api/reservation', (req, res) => {
       error: 'Lütfen ad, telefon ve tarih alanlarını eksiksiz doldurunuz.'
     });
   }
+  if (phone.replace(/\D/g, '').length < 10) {
+    return res.status(400).json({
+      success: false,
+      error: 'Lütfen geçerli bir telefon numarası giriniz (Örn: 0532 123 45 67).'
+    });
+  }
 
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
   const saved = store.addReservation({
-    name: name.trim(),
-    phone: phone.trim(),
+    name,
+    phone,
     date,
     guests,
     tableType,
+    event: eventName,
+    menu,
     note,
+    page,
     ip
   });
 
@@ -329,12 +357,24 @@ app.post('/api/reservation', (req, res) => {
   console.log(`🍾 YENİ MASA REZERVASYON TALEBİ [${saved.id}]`);
   console.log(`İsim: ${name} | Tel: ${phone}`);
   console.log(`Tarih: ${date} | Kişi Sayısı: ${guests || '2'}`);
-  console.log(`Masa Tipi: ${tableType || 'Standart'} | Not: ${note || '-'}`);
+  console.log(`Masa Tipi: ${tableType || 'Standart'} | Program: ${eventName || '-'} | Menü: ${menu || '-'}`);
+  console.log(`Not: ${note || '-'}`);
   console.log('====================================');
 
   res.json({
     success: true,
     id: saved.id,
+    reservation: {
+      id: saved.id,
+      name: saved.name,
+      phone: saved.phone,
+      date: saved.date,
+      guests: saved.guests,
+      tableType: saved.tableType,
+      event: saved.event,
+      menu: saved.menu,
+      note: saved.note
+    },
     message: `Talebiniz Heybeli Sahne ekibine iletildi. Rezervasyon onayınız ve masa detaylarınız için ${phone} numaralı telefondan en kısa sürede iletişime geçilecektir.`
   });
 });
@@ -372,7 +412,8 @@ app.get('/api/admin/data', requireAdmin, (req, res) => {
     status: req.query.status,
     search: req.query.search
   });
-  const clicks = store.getClicks(200);
+  const clicks = store.getClicks(300);
+  const clickStats = store.getClickStats();
   const sliders = store.getSliders();
   const events = store.getEvents();
   const categories = store.getCategories();
@@ -385,6 +426,7 @@ app.get('/api/admin/data', requireAdmin, (req, res) => {
     stats,
     reservations,
     clicks,
+    clickStats,
     sliders,
     events,
     categories,
@@ -587,4 +629,12 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`🌐 http://localhost:${PORT}`);
   console.log(`👑 Admin Paneli: http://localhost:${PORT}/admin`);
   console.log(`=================================================`);
+});
+
+// Kapanışta bekleyen tıklama kayıtlarını diske yaz (veri kaybı olmasın)
+['SIGINT', 'SIGTERM'].forEach(sig => {
+  process.on(sig, () => {
+    try { store.flushPendingWrites(); } catch (e) {}
+    process.exit(0);
+  });
 });

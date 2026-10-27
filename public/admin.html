@@ -455,6 +455,30 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
     }
 
+    .badge-click-whatsapp { background: rgba(37, 211, 102, 0.15); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.3); }
+    .badge-click-call { background: rgba(59, 130, 246, 0.15); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .badge-click-reserve { background: rgba(196, 154, 85, 0.18); color: var(--gold-light); border: 1px solid var(--border-gold); }
+    .badge-click-menu { background: rgba(168, 85, 247, 0.15); color: #C084FC; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .badge-click-social { background: rgba(236, 72, 153, 0.15); color: #F472B6; border: 1px solid rgba(236, 72, 153, 0.3); }
+    .badge-click-map { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-click-review { background: rgba(251, 191, 36, 0.15); color: #FBBF24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-click-other { background: rgba(156, 163, 175, 0.15); color: #9CA3AF; border: 1px solid rgba(156, 163, 175, 0.3); }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
     /* Cards Grid */
     .cards-grid {
       display: grid;
@@ -704,8 +728,8 @@
           <div class="stat-label">Menü Ürünleri</div>
           <div class="stat-value" id="kpi-menu-items">0</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">WhatsApp & Arama</div>
+        <div class="stat-card" style="cursor: pointer;" onclick="document.querySelector('[data-tab=\'tab-analytics\']').click()" title="Tıklama Analizi Sekmesini Aç">
+          <div class="stat-label">Dinamik Buton Tıklamaları ↗</div>
           <div class="stat-value" id="kpi-clicks">0</div>
         </div>
       </div>
@@ -714,6 +738,7 @@
       <div class="tabs-bar">
         <div class="nav-tabs">
           <button class="tab-btn active" data-tab="tab-reservations">📋 Rezervasyonlar <span class="tab-badge" id="badge-res-count">0</span></button>
+          <button class="tab-btn" data-tab="tab-analytics">📊 Tıklama & Dönüşüm Analizi <span class="tab-badge" id="badge-clicks-count">0</span></button>
           <button class="tab-btn" data-tab="tab-sliders">🖼️ Slider Afişleri <span class="tab-badge" id="badge-sliders-count">0</span></button>
           <button class="tab-btn" data-tab="tab-events">📅 Aylık Program & Konserler <span class="tab-badge" id="badge-events-count">0</span></button>
           <button class="tab-btn" data-tab="tab-menu">🍽️ Menü & Kategoriler <span class="tab-badge" id="badge-menu-count">0</span></button>
@@ -750,7 +775,7 @@
                   <th>Kod</th>
                   <th>Müşteri Bilgisi</th>
                   <th>Tarih & Kişi</th>
-                  <th>Masa Tercihi</th>
+                  <th>Masa & Program</th>
                   <th>Özel İstek / Not</th>
                   <th>Durum</th>
                   <th>İşlemler</th>
@@ -760,6 +785,126 @@
                 <tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Yükleniyor...</td></tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: ANALİTİK & DİNAMİK BUTON TIKLAMALARI -->
+      <div id="tab-analytics" class="tab-content">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Dinamik Buton & Tıklama Analizi</h2>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                Sitedeki tüm dinamik butonlara (WhatsApp, telefon arama, rezervasyon formu gönderimleri, menü, sosyal medya) yapılan tıklamalar anlık ve kategorili olarak takip edilir.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button onclick="loadDashboardData()" class="btn btn-outline btn-sm">🔄 Verileri Yenile</button>
+            </div>
+          </div>
+
+          <!-- Click KPIs Sub-grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px;">
+            <div class="stat-card" style="border-left: 3px solid #25D366;">
+              <div class="stat-label">WhatsApp Tıklamaları</div>
+              <div class="stat-value" id="stat-clk-whatsapp" style="color: #25D366;">0</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Bugün: <span id="stat-clk-whatsapp-today" style="color: var(--text-main); font-weight: 600;">0</span></div>
+            </div>
+
+            <div class="stat-card" style="border-left: 3px solid #60A5FA;">
+              <div class="stat-label">Telefon Aramaları</div>
+              <div class="stat-value" id="stat-clk-call" style="color: #60A5FA;">0</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Bugün: <span id="stat-clk-call-today" style="color: var(--text-main); font-weight: 600;">0</span></div>
+            </div>
+
+            <div class="stat-card" style="border-left: 3px solid var(--gold-primary);">
+              <div class="stat-label">Masa Ayır / Rezervasyon CTA</div>
+              <div class="stat-value" id="stat-clk-reserve" style="color: var(--gold-light);">0</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Bugün: <span id="stat-clk-reserve-today" style="color: var(--text-main); font-weight: 600;">0</span></div>
+            </div>
+
+            <div class="stat-card" style="border-left: 3px solid #A855F7;">
+              <div class="stat-label">Rezervasyon Form Talepleri</div>
+              <div class="stat-value" id="stat-clk-res-submits" style="color: #C084FC;">0</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Bugün: <span id="stat-clk-res-submits-today" style="color: var(--text-main); font-weight: 600;">0</span></div>
+            </div>
+
+            <div class="stat-card" style="border-left: 3px solid #F472B6;">
+              <div class="stat-label">Menü & Program Butonları</div>
+              <div class="stat-value" id="stat-clk-menu">0</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Tüm Zamanlar</div>
+            </div>
+
+            <div class="stat-card" style="border-left: 3px solid #FBBF24;">
+              <div class="stat-label">Sosyal Medya, Harita & Yorum</div>
+              <div class="stat-value" id="stat-clk-social">0</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Tüm Zamanlar</div>
+            </div>
+          </div>
+
+          <!-- Breakdown Grids (Source & Pages) -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 24px;">
+            <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px;">
+              <h3 style="font-size: 15px; font-weight: 600; color: var(--gold-light); margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+                <span>📍 Kaynak Alana Göre Dağılım</span>
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: 400;">En Çok Tıklananlar</span>
+              </h3>
+              <div id="analytics-sources-list" style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="color: var(--text-muted); font-size: 13px;">Yükleniyor...</div>
+              </div>
+            </div>
+
+            <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px;">
+              <h3 style="font-size: 15px; font-weight: 600; color: var(--gold-light); margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+                <span>🌐 Sayfalara Göre Dağılım</span>
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: 400;">Ziyaretçi Etkileşimi</span>
+              </h3>
+              <div id="analytics-pages-list" style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="color: var(--text-muted); font-size: 13px;">Yükleniyor...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Clicks Stream Table -->
+          <div style="margin-top: 10px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+              <h3 style="font-size: 16px; font-weight: 600; color: var(--text-main);">Canlı Tıklama Akışı (Son Hareketler)</h3>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="text" id="click-search" class="input-field" placeholder="Buton, kaynak veya sayfa ara..." style="max-width: 240px;" oninput="filterClicksTable()">
+                <select id="click-type-filter" class="select-field" style="max-width: 180px;" onchange="filterClicksTable()">
+                  <option value="all">Tüm Tıklama Türleri</option>
+                  <option value="whatsapp">WhatsApp Butonları</option>
+                  <option value="call">Telefon Aramaları</option>
+                  <option value="reservation_click">Masa Ayır / Rezervasyon</option>
+                  <option value="reservation_whatsapp">Form Sonrası WhatsApp</option>
+                  <option value="reservation_self_whatsapp">Kullanıcı Onay Kaydetme</option>
+                  <option value="menu">Menü İnceleme</option>
+                  <option value="program">Program İnceleme</option>
+                  <option value="social">Sosyal Medya</option>
+                  <option value="map">Harita / Konum</option>
+                  <option value="review">Google Yorumları</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Zaman</th>
+                    <th>Tıklama Türü</th>
+                    <th>Buton / Etiket</th>
+                    <th>Kaynak Alan</th>
+                    <th>Bulunulan Sayfa</th>
+                    <th>Cihaz</th>
+                  </tr>
+                </thead>
+                <tbody id="clicks-tbody">
+                  <tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">Yükleniyor...</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -1339,6 +1484,7 @@
           dashboardData = data;
           renderKPIs(data.stats);
           renderReservations(data.reservations);
+          renderAnalytics(data.clickStats, data.clicks);
           renderSliders(data.sliders);
           renderEvents(data.events);
           renderCategories(data.categories);
@@ -1362,6 +1508,7 @@
       document.getElementById('kpi-clicks').textContent = stats.totalClicks || 0;
 
       document.getElementById('badge-res-count').textContent = stats.totalReservations || 0;
+      document.getElementById('badge-clicks-count').textContent = stats.totalClicks || 0;
       document.getElementById('badge-sliders-count').textContent = stats.totalSliders || 0;
       document.getElementById('badge-events-count').textContent = stats.totalEvents || 0;
       document.getElementById('badge-menu-count').textContent = stats.totalMenuItems || 0;
@@ -1381,16 +1528,22 @@
           <td>
             <div style="font-weight: 600;">${escapeHtml(r.name)}</div>
             <div style="font-size: 12px; color: var(--text-muted);"><a href="tel:${r.phone}" style="color: inherit;">📞 ${r.phone}</a></div>
+            ${r.page ? `<div style="font-size: 11px; color: var(--text-muted); opacity: 0.8;">Sayfa: ${escapeHtml(r.page)}</div>` : ''}
           </td>
           <td>
             <div>📅 ${r.date}</div>
             <div style="font-size: 12px; color: var(--text-muted);">👥 ${r.guests || '2 Kişi'}</div>
           </td>
-          <td><span style="font-size: 12px; color: var(--gold-primary); font-weight: 500;">${escapeHtml(r.tableType)}</span></td>
+          <td>
+            <div style="font-size: 12px; color: var(--gold-primary); font-weight: 600;">${escapeHtml(r.tableType || 'Standart Masa')}</div>
+            ${r.event && r.event !== 'Genel Rezervasyon' ? `<span style="display: inline-block; margin-top: 3px; font-size: 11px; padding: 2px 6px; border-radius: 4px; background: rgba(196,154,85,0.12); color: var(--gold-light);">🎤 ${escapeHtml(r.event)}</span>` : ''}
+            ${r.menu ? `<span style="display: inline-block; margin-top: 3px; font-size: 11px; padding: 2px 6px; border-radius: 4px; background: rgba(168,85,247,0.12); color: #C084FC;">🍽️ ${escapeHtml(r.menu)}</span>` : ''}
+          </td>
           <td style="max-width: 220px; font-size: 12px; color: var(--text-muted); line-height: 1.4;">${escapeHtml(r.note || '-')}</td>
           <td><span class="badge badge-${r.status}">${r.status}</span></td>
           <td>
-            <div style="display: flex; gap: 6px;">
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button onclick="sendWhatsAppConfirmation('${r.id}')" class="btn btn-outline btn-sm" style="color: #25D366; border-color: rgba(37, 211, 102, 0.4); padding: 4px 8px;" title="Müşteriye WhatsApp Onay Mesajı Gönder">💬 WP Onay</button>
               ${r.status === 'yeni' ? `
                 <button onclick="updateReservationStatus('${r.id}', 'onaylandi')" class="btn btn-outline btn-sm" style="color: #34D399;" title="Onayla">✓</button>
                 <button onclick="updateReservationStatus('${r.id}', 'iptal')" class="btn btn-outline btn-sm" style="color: #F87171;" title="İptal Et">✕</button>
@@ -1400,6 +1553,42 @@
           </td>
         </tr>
       `).join('');
+    }
+
+    // Müşteriye WhatsApp ile Onay Gönderme
+    function sendWhatsAppConfirmation(id) {
+      if (!dashboardData || !dashboardData.reservations) return;
+      const r = dashboardData.reservations.find(x => x.id === id);
+      if (!r) return;
+
+      let phone = (r.phone || '').replace(/\D/g, '');
+      if (phone.startsWith('00')) phone = phone.slice(2);
+      if (phone.length === 11 && phone.startsWith('0')) phone = '9' + phone;
+      else if (phone.length === 10 && phone.startsWith('5')) phone = '90' + phone;
+
+      if (phone.length < 11) {
+        alert('Müşteri telefon numarası geçersiz: ' + r.phone);
+        return;
+      }
+
+      const msg = [
+        `Merhaba Sayın ${r.name},`,
+        `Heybeli Sahne rezervasyon talebiniz (${r.id}) onaylanmıştır. Masanız ayrılmıştır.`,
+        '',
+        `📅 Tarih: ${r.date}`,
+        `👥 Kişi Sayısı: ${r.guests || '2 Kişi'}`,
+        `🪑 Masa Tercihi: ${r.tableType || 'Standart Salon Masası'}`,
+        (r.event && r.event !== 'Genel Rezervasyon') ? `🎤 Sahne Programı: ${r.event}` : '',
+        r.menu ? `🍽️ Menü: ${r.menu}` : '',
+        '',
+        '🚪 Kapı Açılış: 20:00 · 🎤 Sahne: 22:00',
+        '📍 Adres: Kordonboyu, Turgut Özal Blv. NO:53/A, 34860 Kartal / İstanbul',
+        '☎️ Danışma & Rezervasyon: 0530 527 91 77',
+        '',
+        'Heybeli Sahne ailesi olarak keyifli bir akşam dileriz.'
+      ].filter(Boolean).join('\n');
+
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
     }
 
     function filterReservations() {
@@ -1415,7 +1604,8 @@
         filtered = filtered.filter(r => 
           (r.name && r.name.toLowerCase().includes(q)) || 
           (r.phone && r.phone.includes(q)) ||
-          (r.id && r.id.toLowerCase().includes(q))
+          (r.id && r.id.toLowerCase().includes(q)) ||
+          (r.event && r.event.toLowerCase().includes(q))
         );
       }
       renderReservations(filtered);
@@ -1454,6 +1644,170 @@
       } catch (err) {
         showToast('Silme hatası', true);
       }
+    }
+
+    // 2. ANALİTİK & TIKLAMA YÖNETİMİ
+    let cachedClicks = [];
+
+    function renderAnalytics(clickStats, clicks) {
+      cachedClicks = clicks || [];
+      if (!clickStats) return;
+
+      const byType = clickStats.byType || {};
+      const resSubmits = clickStats.reservationSubmits || { total: 0, today: 0 };
+
+      // WhatsApp toplamı (genel whatsapp + form sonrası whatsapp butonları)
+      const waDirect = byType.whatsapp || { total: 0, today: 0 };
+      const waForm = byType.reservation_whatsapp || { total: 0, today: 0 };
+      const totalWa = (waDirect.total || 0) + (waForm.total || 0);
+      const todayWa = (waDirect.today || 0) + (waForm.today || 0);
+
+      document.getElementById('stat-clk-whatsapp').textContent = totalWa;
+      document.getElementById('stat-clk-whatsapp-today').textContent = todayWa;
+
+      const callStat = byType.call || { total: 0, today: 0 };
+      document.getElementById('stat-clk-call').textContent = callStat.total || 0;
+      document.getElementById('stat-clk-call-today').textContent = callStat.today || 0;
+
+      const reserveStat = byType.reservation_click || { total: 0, today: 0 };
+      document.getElementById('stat-clk-reserve').textContent = reserveStat.total || 0;
+      document.getElementById('stat-clk-reserve-today').textContent = reserveStat.today || 0;
+
+      document.getElementById('stat-clk-res-submits').textContent = resSubmits.total || 0;
+      document.getElementById('stat-clk-res-submits-today').textContent = resSubmits.today || 0;
+
+      const menuStat = byType.menu || { total: 0 };
+      const progStat = byType.program || { total: 0 };
+      document.getElementById('stat-clk-menu').textContent = (menuStat.total || 0) + (progStat.total || 0);
+
+      const socialStat = byType.social || { total: 0 };
+      const mapStat = byType.map || { total: 0 };
+      const reviewStat = byType.review || { total: 0 };
+      document.getElementById('stat-clk-social').textContent = (socialStat.total || 0) + (mapStat.total || 0) + (reviewStat.total || 0);
+
+      // Kaynak Alana Göre Dağılım
+      const sourcesContainer = document.getElementById('analytics-sources-list');
+      const sources = clickStats.bySource || [];
+      if (sources.length === 0) {
+        sourcesContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 13px;">Henüz tıklama kaydı bulunmuyor.</div>';
+      } else {
+        const maxSrc = Math.max(...sources.map(s => s.count), 1);
+        sourcesContainer.innerHTML = sources.map(s => {
+          const pct = Math.round((s.count / maxSrc) * 100);
+          return `
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px;">
+                <span style="font-weight: 500; color: var(--text-main);">${escapeHtml(s.key)}</span>
+                <span style="color: var(--gold-light); font-weight: 700;">${s.count} tıklama</span>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" style="width: ${pct}%;"></div>
+              </div>
+            </div>`;
+        }).join('');
+      }
+
+      // Sayfalara Göre Dağılım
+      const pagesContainer = document.getElementById('analytics-pages-list');
+      const pages = clickStats.byPage || [];
+      if (pages.length === 0) {
+        pagesContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 13px;">Henüz sayfa etkileşimi bulunmuyor.</div>';
+      } else {
+        const maxPg = Math.max(...pages.map(p => p.count), 1);
+        pagesContainer.innerHTML = pages.map(p => {
+          const pct = Math.round((p.count / maxPg) * 100);
+          return `
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px;">
+                <span style="font-weight: 500; color: var(--text-main); font-family: monospace;">${escapeHtml(p.key)}</span>
+                <span style="color: var(--gold-light); font-weight: 700;">${p.count} etkileşim</span>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" style="width: ${pct}%; background: linear-gradient(90deg, #60A5FA, #3B82F6);"></div>
+              </div>
+            </div>`;
+        }).join('');
+      }
+
+      renderClicksTable(cachedClicks);
+    }
+
+    function getClickBadge(type) {
+      switch (type) {
+        case 'whatsapp':
+        case 'reservation_whatsapp':
+        case 'reservation_self_whatsapp':
+          return `<span class="badge badge-click-whatsapp">💬 WhatsApp</span>`;
+        case 'call':
+          return `<span class="badge badge-click-call">📞 Arama</span>`;
+        case 'reservation_click':
+          return `<span class="badge badge-click-reserve">🎫 Masa Ayır</span>`;
+        case 'menu':
+          return `<span class="badge badge-click-menu">🍽️ Menü</span>`;
+        case 'program':
+          return `<span class="badge badge-click-menu">📅 Program</span>`;
+        case 'social':
+          return `<span class="badge badge-click-social">📱 Sosyal Medya</span>`;
+        case 'map':
+          return `<span class="badge badge-click-map">📍 Harita</span>`;
+        case 'review':
+          return `<span class="badge badge-click-review">⭐ Google Yorum</span>`;
+        case 'email':
+          return `<span class="badge badge-click-other">✉️ E-Posta</span>`;
+        case 'faq':
+          return `<span class="badge badge-click-other">❓ S.S.S.</span>`;
+        default:
+          return `<span class="badge badge-click-other">${escapeHtml(type)}</span>`;
+      }
+    }
+
+    function renderClicksTable(list) {
+      const tbody = document.getElementById('clicks-tbody');
+      if (!list || list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">Kayıtlı tıklama verisi bulunamadı.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = list.slice(0, 150).map(c => {
+        let timeStr = c.timestamp || '';
+        try {
+          const d = new Date(c.timestamp);
+          timeStr = d.toLocaleString('tr-TR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        } catch (e) {}
+
+        const deviceIcon = c.device === 'Mobil' ? '📱 Mobil' : '💻 Masaüstü';
+
+        return `
+          <tr>
+            <td style="font-size: 12px; color: var(--text-muted); white-space: nowrap;">${timeStr}</td>
+            <td>${getClickBadge(c.type)}</td>
+            <td style="font-weight: 500; font-size: 13px; max-width: 220px;">${escapeHtml(c.label || '-')}</td>
+            <td style="font-size: 12px; color: var(--gold-light);">${escapeHtml(c.source || 'Bilinmiyor')}</td>
+            <td style="font-size: 12px; font-family: monospace; color: var(--text-muted);">${escapeHtml(c.page || '/')}</td>
+            <td style="font-size: 12px; color: var(--text-muted);">${deviceIcon}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterClicksTable() {
+      if (!cachedClicks) return;
+      const q = (document.getElementById('click-search').value || '').toLowerCase();
+      const type = document.getElementById('click-type-filter').value;
+
+      let filtered = cachedClicks;
+      if (type !== 'all') {
+        filtered = filtered.filter(c => c.type === type);
+      }
+      if (q) {
+        filtered = filtered.filter(c =>
+          (c.label && c.label.toLowerCase().includes(q)) ||
+          (c.source && c.source.toLowerCase().includes(q)) ||
+          (c.page && c.page.toLowerCase().includes(q)) ||
+          (c.type && c.type.toLowerCase().includes(q))
+        );
+      }
+      renderClicksTable(filtered);
     }
 
     // Export CSV
@@ -1987,11 +2341,24 @@
         .replace(/'/g, '&#039;');
     }
 
-    // Auto-login if token exists
+    // Auto-login if token exists or provided via URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenParam = urlParams.get('token');
+    if (tokenParam) {
+      appToken = tokenParam;
+      localStorage.setItem('heybeli_admin_token', appToken);
+    }
+
     if (appToken) {
       document.getElementById('auth-screen').style.display = 'none';
       document.getElementById('admin-app').style.display = 'flex';
-      loadDashboardData();
+      loadDashboardData().then(() => {
+        const tabParam = urlParams.get('tab');
+        if (tabParam) {
+          const targetTabBtn = document.querySelector(`[data-tab="${tabParam}"]`);
+          if (targetTabBtn) targetTabBtn.click();
+        }
+      });
     }
   </script>
 </body>

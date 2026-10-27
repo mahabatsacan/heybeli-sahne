@@ -398,47 +398,6 @@
         }
       }
 
-      const form = document.getElementById('pageReservationForm');
-      const statusMsg = document.getElementById('resStatusMsg');
-      if (form) {
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const submitBtn = form.querySelector('button[type="submit"]');
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'İşleniyor...';
-
-          const payload = {
-            name: form.name.value.trim(),
-            phone: form.phone.value.trim(),
-            date: form.date.value,
-            guests: form.guests.value,
-            tableType: form.area.value,
-            note: `Program: ${form.event.value} | Menü: ${form.menu.value} | Not: ${form.notes.value.trim()}`
-          };
-
-          try {
-            const res = await fetch('/api/reservation', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
-            const data = await res.json();
-            if (res.ok && data.success) {
-              statusMsg.className = 'form-feedback success';
-              statusMsg.innerHTML = `✓ <strong>Talebiniz Alındı!</strong><br>${data.message}`;
-              form.reset();
-            } else {
-              throw new Error(data.error || 'Hata oluştu');
-            }
-          } catch (err) {
-            statusMsg.className = 'form-feedback error';
-            statusMsg.innerHTML = `✕ <strong>Hata:</strong> ${err.message}`;
-          } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Rezervasyon Talebini Gönder';
-          }
-        });
-      }
     });
   </script>
 </body>

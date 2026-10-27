@@ -1,6 +1,21 @@
 {
   "reservations": [
     {
+      "id": "RES-4125",
+      "name": "Ahmet Yılmaz",
+      "phone": "05321234567",
+      "date": "2026-11-15",
+      "guests": "4 Kişi",
+      "tableType": "Sahne Önü VIP Masa",
+      "event": "Nevzat Ak",
+      "menu": "VIP Gala Menüsü",
+      "note": "Ön masa rica ederiz",
+      "page": "/rezervasyon",
+      "status": "yeni",
+      "createdAt": "2026-10-27T12:20:24.883Z",
+      "ip": "127.0.0.1"
+    },
+    {
       "id": "RES-5832",
       "name": "mahabat saçan",
       "phone": "05058401006",
@@ -62,6 +77,33 @@
     }
   ],
   "clicks": [
+    {
+      "id": "CLK-mvqnmhwzj4",
+      "type": "reservation_click",
+      "source": "Etkinlik Kartı",
+      "label": "Masa Ayır – Özcan Türe",
+      "page": "/program",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T12:21:03.923Z"
+    },
+    {
+      "id": "CLK-mvqnmhwike",
+      "type": "call",
+      "source": "Üst Menü (Header)",
+      "label": "0530 527 91 77",
+      "page": "/program",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-27T12:21:03.906Z"
+    },
+    {
+      "id": "CLK-mvqnmhvzqp",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "WhatsApp",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T12:21:03.887Z"
+    },
     {
       "id": "CLK-101",
       "type": "whatsapp",
@@ -767,5 +809,10 @@
     "heroTitle": "İstanbul Meyhane Zarafeti & Canlı Sahne",
     "heroDesc": "İstanbul meyhane kültürünün zarafetini, usta sanatçıların canlı performansları ve Ege lezzetleriyle taçlandıran özel bir buluşma adresi."
   },
-  "media": []
+  "media": [],
+  "clickTotals": {
+    "whatsapp": 2,
+    "call": 2,
+    "reservation_click": 1
+  }
 }
