@@ -11,7 +11,7 @@ const UPCOMING_EVENTS = [
     badge: 'Bu Cuma',
     image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80',
     description: 'Modern arabesk ve pop müziğin sevilen grubu Sakiler, Heybeli Sahne\'de en hit şarkıları ve eşsiz sahne enerjisiyle sizlerle buluşuyor.',
-    highlights: ['Özel Fiks Menü Dahil', 'Canlı Fasıl Açılışı (20:00)', 'Gece Boyu DJ Performans'],
+    highlights: ['Özel Fiks Menü Dahil', 'Kapı Açılış (20:00)', 'Sahne Çıkış (22:00)'],
     ticketInfo: 'Fiks Menü + Konser Girişi Dahil',
     isSoldOut: false
   },
@@ -159,8 +159,8 @@ const VENUE_INFO = {
   mapUrl: 'https://www.google.com/maps/place//data=!4m2!3m1!1s0x14cac71cab646a87:0x9968fa4cab653899?sa=X&ved=1t:8290&ictx=111',
   menuUrl: 'https://heybelisahne.com/men%C3%BC',
   email: 'rezervasyon@heybelisahne.com',
-  workingHours: 'Çarşamba - Pazar: 19:30 - 02:00',
-  musicStart: '20:30 Fasıl & DJ | 21:45 Canlı Sahne'
+  workingHours: 'Çarşamba - Pazar: 20:00 - 02:00',
+  musicStart: 'Kapı Açılış: 20:00 | Sahne Çıkış: 22:00'
 };
 
 module.exports = {

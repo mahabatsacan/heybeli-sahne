@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Update Working Hours
       if (s.workingHours) {
         document.querySelectorAll('.footer-hours-badge, .mobile-menu-info p').forEach(el => {
-          if (el.textContent.includes('Çarşamba') || el.textContent.includes('19:30')) {
+          if (el.textContent.includes('Çarşamba') || el.textContent.includes('19:30') || el.textContent.includes('20:00')) {
             el.textContent = s.workingHours;
           }
         });
