@@ -74,6 +74,18 @@
       "status": "yeni",
       "createdAt": "2026-09-23T10:15:00.000Z",
       "ip": "127.0.0.1"
+    },
+    {
+      "id": "RES-5650",
+      "name": "Serhat Saçan",
+      "phone": "5333324341",
+      "date": "2026-09-25",
+      "guests": "5-6 Kişi",
+      "tableType": "Özel VIP Loca",
+      "note": "asa",
+      "status": "yeni",
+      "createdAt": "2026-09-23T10:38:32.476Z",
+      "ip": "46.104.21.43"
     }
   ],
   "clicks": [
@@ -119,6 +131,267 @@
       "page": "/program",
       "device": "Mobil (Android)",
       "timestamp": "2026-09-23T11:10:00.000Z"
+    },
+    {
+      "id": "CLK-6538",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/program",
+      "device": "Mobil",
+      "timestamp": "2026-10-24T07:34:42.793Z",
+      "ip": "95.8.224.55"
+    },
+    {
+      "id": "CLK-3823",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/program",
+      "device": "Mobil",
+      "timestamp": "2026-10-24T07:34:35.378Z",
+      "ip": "95.8.224.55"
+    },
+    {
+      "id": "CLK-9924",
+      "type": "whatsapp",
+      "source": "Alt Bilgi (Footer)",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-20T17:25:05.363Z",
+      "ip": "82.222.125.69"
+    },
+    {
+      "id": "CLK-4732",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-20T17:24:49.680Z",
+      "ip": "82.222.125.69"
+    },
+    {
+      "id": "CLK-5040",
+      "type": "whatsapp",
+      "source": "Üst Menü (Header)",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-19T13:19:34.471Z",
+      "ip": "176.42.139.110"
+    },
+    {
+      "id": "CLK-7952",
+      "type": "call",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-19T08:24:28.788Z",
+      "ip": "5.47.206.172"
+    },
+    {
+      "id": "CLK-6783",
+      "type": "call",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-17T17:30:36.583Z",
+      "ip": "176.40.231.66"
+    },
+    {
+      "id": "CLK-1631",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-14T18:19:48.902Z",
+      "ip": "151.135.61.132"
+    },
+    {
+      "id": "CLK-8528",
+      "type": "call",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-14T18:19:38.672Z",
+      "ip": "151.135.61.132"
+    },
+    {
+      "id": "CLK-8887",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/rezervasyon",
+      "device": "Mobil",
+      "timestamp": "2026-10-13T20:00:27.130Z",
+      "ip": "88.251.79.57"
+    },
+    {
+      "id": "CLK-5673",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-12T19:27:36.041Z",
+      "ip": "150.228.111.141"
+    },
+    {
+      "id": "CLK-4502",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-10T19:43:32.296Z",
+      "ip": "88.230.73.57"
+    },
+    {
+      "id": "CLK-9422",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-10T19:42:03.678Z",
+      "ip": "88.230.73.57"
+    },
+    {
+      "id": "CLK-8707",
+      "type": "call",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-08T15:24:49.084Z",
+      "ip": "5.47.203.82"
+    },
+    {
+      "id": "CLK-3467",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-08T15:24:42.319Z",
+      "ip": "5.47.203.82"
+    },
+    {
+      "id": "CLK-8474",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-08T15:24:30.250Z",
+      "ip": "5.47.203.82"
+    },
+    {
+      "id": "CLK-2251",
+      "type": "call",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-08T15:24:18.413Z",
+      "ip": "5.47.203.82"
+    },
+    {
+      "id": "CLK-6367",
+      "type": "call",
+      "source": "Üst Menü (Header)",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-08T15:23:56.223Z",
+      "ip": "5.47.203.82"
+    },
+    {
+      "id": "CLK-7505",
+      "type": "whatsapp",
+      "source": "Üst Menü (Header)",
+      "page": "/men%C3%BC",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-08T09:41:38.669Z",
+      "ip": "95.70.166.238"
+    },
+    {
+      "id": "CLK-4491",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-06T13:31:50.038Z",
+      "ip": "81.214.167.93"
+    },
+    {
+      "id": "CLK-4460",
+      "type": "call",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-06T09:47:52.488Z",
+      "ip": "176.55.99.158"
+    },
+    {
+      "id": "CLK-4125",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-05T09:43:38.177Z",
+      "ip": "79.127.184.106"
+    },
+    {
+      "id": "CLK-9585",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-05T09:42:27.851Z",
+      "ip": "79.127.184.106"
+    },
+    {
+      "id": "CLK-5470",
+      "type": "call",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-04T17:04:10.660Z",
+      "ip": "85.99.179.247"
+    },
+    {
+      "id": "CLK-2625",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-04T11:30:11.400Z",
+      "ip": "178.240.239.142"
+    },
+    {
+      "id": "CLK-4816",
+      "type": "call",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-09-25T07:29:41.635Z",
+      "ip": "176.232.180.111"
+    },
+    {
+      "id": "CLK-8405",
+      "type": "call",
+      "source": "Mobil Sabit Alt Bar",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-09-23T12:01:45.197Z",
+      "ip": "178.240.225.0"
+    },
+    {
+      "id": "CLK-4322",
+      "type": "whatsapp",
+      "source": "Üst Menü (Header)",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-09-23T10:38:56.454Z",
+      "ip": "46.104.21.43"
+    },
+    {
+      "id": "CLK-3381",
+      "type": "whatsapp",
+      "source": "production-verification",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-09-23T10:24:07.053Z",
+      "ip": "46.104.21.43"
     }
   ],
   "sliders": [
