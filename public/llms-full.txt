@@ -27,8 +27,8 @@ Sıradan bir gece kulübü veya yüksek volümlü disko formatından uzak; yeti�
 ---
 
 ## 3. Çalışma Günleri, Saatler ve Sahne Akışı
-- **Açık Günler:** Çarşamba, Perşembe, Cuma, Cumartesi, Pazar (Haftanın 5 günü).
-- **Kapalı Günler:** Pazartesi ve Salı günleri kapalıdır (özel kurumsal davet ve düğün/kutlama kiralamaları hariç).
+- **Açık Günler:** Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar (Haftanın 7 günü).
+- **Çalışma Saatleri:** 20:00 - 02:00
 - **Kapı Açılışı:** 20:00
 - **Ana Sanatçı / Canlı Konser:** 22:00 - 01:30
 - **Mekan Kapanışı:** 02:00

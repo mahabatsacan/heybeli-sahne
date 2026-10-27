@@ -2003,11 +2003,16 @@ textarea.form-control-editorial {
     right: 16px !important;
   }
   .whatsapp-tooltip {
-    display: none !important;
+    display: flex !important;
+    padding: 6px 11px !important;
+    font-size: 11px !important;
+    border-radius: 16px !important;
+    background-color: rgba(22, 21, 19, 0.94) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
   }
   .whatsapp-icon-circle {
-    width: 52px !important;
-    height: 52px !important;
+    width: 48px !important;
+    height: 48px !important;
   }
 }
 
@@ -2015,6 +2020,7 @@ textarea.form-control-editorial {
    RESERVATION SUCCESS MODAL (Editorial Warm Luxury Modal)
    ========================================================== */
 .reservation-success-modal {
+  display: none !important;
   position: fixed;
   inset: 0;
   width: 100%;
@@ -2023,7 +2029,6 @@ textarea.form-control-editorial {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 99999;
-  display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
@@ -2034,6 +2039,7 @@ textarea.form-control-editorial {
 }
 
 .reservation-success-modal.active {
+  display: flex !important;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -2633,6 +2639,11 @@ textarea.form-control-editorial {
   /* Prevent iPhone iOS Safari auto-zoom on input focus */
   input, select, textarea, .form-input-editorial, .form-control-editorial {
     font-size: 16px !important;
+  }
+
+  /* Shorten mobile page height: Show 3 reviews on mobile */
+  .reviews-editorial-grid .review-card:nth-child(n+4) {
+    display: none !important;
   }
 
   /* Universal Mobile Responsive Grid Helper (Fixes column overflows / blowout on mobile) */

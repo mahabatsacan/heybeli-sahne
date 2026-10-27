@@ -77,9 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 5. RESERVATION FORM SUBMISSION
   const reservationForm = document.getElementById('reservation-form');
-  const resModal = document.getElementById('reservation-modal');
-  const modalDetails = document.getElementById('modal-details');
-  const modalCloseBtn = document.getElementById('modal-close-btn');
 
   if (reservationForm) {
     reservationForm.addEventListener('submit', async (e) => {
@@ -120,20 +117,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = await response.json();
 
         if (response.ok && result.success) {
-          if (resModal) {
-            if (modalDetails) {
-              modalDetails.innerHTML = `
-                <div style="font-size: 13px; line-height: 1.8; color: var(--text-primary);">
-                  <p><strong>Rezervasyon Kodu:</strong> <span style="color: var(--accent-gold); font-weight: 700;">${result.id || 'RES-' + Math.floor(Math.random()*9000+1000)}</span></p>
-                  <p><strong>İsim:</strong> ${escapeHtml(payload.name)}</p>
-                  <p><strong>Tarih & Kişi:</strong> ${escapeHtml(payload.date)} (${escapeHtml(payload.guests)})</p>
-                  <p><strong>Masa Tercihi:</strong> ${escapeHtml(payload.tableType)}</p>
-                </div>
-              `;
-            }
-            resModal.classList.add('active');
-            resModal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
+          const feedback = document.getElementById('resStatusMsg') || reservationForm.querySelector('.form-feedback');
+          if (feedback) {
+            feedback.className = 'form-feedback success';
+            feedback.style.display = 'block';
+            feedback.innerHTML = `
+              <strong>✓ Rezervasyon Talebiniz Başarıyla Alındı! (Kod: ${result.id || 'RES-' + Math.floor(Math.random()*9000+1000)})</strong><br>
+              Talebiniz ekibimize iletilmiştir. Yetkilimiz masa onayınızı iletmek üzere 15 dakika içinde <strong>${escapeHtml(payload.phone)}</strong> numarasından sizinle iletişime geçecektir.<br>
+              <a href="https://wa.me/905308664321?text=Merhaba,%20${result.id}%20numaralı%20rezervasyonum%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" style="display: inline-block; margin-top: 10px; color: #128C7E; font-weight: 700; text-decoration: underline;">
+                WhatsApp Üzerinden Hızlı Teyit Al (0530 866 43 21) ↗
+              </a>
+            `;
+            feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           } else {
             alert(`✓ Rezervasyon Talebiniz Alındı!\nKod: ${result.id}\nEkibimiz ${payload.phone} üzerinden sizinle iletişime geçecektir.`);
           }
@@ -149,24 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
           submitBtn.style.opacity = '1';
           submitBtn.innerText = originalText;
         }
-      }
-    });
-  }
-
-  if (modalCloseBtn && resModal) {
-    modalCloseBtn.addEventListener('click', () => {
-      resModal.classList.remove('active');
-      resModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    });
-  }
-
-  if (resModal) {
-    resModal.addEventListener('click', (e) => {
-      if (e.target === resModal) {
-        resModal.classList.remove('active');
-        resModal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
       }
     });
   }
@@ -266,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Çalışma Saatleri
     if (s.workingHours) {
       document.querySelectorAll('.footer-hours-badge, .mobile-menu-info p').forEach(el => {
-        if (el.textContent.includes('Çarşamba') || el.textContent.includes('19:30') || el.textContent.includes('20:00')) {
+        if (el.textContent.includes('Çarşamba') || el.textContent.includes('Pazartesi') || el.textContent.includes('19:30') || el.textContent.includes('20:00')) {
           el.textContent = s.workingHours;
         }
       });
@@ -432,15 +409,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // D. Dinamik Menü Kategorileri
+  // D. Dinamik Menü Kategorileri (Anasayfada 3 Temel Kategori: Ana Yemek, Mezeler, İçkiler)
   function renderCategories(categories) {
     const grid = document.querySelector('.menu-categories-grid');
     if (!grid || !categories || categories.length === 0) return;
 
-    grid.innerHTML = categories.map(cat => `
+    // Anasayfada 3 temel kategori sunulur: Ana Yemek, Mezeler, İçkiler
+    const selected = [];
+    const anaYemek = categories.find(c => (c.name || '').toLowerCase().includes('ana yemek')) || categories[0];
+    const mezeler = categories.find(c => (c.name || '').toLowerCase().includes('meze')) || categories[1];
+    const ickiler = categories.find(c => (c.name || '').toLowerCase().includes('içki') || (c.name || '').toLowerCase().includes('icki') || (c.name || '').toLowerCase().includes('kokteyl')) || categories[2];
+
+    if (anaYemek) selected.push(anaYemek);
+    if (mezeler && !selected.includes(mezeler)) selected.push(mezeler);
+    if (ickiler && !selected.includes(ickiler)) selected.push(ickiler);
+
+    const catsToRender = selected.length === 3 ? selected : categories.slice(0, 3);
+
+    grid.innerHTML = catsToRender.map(cat => `
       <div class="menu-category-card" onclick="window.location.href='/menu#${cat.id}'" style="cursor: pointer;">
         <div class="category-card-img-wrap">
-          <img src="${cat.image || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80'}" alt="${escapeHtml(cat.name)}" loading="lazy">
+          <img src="${cat.image || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80'}" alt="${escapeHtml(cat.name)}" loading="lazy" decoding="async">
           <div class="category-card-overlay"></div>
         </div>
         <div class="category-card-content">

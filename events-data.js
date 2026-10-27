@@ -159,7 +159,7 @@ const VENUE_INFO = {
   mapUrl: 'https://www.google.com/maps/place//data=!4m2!3m1!1s0x14cac71cab646a87:0x9968fa4cab653899?sa=X&ved=1t:8290&ictx=111',
   menuUrl: 'https://heybelisahne.com/men%C3%BC',
   email: 'rezervasyon@heybelisahne.com',
-  workingHours: 'Çarşamba - Pazar: 20:00 - 02:00',
+  workingHours: 'Pazartesi - Pazar: 20:00 - 02:00',
   musicStart: 'Kapı Açılış: 20:00 | Sahne Çıkış: 22:00'
 };
 
