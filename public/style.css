@@ -803,19 +803,19 @@ button, input, select, textarea {
 }
 
 .editorial-schedule-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  max-width: 1260px;
   margin: 0 auto;
 }
 
 .schedule-item {
   display: grid;
-  grid-template-columns: 180px 140px 1.4fr 1fr 140px;
-  align-items: center;
-  gap: 24px;
-  padding: 22px 28px;
+  grid-template-columns: 120px 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px 20px;
+  padding: 22px 24px;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-sm);
@@ -830,8 +830,13 @@ button, input, select, textarea {
 }
 
 .schedule-date-col {
+  grid-column: 1 / -1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(226, 218, 206, 0.7);
 }
 
 .schedule-date-main {
@@ -842,18 +847,20 @@ button, input, select, textarea {
 }
 
 .schedule-date-sub {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--accent-gold-hover);
   font-weight: 600;
-  margin-top: 4px;
 }
 
 .schedule-thumb-col {
-  width: 130px;
-  height: 85px;
+  grid-column: 1;
+  grid-row: 2;
+  width: 120px;
+  height: 120px;
   border-radius: var(--radius-xs);
   overflow: hidden;
   background-color: var(--bg-surface-warm);
+  align-self: start;
 }
 
 .schedule-thumb-col img {
@@ -868,36 +875,41 @@ button, input, select, textarea {
 }
 
 .schedule-artist-col {
+  grid-column: 2;
+  grid-row: 2;
   display: flex;
   flex-direction: column;
 }
 
 .schedule-artist-name {
   font-family: var(--font-serif);
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .schedule-event-title {
   font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 4px;
+  color: var(--accent-gold-hover);
+  font-weight: 500;
+  margin-top: 3px;
 }
 
 .schedule-event-desc {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
   line-height: 1.5;
   margin-top: 6px;
-  max-width: 540px;
 }
 
 .schedule-meta-col {
+  grid-column: 1;
+  grid-row: 3;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  align-self: center;
 }
 
 .schedule-tag-text {
@@ -909,35 +921,45 @@ button, input, select, textarea {
   padding: 4px 10px;
   border-radius: var(--radius-pill);
   width: fit-content;
+  white-space: nowrap;
 }
 
 .schedule-note-text {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .schedule-action-col {
-  text-align: right;
+  grid-column: 2;
+  grid-row: 3;
+  justify-self: end;
+  align-self: center;
 }
 
-.btn-schedule-book {
+.btn-schedule-book,
+.schedule-action-col .btn-primary-editorial {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 10px 22px;
   background-color: var(--text-primary);
   color: var(--bg-main);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   border-radius: var(--radius-xs);
   transition: var(--transition-fast);
+  border: 1px solid var(--text-primary);
+  text-decoration: none;
   cursor: pointer;
 }
 
-.btn-schedule-book:hover {
-  background-color: var(--accent-gold);
+.btn-schedule-book:hover,
+.schedule-action-col .btn-primary-editorial:hover {
+  background-color: var(--accent-gold-hover);
+  border-color: var(--accent-gold-hover);
   color: #FFFFFF;
   transform: translateY(-1px);
 }
@@ -2564,20 +2586,14 @@ textarea.form-control-editorial {
 /* ==========================================================
    RESPONSIVE DESIGN (Adaptive Luxury Standards)
    ========================================================== */
-@media (max-width: 1024px) {
-  .schedule-item {
-    grid-template-columns: 140px 100px 1fr 1fr;
+@media (max-width: 960px) {
+  .editorial-schedule-list {
+    grid-template-columns: 1fr !important;
     gap: 16px;
-    padding: 18px;
   }
-  .schedule-action-col {
-    grid-column: 1 / -1;
-    text-align: left;
-    margin-top: 6px;
-  }
-  .schedule-action-col .btn-schedule-book {
-    width: 100%;
-  }
+}
+
+@media (max-width: 1024px) {
 
   .story-editorial-grid {
     grid-template-columns: 1fr;
