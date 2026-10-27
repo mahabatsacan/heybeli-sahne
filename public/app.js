@@ -343,21 +343,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const scheduleContainer = document.querySelector('.editorial-schedule-list');
     if (!scheduleContainer || !events || events.length === 0) return;
 
-    scheduleContainer.innerHTML = events.map(ev => `
+    const isProgramPage = window.location.pathname.includes('/program') || window.location.pathname.includes('/etkinlik-takvimi');
+    const eventsToRender = isProgramPage ? events : events.slice(0, 6);
+
+    scheduleContainer.innerHTML = eventsToRender.map(ev => `
       <article class="schedule-item event-card" data-category="${ev.category || 'canli-muzik'}">
         <div class="schedule-date-col">
           <span class="schedule-date-main">${escapeHtml(ev.date)}</span>
           <span class="schedule-date-sub">⏰ ${escapeHtml(ev.time || '22:00')} Sahne</span>
         </div>
         <div class="schedule-thumb-col">
-          <img src="${ev.image || 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80'}" alt="${escapeHtml(ev.title)}" width="600" height="400" loading="lazy" decoding="async">
+          <img src="${ev.image || 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80'}" alt="${escapeHtml(ev.artist || ev.title)}" width="600" height="400" loading="lazy" decoding="async">
         </div>
         <div class="schedule-artist-col">
           <h3 class="schedule-artist-name">${escapeHtml(ev.artist || ev.title)}</h3>
           <span class="schedule-event-title">${escapeHtml(ev.title)}</span>
+          ${ev.description ? `<p class="schedule-event-desc">${escapeHtml(ev.description)}</p>` : ''}
         </div>
         <div class="schedule-meta-col">
-          <span class="schedule-tag-text">${escapeHtml(ev.badge || 'Gala Gecesi')}</span>
+          <span class="schedule-tag-text">${escapeHtml(ev.badge || 'Canlı Sahne')}</span>
           <span class="schedule-note-text">${escapeHtml(ev.ticketInfo || 'Rezervasyon Açıldı')}</span>
         </div>
         <div class="schedule-action-col">

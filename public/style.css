@@ -886,6 +886,14 @@ button, input, select, textarea {
   margin-top: 4px;
 }
 
+.schedule-event-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 6px;
+  max-width: 540px;
+}
+
 .schedule-meta-col {
   display: flex;
   flex-direction: column;
