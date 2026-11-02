@@ -102,13 +102,23 @@ function sendPage(res, file) {
 
   const cssV = assetVersion('style.css');
   const jsV = assetVersion('app.js');
-  const key = `${stat.mtimeMs}:${cssV}:${jsV}`;
+  const activeSliders = (file === 'index.html')
+    ? store.getSliders().filter(s => s.isActive !== false)
+    : [];
+  const firstSliderImg = (activeSliders[0] && activeSliders[0].image) || '';
+  const key = `${stat.mtimeMs}:${cssV}:${jsV}:${firstSliderImg}`;
 
   let cached = pageCache.get(file);
   if (!cached || cached.key !== key) {
-    const body = fs.readFileSync(filePath, 'utf8')
+    let body = fs.readFileSync(filePath, 'utf8')
       .replace(/href="\/style\.css(\?v=[^"]*)?"/g, `href="/style.css?v=${cssV}"`)
       .replace(/src="\/app\.js(\?v=[^"]*)?"/g, `src="/app.js?v=${jsV}"`);
+    if (file === 'index.html' && firstSliderImg) {
+      body = body.replace(
+        /(<div class="hero-background-wrap">\s*<img\s+src=")[^"]+(")/,
+        `$1${firstSliderImg}$2`
+      );
+    }
     cached = { key, body };
     pageCache.set(file, cached);
   }
@@ -630,6 +640,27 @@ app.get('/api/admin/media', requireAdmin, (req, res) => {
 app.delete('/api/admin/media/:id', requireAdmin, (req, res) => {
   const deleted = store.deleteMedia(req.params.id);
   res.json({ success: deleted });
+});
+
+// ------------------------------------------
+// ADMIN: LOCAL -> LIVE (heybelisahne.com) PUBLISH
+// ------------------------------------------
+app.post('/api/admin/publish', requireAdmin, (req, res) => {
+  try {
+    store.flushPendingWrites();
+    const { syncToLive } = require('./sync-live');
+    syncToLive();
+    res.json({
+      success: true,
+      message: 'Yereldeki tüm görseller, slider ve etkinlik değişiklikleri https://heybelisahne.com adresine başarıyla yayınlandı!'
+    });
+  } catch (err) {
+    console.error('Publish error:', err);
+    res.status(500).json({
+      success: false,
+      error: 'Canlı sunucuya aktarım sırasında hata oluştu: ' + (err.message || 'Bilinmeyen hata')
+    });
+  }
 });
 
 // Fallback to index.html

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "deploy": "git push origin main && ssh root@164.92.251.18 'cd /var/www/heybeli-sahne && git pull origin main && npm install --production && pm2 reload heybeli-sahne'"
+    "sync": "node sync-live.js",
+    "deploy": "git push origin main && ssh root@164.92.251.18 'cd /var/www/heybeli-sahne && cp data/store.json /tmp/heybeli_store_bak.json && git checkout -- data/store.json && git pull origin main && cp /tmp/heybeli_store_bak.json data/store.json && npm install --production' && node sync-live.js"
   },
   "dependencies": {
     "compression": "^1.8.2",

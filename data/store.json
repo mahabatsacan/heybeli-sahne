@@ -400,7 +400,7 @@
       "title": "İstanbul Meyhane Zarafeti & Canlı Sahne",
       "subtitle": "KARTAL SAHİL'DE HER AKŞAM YENİ BİR HİKAYE",
       "desc": "İstanbul meyhane kültürünün zarafetini, usta sanatçıların canlı performansları ve Ege lezzetleriyle taçlandıran özel bir buluşma adresi.",
-      "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=75",
+      "image": "/uploads/dsc_3142_1793629238968.jpg",
       "btnText": "Masa Rezervasyonu",
       "btnLink": "#rezervasyon",
       "order": 1,
@@ -411,7 +411,7 @@
       "title": "Gala Konserleri & Usta Sanatçılar",
       "subtitle": "HER CUMA & CUMARTESİ YILDIZLAR GEÇİDİ",
       "desc": "Sakiler, Rubato, Serkan Kaya ve dev orkestralarla unutulmaz sahil akşamları sizleri bekliyor.",
-      "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1600&q=75",
+      "image": "/uploads/dsc_3207_1793629275342.jpg",
       "btnText": "Etkinlik Takvimi",
       "btnLink": "/program",
       "order": 2,
@@ -422,7 +422,7 @@
       "title": "Ege’nin Taptaze Mezeleri & Seçkin Sofra",
       "subtitle": "GÜNLÜK HAZIRLANAN MEZELER & TAŞ FIRIN LEZZETLERİ",
       "desc": "Girit ezmesi, tereyağlı sıcak karides güveç, kömür ateşinde ızgaralar ve seçkin meyhane muhabbeti.",
-      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=75",
+      "image": "/uploads/adjust_size_to_fit_design_2k_20261102130838_1793629329302.jpg",
       "btnText": "Menüyü Keşfet",
       "btnLink": "/menu",
       "order": 3,
@@ -492,39 +492,6 @@
       "isAvailable": true
     },
     {
-      "id": "item-2",
-      "categoryId": "mezeler",
-      "name": "Köz Patlıcanlı Atom",
-      "desc": "Süzme yoğurt, acı tereyağlı çıtır biberler ile közlenmiş patlıcan",
-      "price": "Günlük Taze",
-      "badge": "Popüler",
-      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
-      "order": 2,
-      "isAvailable": true
-    },
-    {
-      "id": "item-3",
-      "categoryId": "mezeler",
-      "name": "Ege Deniz Börülcesi",
-      "desc": "Zeytinyağı, sarımsak ve limon emülsiyonu eşliğinde taze börülce",
-      "price": "Günlük Taze",
-      "badge": "Ege Klasiği",
-      "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80",
-      "order": 3,
-      "isAvailable": true
-    },
-    {
-      "id": "item-4",
-      "categoryId": "mezeler",
-      "name": "Levrek Marin",
-      "desc": "Hardal tohumu, kişniş, taze narenciye ve sızma zeytinyağında marine edilmiş deniz levreği",
-      "price": "Gurme Seçki",
-      "badge": "Özel Meze",
-      "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
-      "order": 4,
-      "isAvailable": true
-    },
-    {
       "id": "item-5",
       "categoryId": "ara-sicaklar",
       "name": "Tereyağında Karides Güveç",
@@ -536,28 +503,6 @@
       "isAvailable": true
     },
     {
-      "id": "item-6",
-      "categoryId": "ara-sicaklar",
-      "name": "Yaprak Ciğer (Edirne Usulü)",
-      "desc": "İnce kıyım dana ciğer, sumaklı soğan söğüş ve çıtır biber ile",
-      "price": "Sıcak Başlangıç",
-      "badge": "Geleneksel",
-      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      "order": 2,
-      "isAvailable": true
-    },
-    {
-      "id": "item-7",
-      "categoryId": "ara-sicaklar",
-      "name": "Çıtır Paçanga Böreği",
-      "desc": "Kayseri pastırması, kaşar peyniri ve domates ile çıtır çıtır yufka",
-      "price": "Sıcak Başlangıç",
-      "badge": "",
-      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
-      "order": 3,
-      "isAvailable": true
-    },
-    {
       "id": "item-8",
       "categoryId": "ana-yemek",
       "name": "Izgara Deniz Levreği",
@@ -566,17 +511,6 @@
       "badge": "Taze Balık",
       "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
       "order": 1,
-      "isAvailable": true
-    },
-    {
-      "id": "item-9",
-      "categoryId": "ana-yemek",
-      "name": "Özel Kasap Köfte & Antrikot",
-      "desc": "Kömürde pişirilmiş dana antrikot ve usta köftesi, köz biber ve domates ile",
-      "price": "Ana Yemek",
-      "badge": "Izgara Seçimi",
-      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      "order": 2,
       "isAvailable": true
     },
     {
@@ -610,6 +544,72 @@
       "badge": "Seçkin Koleksiyon",
       "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80",
       "order": 1,
+      "isAvailable": true
+    },
+    {
+      "id": "item-2",
+      "categoryId": "mezeler",
+      "name": "Köz Patlıcanlı Atom",
+      "desc": "Süzme yoğurt, acı tereyağlı çıtır biberler ile közlenmiş patlıcan",
+      "price": "Günlük Taze",
+      "badge": "Popüler",
+      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+      "order": 2,
+      "isAvailable": true
+    },
+    {
+      "id": "item-6",
+      "categoryId": "ara-sicaklar",
+      "name": "Yaprak Ciğer (Edirne Usulü)",
+      "desc": "İnce kıyım dana ciğer, sumaklı soğan söğüş ve çıtır biber ile",
+      "price": "Sıcak Başlangıç",
+      "badge": "Geleneksel",
+      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+      "order": 2,
+      "isAvailable": true
+    },
+    {
+      "id": "item-9",
+      "categoryId": "ana-yemek",
+      "name": "Özel Kasap Köfte & Antrikot",
+      "desc": "Kömürde pişirilmiş dana antrikot ve usta köftesi, köz biber ve domates ile",
+      "price": "Ana Yemek",
+      "badge": "Izgara Seçimi",
+      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+      "order": 2,
+      "isAvailable": true
+    },
+    {
+      "id": "item-3",
+      "categoryId": "mezeler",
+      "name": "Ege Deniz Börülcesi",
+      "desc": "Zeytinyağı, sarımsak ve limon emülsiyonu eşliğinde taze börülce",
+      "price": "Günlük Taze",
+      "badge": "Ege Klasiği",
+      "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80",
+      "order": 3,
+      "isAvailable": true
+    },
+    {
+      "id": "item-7",
+      "categoryId": "ara-sicaklar",
+      "name": "Çıtır Paçanga Böreği",
+      "desc": "Kayseri pastırması, kaşar peyniri ve domates ile çıtır çıtır yufka",
+      "price": "Sıcak Başlangıç",
+      "badge": "",
+      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+      "order": 3,
+      "isAvailable": true
+    },
+    {
+      "id": "item-4",
+      "categoryId": "mezeler",
+      "name": "Levrek Marin",
+      "desc": "Hardal tohumu, kişniş, taze narenciye ve sızma zeytinyağında marine edilmiş deniz levreği",
+      "price": "Gurme Seçki",
+      "badge": "Özel Meze",
+      "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
+      "order": 4,
       "isAvailable": true
     }
   ],
@@ -1082,7 +1082,32 @@
     "heroTitle": "İstanbul Meyhane Zarafeti & Canlı Sahne",
     "heroDesc": "İstanbul meyhane kültürünün zarafetini, usta sanatçıların canlı performansları ve Ege lezzetleriyle taçlandıran özel bir buluşma adresi."
   },
-  "media": [],
+  "media": [
+    {
+      "id": "media-1793629329309",
+      "filename": "adjust_size_to_fit_design_2k_20261102130838_1793629329302.jpg",
+      "url": "/uploads/adjust_size_to_fit_design_2k_20261102130838_1793629329302.jpg",
+      "size": 300055,
+      "mimetype": "image/jpeg",
+      "createdAt": "2026-11-02T14:22:09.309Z"
+    },
+    {
+      "id": "media-1793629275345",
+      "filename": "dsc_3207_1793629275342.jpg",
+      "url": "/uploads/dsc_3207_1793629275342.jpg",
+      "size": 421474,
+      "mimetype": "image/jpeg",
+      "createdAt": "2026-11-02T14:21:15.345Z"
+    },
+    {
+      "id": "media-1793629238980",
+      "filename": "dsc_3142_1793629238968.jpg",
+      "url": "/uploads/dsc_3142_1793629238968.jpg",
+      "size": 354453,
+      "mimetype": "image/jpeg",
+      "createdAt": "2026-11-02T14:20:38.980Z"
+    }
+  ],
   "clickTotals": {
     "whatsapp": 2,
     "call": 2,

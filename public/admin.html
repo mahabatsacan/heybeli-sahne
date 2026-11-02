@@ -700,6 +700,7 @@
       </div>
 
       <div class="header-actions">
+        <button id="btn-publish-live" onclick="publishToLive()" class="btn btn-gold btn-sm" style="display: none;" title="Localde yaptığınız tüm görsel, slider ve program değişikliklerini heybelisahne.com canlı sitesine aktarır">🚀 Canlıya Yayınla (heybelisahne.com)</button>
         <a href="/" target="_blank" class="btn btn-outline btn-sm">🌐 Siteyi Aç</a>
         <button id="btn-logout" class="btn btn-outline btn-sm">Çıkış Yap</button>
       </div>
@@ -2587,6 +2588,41 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
+    }
+
+    // Local ortamdaysa "Canlıya Yayınla (heybelisahne.com)" butonunu göster
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      const pubBtn = document.getElementById('btn-publish-live');
+      if (pubBtn) pubBtn.style.display = 'inline-flex';
+    }
+
+    async function publishToLive() {
+      const pubBtn = document.getElementById('btn-publish-live');
+      const originalText = pubBtn ? pubBtn.innerHTML : '';
+      if (pubBtn) {
+        pubBtn.disabled = true;
+        pubBtn.innerHTML = '⏳ Canlıya Aktarılıyor...';
+      }
+      showToast('🚀 Görseller ve içerikler heybelisahne.com adresine aktarılıyor...');
+      try {
+        const res = await fetch('/api/admin/publish', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${appToken}` }
+        });
+        const data = await safeParseResponse(res);
+        if (res.ok && data.success) {
+          showToast('✓ ' + (data.message || 'Canlı site güncellendi!'));
+        } else {
+          showToast('✕ ' + (data.error || 'Canlıya aktarım başarısız'), true);
+        }
+      } catch (err) {
+        showToast('✕ Hata: ' + err.message, true);
+      } finally {
+        if (pubBtn) {
+          pubBtn.disabled = false;
+          pubBtn.innerHTML = originalText;
+        }
+      }
     }
 
     // Auto-login if token exists or provided via URL
