@@ -928,13 +928,28 @@
 
       <!-- TAB 3: AYLIK PROGRAM & KONSERLER -->
       <div id="tab-events" class="tab-content">
+        <!-- Sanatçı Adına Göre Toplu Görsel Atama Paneli -->
+        <div class="panel" style="border-color: var(--border-gold);">
+          <div class="panel-header" style="margin-bottom: 10px;">
+            <div>
+              <h2 class="panel-title">🎤 Sanatçı Adına Göre Görsel Ata (Tek Tıkla Tüm Tarihleri Güncelle)</h2>
+              <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">
+                Bilgisayarınızdan bir sanatçının görselini seçip yüklediğinizde, o sanatçının etkinlik takvimindeki <strong>tüm konser tarihlerine</strong> otomatik olarak aynı görsel atanır.
+              </p>
+            </div>
+          </div>
+          <div id="artists-bulk-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; margin-top: 16px;">
+            <!-- Dynamic Unique Artists -->
+          </div>
+        </div>
+
         <div class="panel">
           <div class="panel-header">
-            <h2 class="panel-title">Aylık Sahne Programı & Konser Yönetimi</h2>
+            <h2 class="panel-title">Aylık Sahne Programı & Günlük Konser Listesi</h2>
             <button onclick="openEventModal()" class="btn btn-gold btn-sm">➕ Yeni Program / Konser Ekle</button>
           </div>
           <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 13px;">
-            Canlı müzik konserleri, kadınlar matinesi, gala geceleri ve fasıl programlarını buradan ekleyip güncelleyebilir, afiş görsellerini değiştirebilirsiniz.
+            Canlı müzik konserleri, kadınlar matinesi, gala geceleri ve fasıl programlarını buradan gün gün ekleyip güncelleyebilir veya tek bir günün afiş görselini değiştirebilirsiniz.
           </p>
 
           <div id="events-grid" class="cards-grid">
@@ -1073,11 +1088,14 @@
           </p>
 
           <!-- Upload Box -->
-          <div style="border: 2px dashed var(--border-gold); border-radius: var(--radius-md); padding: 32px; text-align: center; margin-bottom: 24px; background: rgba(196,154,85,0.03);">
-            <input type="file" id="media-file-input" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
-            <p style="font-size: 16px; color: var(--gold-light); margin-bottom: 8px;">Görsel Dosyası Seçin veya Buraya Sürükleyin</p>
-            <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 16px;">Desteklenen formatlar: JPG, PNG, WEBP, GIF, SVG (Maks. 20MB)</p>
-            <button onclick="document.getElementById('media-file-input').click()" class="btn btn-gold">📂 Dosya Seç ve Yükle</button>
+          <div id="media-dropzone" style="border: 2px dashed var(--border-gold); border-radius: var(--radius-md); padding: 32px; text-align: center; margin-bottom: 24px; background: rgba(196,154,85,0.03); transition: all 0.2s ease;"
+               ondragover="event.preventDefault(); this.style.background='rgba(196,154,85,0.12)';"
+               ondragleave="this.style.background='rgba(196,154,85,0.03)';"
+               ondrop="handleMediaDrop(event)">
+            <input type="file" id="media-file-input" accept="image/*,.heic,.heif,.avif,.webp" multiple style="display: none;" onchange="handleFileUpload(event)">
+            <p style="font-size: 16px; color: var(--gold-light); margin-bottom: 8px;">Görsel Dosyalarını Seçin veya Buraya Sürükleyin</p>
+            <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 16px;">Desteklenen formatlar: JPG, PNG, WEBP, GIF, SVG, AVIF, HEIC (Maks. 50MB · Büyük fotoğraflar otomatik optimize edilir)</p>
+            <button type="button" onclick="document.getElementById('media-file-input').click()" class="btn btn-gold">📂 Bilgisayardan Görsel Seç ve Yükle</button>
           </div>
 
           <!-- Media Grid -->
@@ -1111,10 +1129,14 @@
           <textarea id="slider-desc" class="textarea-field" placeholder="Kısa tanıtım yazısı..."></textarea>
         </div>
         <div class="form-group" style="margin-bottom: 14px;">
-          <label>Görsel URL veya Yükle *</label>
-          <div style="display: flex; gap: 8px;">
-            <input type="text" id="slider-image" class="input-field" placeholder="https://... veya /uploads/..." required>
-            <button type="button" class="btn btn-outline btn-sm" onclick="triggerQuickUpload('slider-image')">Yükle</button>
+          <label>Slider Görseli (Bilgisayardan Yükle veya URL) *</label>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="text" id="slider-image" class="input-field" style="flex: 1; min-width: 200px;" placeholder="https://... veya /uploads/..." oninput="updateModalPreview('slider-image', 'slider-image-preview')" required>
+            <button type="button" class="btn btn-gold btn-sm" onclick="triggerQuickUpload('slider-image')">📂 PC'den Görsel Seç & Yükle</button>
+          </div>
+          <div id="slider-image-preview-wrap" style="margin-top: 10px; display: none; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); padding: 8px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <img id="slider-image-preview" src="" alt="Önizleme" style="width: 110px; height: 64px; object-fit: cover; border-radius: 6px; background: #000;">
+            <span style="font-size: 12px; color: var(--gold-light);">✓ Seçili Slider Görseli Önizlemesi</span>
           </div>
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
@@ -1189,11 +1211,18 @@
           </div>
         </div>
         <div class="form-group" style="margin-bottom: 14px;">
-          <label>Afiş Görseli URL veya Yükle *</label>
-          <div style="display: flex; gap: 8px;">
-            <input type="text" id="event-image" class="input-field" placeholder="https://... veya /uploads/..." required>
-            <button type="button" class="btn btn-outline btn-sm" onclick="triggerQuickUpload('event-image')">Yükle</button>
+          <label>Sanatçı / Afiş Görseli (Bilgisayardan Yükle veya URL) *</label>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="text" id="event-image" class="input-field" style="flex: 1; min-width: 200px;" placeholder="https://... veya /uploads/..." oninput="updateModalPreview('event-image', 'event-image-preview')" required>
+            <button type="button" class="btn btn-gold btn-sm" onclick="triggerQuickUpload('event-image')">📂 PC'den Görsel Seç & Yükle</button>
           </div>
+          <div id="event-image-preview-wrap" style="margin-top: 10px; display: none; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); padding: 8px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <img id="event-image-preview" src="" alt="Önizleme" style="width: 90px; height: 64px; object-fit: cover; border-radius: 6px; background: #000;">
+            <span style="font-size: 12px; color: var(--gold-light);">✓ Seçili Sanatçı Görseli Önizlemesi</span>
+          </div>
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none; margin-top: 10px; font-size: 12px; color: var(--gold-light);">
+            <input type="checkbox" id="event-applyToArtist" checked> Bu görseli aynı sanatçının takvimdeki diğer tüm tarihlerine de otomatik uygula
+          </label>
         </div>
         <div class="form-group" style="margin-bottom: 14px;">
           <label>Program Detay Açıklaması</label>
@@ -1324,7 +1353,7 @@
   </div>
 
   <!-- Hidden Quick Uploader Input -->
-  <input type="file" id="quick-uploader-input" accept="image/*" style="display: none;" onchange="handleQuickUpload(event)">
+  <input type="file" id="quick-uploader-input" accept="image/*,.heic,.heif,.avif,.webp" style="display: none;" onchange="handleQuickUpload(event)">
 
   <!-- Toast Notification -->
   <div id="toast-notification">✓ İşlem Başarıyla Tamamlandı</div>
@@ -1334,6 +1363,7 @@
     let appToken = localStorage.getItem('heybeli_admin_token') || '';
     let dashboardData = null;
     let targetUploadFieldId = null;
+    let directUploadCallback = null;
 
     // Toast Notification Helper
     function showToast(message, isError = false) {
@@ -1341,7 +1371,7 @@
       toast.textContent = message;
       toast.style.borderColor = isError ? 'rgba(239, 68, 68, 0.5)' : 'var(--border-gold)';
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3500);
+      setTimeout(() => toast.classList.remove('show'), 3800);
     }
 
     // Modal Helpers
@@ -1352,67 +1382,179 @@
       document.getElementById(id).classList.remove('active');
     }
 
-    // Quick Image Upload for Modals
+    function updateModalPreview(inputId, previewImgId) {
+      const val = (document.getElementById(inputId)?.value || '').trim();
+      const wrap = document.getElementById(previewImgId + '-wrap');
+      const img = document.getElementById(previewImgId);
+      if (!wrap || !img) return;
+      if (val) {
+        img.src = val;
+        wrap.style.display = 'flex';
+      } else {
+        wrap.style.display = 'none';
+      }
+    }
+
+    // Büyük görselleri (örn. 6-25MB kamera/indirme fotoğrafları) tarayıcıda hızlıca optimize eder
+    // Böylece hem Nginx/sunucu boyut sınırına takılmaz hem de sitede anında açılır.
+    async function optimizeImageBeforeUpload(file) {
+      if (!file || !file.type || !file.type.startsWith('image/')) return file;
+      if (file.type === 'image/svg+xml' || file.type === 'image/gif') return file;
+      // 900 KB altındaki görselleri olduğu gibi gönder
+      if (file.size <= 900 * 1024) return file;
+
+      return new Promise((resolve) => {
+        const img = new Image();
+        const objectUrl = URL.createObjectURL(file);
+        img.onload = () => {
+          URL.revokeObjectURL(objectUrl);
+          try {
+            const MAX_DIM = 1920;
+            let width = img.naturalWidth || img.width;
+            let height = img.naturalHeight || img.height;
+            if (!width || !height) return resolve(file);
+
+            if (width > MAX_DIM || height > MAX_DIM) {
+              const ratio = Math.min(MAX_DIM / width, MAX_DIM / height);
+              width = Math.round(width * ratio);
+              height = Math.round(height * ratio);
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const baseName = file.name.replace(/\.[^.]+$/, '') || 'gorsel';
+            canvas.toBlob((blob) => {
+              if (!blob || blob.size >= file.size) {
+                resolve(file);
+              } else {
+                const optimizedFile = new File([blob], `${baseName}.jpg`, {
+                  type: 'image/jpeg',
+                  lastModified: Date.now()
+                });
+                resolve(optimizedFile);
+              }
+            }, 'image/jpeg', 0.86);
+          } catch (e) {
+            resolve(file);
+          }
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          resolve(file);
+        };
+        img.src = objectUrl;
+      });
+    }
+
+    // Güvenli JSON okuma (Nginx 413/502 HTML döndürürse "Unexpected token '<'" hatasını engeller)
+    async function safeParseResponse(res) {
+      const text = await res.text();
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        if (res.status === 413 || text.includes('413 Request Entity Too Large')) {
+          throw new Error('Görsel boyutu sunucu sınırını aştı (413). Lütfen tekrar deneyin.');
+        }
+        if (res.status === 401) {
+          throw new Error('Oturum süresi doldu. Lütfen sayfayı yenileyip tekrar giriş yapın.');
+        }
+        throw new Error(`Sunucu beklenmeyen bir yanıt döndürdü (HTTP ${res.status}).`);
+      }
+    }
+
+    async function uploadSingleFile(rawFile) {
+      const fileToSend = await optimizeImageBeforeUpload(rawFile);
+      const formData = new FormData();
+      formData.append('image', fileToSend);
+
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${appToken}` },
+        body: formData
+      });
+      const data = await safeParseResponse(res);
+      if (!res.ok || !data.success || !data.url) {
+        throw new Error(data.error || 'Görsel yüklenemedi.');
+      }
+      return data;
+    }
+
+    // Quick Image Upload for Modals or Direct Card Actions
     function triggerQuickUpload(targetInputId) {
       targetUploadFieldId = targetInputId;
+      directUploadCallback = null;
+      document.getElementById('quick-uploader-input').click();
+    }
+
+    function triggerDirectActionUpload(callbackFn) {
+      targetUploadFieldId = null;
+      directUploadCallback = callbackFn;
       document.getElementById('quick-uploader-input').click();
     }
 
     async function handleQuickUpload(e) {
       const file = e.target.files[0];
-      if (!file || !targetUploadFieldId) return;
-
-      const formData = new FormData();
-      formData.append('image', file);
+      if (!file) return;
 
       try {
-        showToast('Görsel yükleniyor...');
-        const res = await fetch('/api/admin/upload', {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${appToken}` },
-          body: formData
-        });
-        const data = await res.json();
-        if (data.success && data.url) {
-          document.getElementById(targetUploadFieldId).value = data.url;
+        showToast('⏳ Görsel optimize ediliyor ve yükleniyor...');
+        const data = await uploadSingleFile(file);
+
+        if (directUploadCallback) {
+          await directUploadCallback(data.url);
+        } else if (targetUploadFieldId) {
+          const inputEl = document.getElementById(targetUploadFieldId);
+          if (inputEl) {
+            inputEl.value = data.url;
+            if (targetUploadFieldId === 'slider-image') updateModalPreview('slider-image', 'slider-image-preview');
+            if (targetUploadFieldId === 'event-image') updateModalPreview('event-image', 'event-image-preview');
+          }
           showToast('✓ Görsel yüklendi ve alana eklendi!');
           loadDashboardData();
-        } else {
-          showToast('✕ Yükleme başarısız: ' + (data.error || 'Hata'), true);
         }
       } catch (err) {
         showToast('✕ Yükleme hatası: ' + err.message, true);
       } finally {
         e.target.value = '';
+        directUploadCallback = null;
       }
     }
 
-    // Media tab file upload
-    async function handleFileUpload(e) {
-      const file = e.target.files[0];
-      if (!file) return;
+    // Media tab file upload (çoklu dosya destekli)
+    async function uploadMultipleMediaFiles(fileList) {
+      const files = Array.from(fileList || []);
+      if (files.length === 0) return;
 
-      const formData = new FormData();
-      formData.append('image', file);
-
+      let successCount = 0;
       try {
-        showToast('Görsel yükleniyor...');
-        const res = await fetch('/api/admin/upload', {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${appToken}` },
-          body: formData
-        });
-        const data = await res.json();
-        if (data.success && data.url) {
-          showToast('✓ Görsel başarıyla yüklendi!');
-          loadDashboardData();
-        } else {
-          showToast('✕ Hata: ' + (data.error || 'Yüklenemedi'), true);
+        for (let i = 0; i < files.length; i++) {
+          showToast(`⏳ Görsel yükleniyor (${i + 1}/${files.length})...`);
+          await uploadSingleFile(files[i]);
+          successCount++;
         }
+        showToast(`✓ ${successCount} görsel başarıyla yüklendi!`);
+        loadDashboardData();
       } catch (err) {
         showToast('✕ Yükleme hatası: ' + err.message, true);
-      } finally {
-        e.target.value = '';
+        if (successCount > 0) loadDashboardData();
+      }
+    }
+
+    async function handleFileUpload(e) {
+      await uploadMultipleMediaFiles(e.target.files);
+      e.target.value = '';
+    }
+
+    async function handleMediaDrop(e) {
+      e.preventDefault();
+      const dz = document.getElementById('media-dropzone');
+      if (dz) dz.style.background = 'rgba(196,154,85,0.03)';
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        await uploadMultipleMediaFiles(e.dataTransfer.files);
       }
     }
 
@@ -1825,7 +1967,10 @@
 
       container.innerHTML = sliders.map(s => `
         <div class="item-card">
-          <img src="${s.image}" class="card-thumb" alt="${escapeHtml(s.title)}" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80'">
+          <div style="position: relative;">
+            <img src="${s.image}" class="card-thumb" alt="${escapeHtml(s.title)}" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80'">
+            <button type="button" onclick="changeSliderPhotoDirect('${s.id}')" class="btn btn-gold btn-sm" style="position: absolute; bottom: 10px; right: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.6);">📷 PC'den Görsel Değiştir</button>
+          </div>
           <div class="card-body">
             <span class="card-meta">Sıra: ${s.order || 1} • ${s.isActive !== false ? '🟢 Yayında' : '⚪ Pasif'}</span>
             <h4 class="card-title">${escapeHtml(s.title)}</h4>
@@ -1840,6 +1985,24 @@
           </div>
         </div>
       `).join('');
+    }
+
+    function changeSliderPhotoDirect(sliderId) {
+      const slider = dashboardData && dashboardData.sliders && dashboardData.sliders.find(s => s.id === sliderId);
+      if (!slider) return;
+      triggerDirectActionUpload(async (uploadedUrl) => {
+        const res = await fetch(`/api/admin/sliders/${sliderId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${appToken}` },
+          body: JSON.stringify({ ...slider, image: uploadedUrl })
+        });
+        if (res.ok) {
+          showToast('✓ Slider görseli güncellendi ve yayına alındı!');
+          loadDashboardData();
+        } else {
+          showToast('✕ Slider güncellenemedi', true);
+        }
+      });
     }
 
     function openSliderModal(slider = null) {
@@ -1861,6 +2024,7 @@
         document.getElementById('slider-order').value = (dashboardData.sliders ? dashboardData.sliders.length + 1 : 1);
         document.getElementById('slider-isActive').checked = true;
       }
+      updateModalPreview('slider-image', 'slider-image-preview');
       openModal('slider-modal');
     }
 
@@ -1918,17 +2082,56 @@
       }
     }
 
-    // 3. EVENTS CRUD
+    // 3. EVENTS CRUD & SANATÇI ADINA GÖRE TOPLU GÖRSEL ATAMA
+    let artistRegistryList = [];
+
     function renderEvents(events) {
       const container = document.getElementById('events-grid');
+      const artistsContainer = document.getElementById('artists-bulk-grid');
       if (!events || events.length === 0) {
         container.innerHTML = '<p style="color: var(--text-muted); grid-column: span 3;">Henüz kayıtlı etkinlik bulunmuyor.</p>';
+        if (artistsContainer) artistsContainer.innerHTML = '';
         return;
+      }
+
+      // Sanatçı adına göre tekilleştirilmiş liste
+      if (artistsContainer) {
+        const artistMap = new Map();
+        events.forEach(ev => {
+          const name = (ev.artist || ev.title || '').trim();
+          if (!name) return;
+          const key = name.toLocaleLowerCase('tr-TR');
+          if (!artistMap.has(key)) {
+            artistMap.set(key, { name, image: ev.image, count: 1, dates: [ev.date] });
+          } else {
+            const entry = artistMap.get(key);
+            entry.count++;
+            entry.dates.push(ev.date);
+            if (ev.image && ev.image.startsWith('/uploads/')) {
+              entry.image = ev.image;
+            }
+          }
+        });
+        artistRegistryList = Array.from(artistMap.values());
+
+        artistsContainer.innerHTML = artistRegistryList.map((a, idx) => `
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 12px; display: flex; align-items: center; gap: 12px;">
+            <img src="${a.image}" alt="${escapeHtml(a.name)}" style="width: 58px; height: 58px; object-fit: cover; border-radius: 8px; background: #000; flex-shrink: 0;" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=300&q=80'">
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-weight: 700; font-size: 13px; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${escapeHtml(a.name)}">🎤 ${escapeHtml(a.name)}</div>
+              <div style="font-size: 11px; color: var(--gold-light); margin-bottom: 6px;">Takvimde ${a.count} gece sahne</div>
+              <button type="button" onclick="changeArtistPhotoByIdx(${idx})" class="btn btn-gold btn-sm" style="width: 100%; padding: 5px 8px; font-size: 11px;">📂 PC'den Görsel Yükle</button>
+            </div>
+          </div>
+        `).join('');
       }
 
       container.innerHTML = events.map(ev => `
         <div class="item-card">
-          <img src="${ev.image}" class="card-thumb" alt="${escapeHtml(ev.title)}" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80'">
+          <div style="position: relative;">
+            <img src="${ev.image}" class="card-thumb" alt="${escapeHtml(ev.title)}" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80'">
+            <button type="button" onclick="changeEventPhotoDirect('${ev.id}')" class="btn btn-gold btn-sm" style="position: absolute; bottom: 10px; right: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.6);">📷 Görsel Değiştir</button>
+          </div>
           <div class="card-body">
             <span class="card-meta">📅 ${escapeHtml(ev.date)} • ⏰ ${escapeHtml(ev.time || '21:30')}</span>
             <h4 class="card-title">${escapeHtml(ev.title)}</h4>
@@ -1944,6 +2147,43 @@
           </div>
         </div>
       `).join('');
+    }
+
+    function changeArtistPhotoByIdx(idx) {
+      const artistObj = artistRegistryList[idx];
+      if (!artistObj) return;
+      triggerDirectActionUpload(async (uploadedUrl) => {
+        const res = await fetch('/api/admin/events/artist-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${appToken}` },
+          body: JSON.stringify({ artist: artistObj.name, image: uploadedUrl })
+        });
+        const data = await safeParseResponse(res);
+        if (res.ok && data.success) {
+          showToast(`✓ ${artistObj.name} için ${data.updatedCount} sahne gününün görseli güncellendi!`);
+          loadDashboardData();
+        } else {
+          showToast('✕ Sanatçı görseli güncellenemedi', true);
+        }
+      });
+    }
+
+    function changeEventPhotoDirect(eventId) {
+      const ev = dashboardData && dashboardData.events && dashboardData.events.find(e => e.id === eventId);
+      if (!ev) return;
+      triggerDirectActionUpload(async (uploadedUrl) => {
+        const res = await fetch(`/api/admin/events/${eventId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${appToken}` },
+          body: JSON.stringify({ ...ev, image: uploadedUrl, applyToArtist: true })
+        });
+        if (res.ok) {
+          showToast(`✓ ${ev.artist || ev.title} görseli güncellendi!`);
+          loadDashboardData();
+        } else {
+          showToast('✕ Görsel güncellenemedi', true);
+        }
+      });
     }
 
     function openEventModal(eventItem = null) {
@@ -1962,10 +2202,17 @@
         document.getElementById('event-highlights').value = eventItem.highlights || '';
         document.getElementById('event-ticketInfo').value = eventItem.ticketInfo || '';
         document.getElementById('event-isSoldOut').checked = eventItem.isSoldOut === true;
+        if (document.getElementById('event-applyToArtist')) {
+          document.getElementById('event-applyToArtist').checked = true;
+        }
       } else {
         document.getElementById('event-modal-title').textContent = 'Yeni Sahne Programı Ekle';
         document.getElementById('event-id').value = '';
+        if (document.getElementById('event-applyToArtist')) {
+          document.getElementById('event-applyToArtist').checked = true;
+        }
       }
+      updateModalPreview('event-image', 'event-image-preview');
       openModal('event-modal');
     }
 
@@ -1988,7 +2235,8 @@
         description: document.getElementById('event-description').value.trim(),
         highlights: document.getElementById('event-highlights').value.trim(),
         ticketInfo: document.getElementById('event-ticketInfo').value.trim(),
-        isSoldOut: document.getElementById('event-isSoldOut').checked
+        isSoldOut: document.getElementById('event-isSoldOut').checked,
+        applyToArtist: document.getElementById('event-applyToArtist') ? document.getElementById('event-applyToArtist').checked : false
       };
 
       const url = id ? `/api/admin/events/${id}` : '/api/admin/events';

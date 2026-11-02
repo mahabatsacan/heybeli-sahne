@@ -27,8 +27,8 @@ app.use((req, res, next) => {
 });
 
 // Middleware & Static Assets with aggressive caching for assets
-app.use(express.json({ limit: '20mb' }));
-app.use(express.urlencoded({ extended: true, limit: '20mb' }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Ensure uploads folder exists
 const UPLOADS_DIR = path.join(__dirname, 'public', 'uploads');
@@ -36,26 +36,41 @@ if (!fs.existsSync(UPLOADS_DIR)) {
   fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 }
 
+const TR_CHAR_MAP = {
+  'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u',
+  'Ç': 'c', 'Ğ': 'g', 'İ': 'i', 'Ö': 'o', 'Ş': 's', 'Ü': 'u'
+};
+const ALLOWED_IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg', '.avif', '.heic', '.heif', '.jfif']);
+
 // Multer Upload Configuration
 const uploadStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, UPLOADS_DIR);
   },
   filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname).toLowerCase();
-    const safeBase = path.basename(file.originalname, ext).replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    const rawExt = path.extname(file.originalname || '').toLowerCase();
+    const ext = ALLOWED_IMAGE_EXTS.has(rawExt) ? rawExt : '.jpg';
+    const rawBase = path.basename(file.originalname || 'gorsel', rawExt);
+    const safeBase = rawBase
+      .replace(/[çğıöşüÇĞİÖŞÜ]/g, ch => TR_CHAR_MAP[ch] || ch)
+      .replace(/[^a-zA-Z0-9_-]/g, '_')
+      .replace(/_+/g, '_')
+      .replace(/^_|_$/g, '')
+      .toLowerCase()
+      .slice(0, 60);
     cb(null, `${safeBase || 'heybeli'}_${Date.now()}${ext}`);
   }
 });
 
 const upload = multer({
   storage: uploadStorage,
-  limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
+  limits: { fileSize: 50 * 1024 * 1024 }, // 50MB
   fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) {
+    const ext = path.extname(file.originalname || '').toLowerCase();
+    if ((file.mimetype && file.mimetype.startsWith('image/')) || ALLOWED_IMAGE_EXTS.has(ext)) {
       cb(null, true);
     } else {
-      cb(new Error('Sadece görsel dosyaları (JPEG, PNG, WEBP, GIF, SVG) kabul edilir.'));
+      cb(new Error('Sadece görsel dosyaları (JPG, PNG, WEBP, GIF, SVG, AVIF, HEIC) kabul edilir.'));
     }
   }
 });
@@ -199,7 +214,7 @@ app.get('/api/health', (req, res) => {
 
 // Unified Bootstrap API (Fast 1-roundtrip initial data for client, reduces latency)
 app.get('/api/bootstrap', (req, res) => {
-  res.setHeader('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
+  res.setHeader('Cache-Control', 'no-cache, must-revalidate');
   res.json({
     settings: store.getSettings(),
     sliders: store.getSliders().filter(s => s.isActive !== false),
@@ -550,6 +565,15 @@ app.post('/api/admin/events', requireAdmin, (req, res) => {
   if (!req.body.title) return res.status(400).json({ success: false, error: 'Program başlığı zorunludur' });
   const created = store.addEvent(req.body);
   res.json({ success: true, event: created });
+});
+
+app.post('/api/admin/events/artist-image', requireAdmin, (req, res) => {
+  const { artist, image } = req.body || {};
+  if (!artist || !image) {
+    return res.status(400).json({ success: false, error: 'Sanatçı adı ve görsel URL zorunludur.' });
+  }
+  const result = store.updateArtistEventsImage(artist, image);
+  res.json({ success: true, updatedCount: result.updatedCount, events: result.events });
 });
 
 app.put('/api/admin/events/:id', requireAdmin, (req, res) => {

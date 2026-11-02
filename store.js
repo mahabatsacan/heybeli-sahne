@@ -1234,9 +1234,46 @@ function updateEvent(id, updateData) {
   const idx = data.events.findIndex(e => e.id === id);
   if (idx === -1) return null;
 
-  data.events[idx] = { ...data.events[idx], ...updateData, id };
+  const { applyToArtist, ...fields } = updateData || {};
+  data.events[idx] = { ...data.events[idx], ...fields, id };
+
+  // Eğer aynı sanatçının diğer tüm tarihlerine de görsel uygulanması istendiyse
+  const targetArtist = (data.events[idx].artist || '').trim();
+  if (applyToArtist && targetArtist && fields.image) {
+    const normTarget = targetArtist.toLocaleLowerCase('tr-TR');
+    data.events.forEach((ev, i) => {
+      if (i === idx) return;
+      const evArtist = (ev.artist || '').trim().toLocaleLowerCase('tr-TR');
+      const evTitle = (ev.title || '').trim().toLocaleLowerCase('tr-TR');
+      if (evArtist === normTarget || evArtist.includes(normTarget) || evTitle.includes(normTarget)) {
+        ev.image = fields.image;
+      }
+    });
+  }
+
   writeData(data);
   return data.events[idx];
+}
+
+function updateArtistEventsImage(artistName, imageUrl) {
+  if (!artistName || !imageUrl) return { updatedCount: 0, events: [] };
+  const data = readData();
+  const normTarget = String(artistName).trim().toLocaleLowerCase('tr-TR');
+  let updatedCount = 0;
+
+  (data.events || []).forEach(ev => {
+    const evArtist = (ev.artist || '').trim().toLocaleLowerCase('tr-TR');
+    const evTitle = (ev.title || '').trim().toLocaleLowerCase('tr-TR');
+    if (evArtist === normTarget || evArtist.includes(normTarget) || evTitle.includes(normTarget)) {
+      ev.image = imageUrl;
+      updatedCount++;
+    }
+  });
+
+  if (updatedCount > 0) {
+    writeData(data);
+  }
+  return { updatedCount, events: getEvents() };
 }
 
 function deleteEvent(id) {
@@ -1367,6 +1404,7 @@ module.exports = {
   getEventById,
   addEvent,
   updateEvent,
+  updateArtistEventsImage,
   deleteEvent,
   // Settings
   getSettings,
