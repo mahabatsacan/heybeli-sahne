@@ -20,8 +20,10 @@ function syncToLive() {
     }
   }
 
+const store = require('./store');
+
   // 2. Yerel store.json içeriklerini (sliders, events, categories, menuItems, settings, media)
-  //    canlı sunucudaki store.json ile birleştir (canlıdaki müşteri rezervasyonlarını ve tıklamaları koru!)
+  //    canlı sunucudaki store.json ile birleştir (canlıdaki gerçek müşteri rezervasyonlarını koru, sahte olanları temizle!)
   if (fs.existsSync(LOCAL_STORE)) {
     const localData = JSON.parse(fs.readFileSync(LOCAL_STORE, 'utf8'));
     let remoteData = {};
@@ -32,15 +34,25 @@ function syncToLive() {
       remoteData = {};
     }
 
-    // Canlıdaki rezervasyonları ve tıklama istatistiklerini koru
+    // Canlıdaki ve yereldeki gerçek rezervasyonları birleştir, sahte/test kayıtları filtrele
+    const remoteRes = Array.isArray(remoteData.reservations) ? remoteData.reservations : [];
+    const localRes = Array.isArray(localData.reservations) ? localData.reservations : [];
+    const seenIds = new Set();
+    const cleanReservations = [];
+    for (const r of [...remoteRes, ...localRes]) {
+      if (r && r.id && !seenIds.has(r.id) && !store.isFakeOrInvalidReservation(r)) {
+        seenIds.add(r.id);
+        cleanReservations.push(r);
+      }
+    }
+
+    // Canlıdaki gerçek rezervasyonları ve tıklama istatistiklerini koru
     const mergedData = {
       ...remoteData,
-      reservations: Array.isArray(remoteData.reservations) && remoteData.reservations.length > 0
-        ? remoteData.reservations
-        : (localData.reservations || []),
-      clicks: Array.isArray(remoteData.clicks) && remoteData.clicks.length > 0
+      reservations: cleanReservations,
+      clicks: (Array.isArray(remoteData.clicks) && remoteData.clicks.length > 0
         ? remoteData.clicks
-        : (localData.clicks || []),
+        : (localData.clicks || [])).filter(c => c && c.id !== 'CLK-101' && c.id !== 'CLK-102' && c.source !== 'production-verification'),
       clickTotals: remoteData.clickTotals || localData.clickTotals || {},
       sliders: localData.sliders || remoteData.sliders || [],
       categories: localData.categories || remoteData.categories || [],
@@ -52,9 +64,10 @@ function syncToLive() {
 
     const tmpFile = path.join(__dirname, 'data', '.store.sync.tmp.json');
     fs.writeFileSync(tmpFile, JSON.stringify(mergedData, null, 2), 'utf8');
+    fs.writeFileSync(LOCAL_STORE, JSON.stringify(mergedData, null, 2), 'utf8');
     execSync(`scp -q "${tmpFile}" ${REMOTE_HOST}:${REMOTE_DIR}/data/store.json`, { stdio: 'inherit' });
     fs.unlinkSync(tmpFile);
-    console.log('✅ Veri tabanı (slider, etkinlik takvimi, menü, medya) canlı sunucuya aktarıldı.');
+    console.log('✅ Veri tabanı (gerçek rezervasyonlar, slider, etkinlik takvimi, menü, medya) canlı sunucuya aktarıldı.');
   }
 
   // 3. Canlı sunucuda PM2 heybeli-sahne sürecini yeniden yükle (bellek önbelleğini tazele)
@@ -72,3 +85,4 @@ if (require.main === module) {
 }
 
 module.exports = { syncToLive };
+

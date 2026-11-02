@@ -338,9 +338,26 @@ app.post('/api/track', (req, res) => {
   res.status(200).json({ success: true, id: tracked.id });
 });
 
-// Reservation Form API: Saves to persistent store
+// Reservation Form API: Saves to persistent store (ONLY genuine human submissions from website forms)
 app.post('/api/reservation', (req, res) => {
+  const ua = String(req.headers['user-agent'] || '');
+  if (!ua || /bot|crawl|spider|slurp|headless|lighthouse|pagespeed|curl|wget|python|postman|insomnia/i.test(ua)) {
+    return res.status(403).json({
+      success: false,
+      error: 'Otomatik bot veya sahte form gönderimleri engellenmiştir.'
+    });
+  }
+
   const body = req.body || {};
+
+  // Honeypot & gerçek kullanıcı etkileşimi doğrulaması
+  if (body.website || body.company || body.humanVerified !== true) {
+    return res.status(400).json({
+      success: false,
+      error: 'Lütfen rezervasyon formunu web sitemiz üzerinden gerçek bilgilerinizle doldurunuz.'
+    });
+  }
+
   const name = cleanText(body.name, 80);
   const phone = cleanText(body.phone, 30);
   const date = cleanText(body.date, 20);
@@ -354,36 +371,46 @@ app.post('/api/reservation', (req, res) => {
   if (!name || !phone || !date) {
     return res.status(400).json({
       success: false,
-      error: 'Lütfen ad, telefon ve tarih alanlarını eksiksiz doldurunuz.'
+      error: 'Lütfen ad soyad, telefon ve tarih alanlarını eksiksiz doldurunuz.'
     });
   }
-  if (phone.replace(/\D/g, '').length < 10) {
+
+  const validation = store.validateRealReservationInput({ name, phone, note });
+  if (!validation.valid) {
     return res.status(400).json({
       success: false,
-      error: 'Lütfen geçerli bir telefon numarası giriniz (Örn: 0532 123 45 67).'
+      error: validation.error
     });
   }
 
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
-  const saved = store.addReservation({
-    name,
-    phone,
-    date,
-    guests,
-    tableType,
-    event: eventName,
-    menu,
-    note,
-    page,
-    ip
-  });
+  let saved;
+  try {
+    saved = store.addReservation({
+      name: validation.cleanedName,
+      phone: validation.cleanedPhone,
+      date,
+      guests,
+      tableType,
+      event: eventName,
+      menu,
+      note,
+      page,
+      ip
+    });
+  } catch (err) {
+    return res.status(400).json({
+      success: false,
+      error: err.message || 'Geçersiz rezervasyon bilgisi.'
+    });
+  }
 
   console.log('====================================');
-  console.log(`🍾 YENİ MASA REZERVASYON TALEBİ [${saved.id}]`);
-  console.log(`İsim: ${name} | Tel: ${phone}`);
-  console.log(`Tarih: ${date} | Kişi Sayısı: ${guests || '2'}`);
-  console.log(`Masa Tipi: ${tableType || 'Standart'} | Program: ${eventName || '-'} | Menü: ${menu || '-'}`);
-  console.log(`Not: ${note || '-'}`);
+  console.log(`🍾 YENİ GERÇEK MASA REZERVASYON TALEBİ [${saved.id}]`);
+  console.log(`İsim: ${saved.name} | Tel: ${saved.phone}`);
+  console.log(`Tarih: ${saved.date} | Kişi Sayısı: ${saved.guests || '2'}`);
+  console.log(`Masa Tipi: ${saved.tableType || 'Standart'} | Program: ${saved.event || '-'} | Menü: ${saved.menu || '-'}`);
+  console.log(`Not: ${saved.note || '-'}`);
   console.log('====================================');
 
   res.json({
@@ -398,10 +425,21 @@ app.post('/api/reservation', (req, res) => {
       tableType: saved.tableType,
       event: saved.event,
       menu: saved.menu,
-      note: saved.note
+      note: saved.note,
+      waConfirmed: saved.waConfirmed
     },
-    message: `Talebiniz Heybeli Sahne ekibine iletildi. Rezervasyon onayınız ve masa detaylarınız için ${phone} numaralı telefondan en kısa sürede iletişime geçilecektir.`
+    message: `Talebiniz yönetim panelimize kaydedildi. Rezervasyonunuzun kesinleşmesi için lütfen açılan WhatsApp ekranından onay mesajını gönderiniz.`
   });
+});
+
+// WhatsApp Onay Teyidi İşaretleme (Müşteri veya Admin WhatsApp teyit başlattığında)
+app.post('/api/reservation/:id/wa-confirm', (req, res) => {
+  const { by } = req.body || {};
+  const updated = store.markReservationWaConfirmed(req.params.id, by === 'admin' ? 'admin' : 'customer');
+  if (!updated) {
+    return res.status(404).json({ success: false, error: 'Rezervasyon bulunamadı.' });
+  }
+  res.json({ success: true, reservation: updated });
 });
 
 // ==========================================

@@ -1661,9 +1661,15 @@
     function renderReservations(list) {
       const tbody = document.getElementById('reservations-tbody');
       if (!list || list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">Kayıtlı rezervasyon talebi bulunmuyor.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">Henüz gerçek kullanıcı tarafından oluşturulmuş rezervasyon talebi bulunmuyor.</td></tr>';
         return;
       }
+
+      const statusLabel = (s) => {
+        if (s === 'onaylandi') return 'Onaylandı';
+        if (s === 'iptal') return 'İptal';
+        return 'Onay Bekliyor';
+      };
 
       tbody.innerHTML = list.map(r => `
         <tr>
@@ -1683,10 +1689,13 @@
             ${r.menu ? `<span style="display: inline-block; margin-top: 3px; font-size: 11px; padding: 2px 6px; border-radius: 4px; background: rgba(168,85,247,0.12); color: #C084FC;">🍽️ ${escapeHtml(r.menu)}</span>` : ''}
           </td>
           <td style="max-width: 220px; font-size: 12px; color: var(--text-muted); line-height: 1.4;">${escapeHtml(r.note || '-')}</td>
-          <td><span class="badge badge-${r.status}">${r.status}</span></td>
+          <td>
+            <span class="badge badge-${r.status}">${statusLabel(r.status)}</span>
+            ${r.waConfirmed ? `<div style="margin-top:4px;font-size:11px;color:#25D366;font-weight:600;">💬 WP Teyitli</div>` : `<div style="margin-top:4px;font-size:11px;color:var(--text-muted);">⏳ WP Teyidi Bekliyor</div>`}
+          </td>
           <td>
             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-              <button onclick="sendWhatsAppConfirmation('${r.id}')" class="btn btn-outline btn-sm" style="color: #25D366; border-color: rgba(37, 211, 102, 0.4); padding: 4px 8px;" title="Müşteriye WhatsApp Onay Mesajı Gönder">💬 WP Onay</button>
+              <button onclick="sendWhatsAppConfirmation('${r.id}')" class="btn btn-outline btn-sm" style="color: #25D366; border-color: rgba(37, 211, 102, 0.4); padding: 4px 8px;" title="Müşteriye WhatsApp Üzerinden Onay Teyidi Gönder ve Onayla">💬 WP Onay Teyidi</button>
               ${r.status === 'yeni' ? `
                 <button onclick="updateReservationStatus('${r.id}', 'onaylandi')" class="btn btn-outline btn-sm" style="color: #34D399;" title="Onayla">✓</button>
                 <button onclick="updateReservationStatus('${r.id}', 'iptal')" class="btn btn-outline btn-sm" style="color: #F87171;" title="İptal Et">✕</button>
@@ -1698,8 +1707,8 @@
       `).join('');
     }
 
-    // Müşteriye WhatsApp ile Onay Gönderme
-    function sendWhatsAppConfirmation(id) {
+    // Müşteriye WhatsApp ile Onay Teyidi Gönderme ve Durumu Onaylandı Yapma
+    async function sendWhatsAppConfirmation(id) {
       if (!dashboardData || !dashboardData.reservations) return;
       const r = dashboardData.reservations.find(x => x.id === id);
       if (!r) return;
@@ -1728,10 +1737,20 @@
         '📍 Adres: Kordonboyu, Turgut Özal Blv. NO:53/A, 34860 Kartal / İstanbul',
         '☎️ Danışma & Rezervasyon: 0530 527 91 77',
         '',
-        'Heybeli Sahne ailesi olarak keyifli bir akşam dileriz.'
+        'Lütfen bu mesajı yanıtlayarak katılım teyidinizi iletiniz. Heybeli Sahne ailesi olarak keyifli bir akşam dileriz.'
       ].filter(Boolean).join('\n');
 
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+
+      try {
+        await fetch(`/api/reservation/${encodeURIComponent(id)}/wa-confirm`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ by: 'admin' })
+        });
+        showToast('✓ WhatsApp onay mesajı açıldı ve rezervasyon onaylandı!');
+        loadDashboardData();
+      } catch (e) {}
     }
 
     function filterReservations() {

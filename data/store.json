@@ -1,137 +1,37 @@
 {
   "reservations": [
     {
-      "id": "RES-4125",
-      "name": "Ahmet Yılmaz",
-      "phone": "05321234567",
-      "date": "2026-11-15",
-      "guests": "4 Kişi",
-      "tableType": "Sahne Önü VIP Masa",
-      "event": "Nevzat Ak",
-      "menu": "VIP Gala Menüsü",
-      "note": "Ön masa rica ederiz",
+      "id": "RES-2583",
+      "name": "Pınar Duran",
+      "phone": "05546101546",
+      "date": "2026-11-20",
+      "guests": "3 Kişi",
+      "tableType": "Standart Meyhane Masası",
+      "event": "Arzu Şahin",
+      "menu": "Alakart / Mekanda Seçim",
+      "note": "",
       "page": "/rezervasyon",
       "status": "yeni",
-      "createdAt": "2026-10-27T12:20:24.883Z",
-      "ip": "127.0.0.1"
+      "createdAt": "2026-10-31T21:11:13.842Z",
+      "ip": "188.3.219.46"
     },
     {
-      "id": "RES-5832",
-      "name": "mahabat saçan",
-      "phone": "05058401006",
-      "date": "2026-11-13",
-      "guests": "7-8 Kişi",
-      "tableType": "Sahne Önü VIP Masa",
-      "note": "mahabat saçan web sitesi deneme rezervasyonu",
-      "status": "yeni",
-      "createdAt": "2026-10-27T09:56:26.814Z",
-      "ip": "127.0.0.1"
-    },
-    {
-      "id": "RES-3387",
-      "name": "NDKJSFBJKAlksfnjaskfv",
-      "phone": "204*2057*235*28*1",
-      "date": "2026-11-13",
-      "guests": "4 Kişi",
-      "tableType": "Sahne Önü VIP Masa",
-      "note": "",
-      "status": "yeni",
-      "createdAt": "2026-10-27T09:54:52.217Z",
-      "ip": "127.0.0.1"
-    },
-    {
-      "id": "RES-8373",
-      "name": "Test Misafir",
-      "phone": "05301234567",
-      "date": "2026-10-30",
-      "guests": "4 Kişi",
-      "tableType": "Sahne Önü VIP Masa",
-      "note": "Test rezervasyonu",
-      "status": "yeni",
-      "createdAt": "2026-10-26T14:14:24.715Z",
-      "ip": "127.0.0.1"
-    },
-    {
-      "id": "RES-8921",
-      "name": "Murat Yılmaz",
-      "phone": "0532 450 11 22",
-      "date": "2026-09-25",
-      "guests": "4 Kişi",
-      "tableType": "Sahne Önü VIP Masa",
-      "note": "Evlilik yıldönümü kutlaması, pasta rica ediyoruz.",
-      "status": "onaylandi",
-      "createdAt": "2026-09-23T08:30:00.000Z",
-      "ip": "127.0.0.1"
-    },
-    {
-      "id": "RES-8920",
-      "name": "Zeynep Kaya",
-      "phone": "0541 330 44 55",
-      "date": "2026-09-26",
+      "id": "RES-3539",
+      "name": "Nuray kaya",
+      "phone": "05334243779",
+      "date": "2026-11-17",
       "guests": "2 Kişi",
       "tableType": "Standart Meyhane Masası",
-      "note": "Sahneyi gören sakin bir masa tercihimizdir.",
+      "event": "Yılmaz Çelik",
+      "menu": "Alakart / Mekanda Seçim",
+      "note": "Güzel bir masa istiyoruz sahneyi iyi gören kalabalık gürültüden biraz daha sakin köşe",
+      "page": "/rezervasyon",
       "status": "yeni",
-      "createdAt": "2026-09-23T10:15:00.000Z",
-      "ip": "127.0.0.1"
-    },
-    {
-      "id": "RES-5650",
-      "name": "Serhat Saçan",
-      "phone": "5333324341",
-      "date": "2026-09-25",
-      "guests": "5-6 Kişi",
-      "tableType": "Özel VIP Loca",
-      "note": "asa",
-      "status": "yeni",
-      "createdAt": "2026-09-23T10:38:32.476Z",
-      "ip": "46.104.21.43"
+      "createdAt": "2026-10-30T14:43:35.988Z",
+      "ip": "88.233.168.140"
     }
   ],
   "clicks": [
-    {
-      "id": "CLK-mvqnmhwzj4",
-      "type": "reservation_click",
-      "source": "Etkinlik Kartı",
-      "label": "Masa Ayır – Özcan Türe",
-      "page": "/program",
-      "device": "Mobil",
-      "timestamp": "2026-10-27T12:21:03.923Z"
-    },
-    {
-      "id": "CLK-mvqnmhwike",
-      "type": "call",
-      "source": "Üst Menü (Header)",
-      "label": "0530 527 91 77",
-      "page": "/program",
-      "device": "Masaüstü",
-      "timestamp": "2026-10-27T12:21:03.906Z"
-    },
-    {
-      "id": "CLK-mvqnmhvzqp",
-      "type": "whatsapp",
-      "source": "Mobil Sabit Alt Bar",
-      "label": "WhatsApp",
-      "page": "/",
-      "device": "Mobil",
-      "timestamp": "2026-10-27T12:21:03.887Z"
-    },
-    {
-      "id": "CLK-101",
-      "type": "whatsapp",
-      "source": "Mobil Sabit Alt Bar",
-      "page": "/",
-      "device": "Mobil (iOS)",
-      "timestamp": "2026-09-23T09:45:00.000Z"
-    },
-    {
-      "id": "CLK-102",
-      "type": "call",
-      "source": "Mobil Sabit Alt Bar",
-      "page": "/program",
-      "device": "Mobil (Android)",
-      "timestamp": "2026-09-23T11:10:00.000Z"
-    },
     {
       "id": "CLK-6538",
       "type": "whatsapp",
@@ -383,21 +283,12 @@
       "device": "Masaüstü",
       "timestamp": "2026-09-23T10:38:56.454Z",
       "ip": "46.104.21.43"
-    },
-    {
-      "id": "CLK-3381",
-      "type": "whatsapp",
-      "source": "production-verification",
-      "page": "/",
-      "device": "Masaüstü",
-      "timestamp": "2026-09-23T10:24:07.053Z",
-      "ip": "46.104.21.43"
     }
   ],
   "sliders": [
     {
       "id": "slide-1",
-      "title": "İstanbul Meyhane Zarafeti & Canlı Sahne",
+      "title": "İstanbul Türkü Bar  & Canlı Sahne",
       "subtitle": "KARTAL SAHİL'DE HER AKŞAM YENİ BİR HİKAYE",
       "desc": "İstanbul meyhane kültürünün zarafetini, usta sanatçıların canlı performansları ve Ege lezzetleriyle taçlandıran özel bir buluşma adresi.",
       "image": "/uploads/dsc_3142_1793629238968.jpg",
@@ -408,9 +299,9 @@
     },
     {
       "id": "slide-2",
-      "title": "Gala Konserleri & Usta Sanatçılar",
-      "subtitle": "HER CUMA & CUMARTESİ YILDIZLAR GEÇİDİ",
-      "desc": "Sakiler, Rubato, Serkan Kaya ve dev orkestralarla unutulmaz sahil akşamları sizleri bekliyor.",
+      "title": "Usta Sanatçılar",
+      "subtitle": "HAFTA'NIN HER GÜNÜ YILDIZLAR GEÇİDİ",
+      "desc": "Sabahat Akkiraz, Selçuk Balcı, Nurettin Rençber, Arzu Şahin, Özcan Türe  ve dev orkestralarla unutulmaz  akşamları sizleri bekliyor.",
       "image": "/uploads/dsc_3207_1793629275342.jpg",
       "btnText": "Etkinlik Takvimi",
       "btnLink": "/program",
@@ -419,9 +310,9 @@
     },
     {
       "id": "slide-3",
-      "title": "Ege’nin Taptaze Mezeleri & Seçkin Sofra",
-      "subtitle": "GÜNLÜK HAZIRLANAN MEZELER & TAŞ FIRIN LEZZETLERİ",
-      "desc": "Girit ezmesi, tereyağlı sıcak karides güveç, kömür ateşinde ızgaralar ve seçkin meyhane muhabbeti.",
+      "title": "Izgara Lezzetleri & Ege’nin Taptaze Mezeleri",
+      "subtitle": "GÜNLÜK HAZIRLANAN MEZELER & IZGARA  LEZZETLERİ",
+      "desc": "Kömür ateşinde ızgaralar  ve Girit ezmesi,  seçkin meyhane muhabbeti.",
       "image": "/uploads/adjust_size_to_fit_design_2k_20261102130838_1793629329302.jpg",
       "btnText": "Menüyü Keşfet",
       "btnLink": "/menu",

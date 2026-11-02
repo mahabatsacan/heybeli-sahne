@@ -698,6 +698,90 @@ const DEFAULT_SETTINGS = {
   heroDesc: 'İstanbul meyhane kültürünün zarafetini, usta sanatçıların canlı performansları ve Ege lezzetleriyle taçlandıran özel bir buluşma adresi.'
 };
 
+// Fake / Demo / Bot Rezervasyon Filtresi ve Doğrulayıcı
+const KNOWN_FAKE_RESERVATION_IDS = new Set([
+  'RES-4125', 'RES-5832', 'RES-3387', 'RES-8373', 'RES-8921', 'RES-8920', 'RES-5650'
+]);
+
+const KNOWN_FAKE_PHONES = new Set([
+  '5321234567', '5301234567', '5324501122', '5413304455', '5333324341',
+  '5555555555', '5000000000', '5320000000', '5551234567'
+]);
+
+function normalizeTrPhoneDigits(rawPhone) {
+  const str = String(rawPhone || '').trim();
+  // Yıldız (*), diyez (#) veya harf içeren sahte numaraları reddet
+  if (/[*#a-zA-Z]/.test(str)) return '';
+  let digits = str.replace(/\D/g, '');
+  if (digits.startsWith('90') && digits.length === 12) {
+    digits = digits.slice(2);
+  } else if (digits.startsWith('0') && digits.length === 11) {
+    digits = digits.slice(1);
+  }
+  return digits;
+}
+
+function validateRealReservationInput(item = {}) {
+  const rawName = String(item.name || '').trim().replace(/\s+/g, ' ');
+  const rawPhone = String(item.phone || '').trim();
+  const rawNote = String(item.note || '').trim();
+
+  if (!rawName || rawName.length < 4 || rawName.length > 70) {
+    return { valid: false, error: 'Lütfen geçerli ad ve soyadınızı giriniz.' };
+  }
+
+  // Sadece Türkçe/Latin harfler ve boşluk olmalı
+  if (!/^[a-zA-ZçğıöşüÇĞİÖŞÜ\s.'-]+$/.test(rawName)) {
+    return { valid: false, error: 'Ad Soyad alanı yalnızca harflerden oluşmalıdır.' };
+  }
+
+  // En az 2 kelime (Ad ve Soyad) olmalı
+  const words = rawName.split(' ').filter(w => w.length >= 2);
+  if (words.length < 2) {
+    return { valid: false, error: 'Lütfen adınızı ve soyadınızı eksiksiz (en az iki kelime) giriniz.' };
+  }
+
+  // Rastgele klavye tuşlaması kontrolü (5+ ardışık sessiz harf veya hiç sesli harf olmaması)
+  if (/[^aeıioöuüAEIİOÖUÜ\s.'-]{5,}/.test(rawName) || !/[aeıioöuüAEIİOÖUÜ]/.test(rawName)) {
+    return { valid: false, error: 'Lütfen gerçek ad ve soyadınızı giriniz.' };
+  }
+
+  // Aynı harfin 3+ kez tekrarı (örn. aaaa, asdf)
+  if (/(.)\1{2,}/i.test(rawName)) {
+    return { valid: false, error: 'Lütfen geçerli bir ad ve soyad giriniz.' };
+  }
+
+  const lowerName = rawName.toLocaleLowerCase('tr-TR');
+  const lowerNote = rawNote.toLocaleLowerCase('tr-TR');
+  const fakePatterns = ['test misafir', 'deneme', 'asdf', 'qwer', 'zxcv', 'fake', 'bot ', 'admin', 'anonim', 'isimsiz'];
+  if (fakePatterns.some(p => lowerName.includes(p)) || lowerNote.includes('deneme rezervasyonu') || lowerNote === 'asa' || lowerNote === 'test rezervasyonu') {
+    return { valid: false, error: 'Test veya sahte form gönderimleri kabul edilmemektedir.' };
+  }
+
+  // Telefon doğrulaması: Türkiye GSM (50x, 53x, 54x, 55x, 56x ile başlayan 10 hane)
+  const digits = normalizeTrPhoneDigits(rawPhone);
+  if (!/^5[03456]\d{8}$/.test(digits)) {
+    return { valid: false, error: 'Lütfen WhatsApp onayı için geçerli bir Türkiye cep telefonu numarası (05XX XXX XX XX) giriniz.' };
+  }
+
+  if (KNOWN_FAKE_PHONES.has(digits) || /(\d)\1{5,}/.test(digits) || /123456|654321|012345/.test(digits)) {
+    return { valid: false, error: 'Lütfen gerçek ve aktif bir cep telefonu numarası giriniz.' };
+  }
+
+  return {
+    valid: true,
+    cleanedName: rawName,
+    cleanedPhone: '0' + digits
+  };
+}
+
+function isFakeOrInvalidReservation(r) {
+  if (!r || typeof r !== 'object') return true;
+  if (KNOWN_FAKE_RESERVATION_IDS.has(r.id)) return true;
+  const check = validateRealReservationInput(r);
+  return !check.valid;
+}
+
 // Ensure data directory and store file exist
 function initStore() {
   if (!fs.existsSync(DATA_DIR)) {
@@ -719,10 +803,22 @@ function initStore() {
   if (!Array.isArray(data.reservations)) {
     data.reservations = [];
     modified = true;
+  } else {
+    const cleanRes = data.reservations.filter(r => !isFakeOrInvalidReservation(r));
+    if (cleanRes.length !== data.reservations.length) {
+      data.reservations = cleanRes;
+      modified = true;
+    }
   }
   if (!Array.isArray(data.clicks)) {
     data.clicks = [];
     modified = true;
+  } else {
+    const cleanClicks = data.clicks.filter(c => c && c.id !== 'CLK-101' && c.id !== 'CLK-102' && c.source !== 'production-verification');
+    if (cleanClicks.length !== data.clicks.length) {
+      data.clicks = cleanClicks;
+      modified = true;
+    }
   }
   if (!Array.isArray(data.sliders) || data.sliders.length === 0) {
     data.sliders = DEFAULT_SLIDERS;
@@ -808,11 +904,16 @@ function generateReservationId(list) {
 }
 
 function addReservation(item) {
+  const check = validateRealReservationInput(item);
+  if (!check.valid) {
+    throw new Error(check.error || 'Geçersiz rezervasyon bilgisi');
+  }
+
   const data = readData();
   const newReservation = {
     id: generateReservationId(data.reservations),
-    name: item.name,
-    phone: item.phone,
+    name: check.cleanedName,
+    phone: check.cleanedPhone,
     date: item.date,
     guests: item.guests || '2 Kişi',
     tableType: item.tableType || 'Standart Meyhane Masası',
@@ -821,6 +922,7 @@ function addReservation(item) {
     note: item.note || '',
     page: item.page || '/',
     status: 'yeni', // 'yeni' | 'onaylandi' | 'iptal'
+    waConfirmed: Boolean(item.waConfirmed),
     createdAt: new Date().toISOString(),
     ip: item.ip || 'Bilinmiyor'
   };
@@ -832,7 +934,7 @@ function addReservation(item) {
 
 function getReservations(filter = {}) {
   const data = readData();
-  let list = data.reservations;
+  let list = (data.reservations || []).filter(r => !isFakeOrInvalidReservation(r));
 
   if (filter.status && filter.status !== 'all') {
     list = list.filter(r => r.status === filter.status);
@@ -848,6 +950,22 @@ function getReservations(filter = {}) {
   }
 
   return list;
+}
+
+function markReservationWaConfirmed(id, by = 'customer') {
+  const data = readData();
+  const target = (data.reservations || []).find(r => r.id === id);
+  if (!target) return null;
+
+  target.waConfirmed = true;
+  target.waConfirmedAt = new Date().toISOString();
+  target.waConfirmedBy = by;
+  if (by === 'admin') {
+    target.status = 'onaylandi';
+  }
+  target.updatedAt = new Date().toISOString();
+  writeData(data);
+  return target;
 }
 
 function updateReservationStatus(id, newStatus) {
@@ -1374,9 +1492,12 @@ initStore();
 
 module.exports = {
   // Reservations
+  validateRealReservationInput,
+  isFakeOrInvalidReservation,
   addReservation,
   getReservations,
   updateReservationStatus,
+  markReservationWaConfirmed,
   deleteReservation,
   // Clicks & Stats
   addClick,

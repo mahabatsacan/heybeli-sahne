@@ -185,6 +185,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const WA_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.28c-.24.68-1.39 1.3-1.92 1.38-.5.08-1.13.11-3.64-.93-2.14-.88-3.52-3.06-3.63-3.21-.11-.15-.86-1.14-.86-2.18s.54-1.55.74-1.76c.19-.21.43-.26.57-.26.15 0 .29 0 .42.01.13.01.32-.05.5.38.19.45.64 1.57.7 1.69.06.12.09.26.02.41-.08.15-.12.24-.24.38-.12.15-.25.32-.36.43-.12.12-.24.26-.1.5.14.24.63 1.04 1.35 1.68.93.83 1.71 1.09 1.95 1.21.24.12.38.1.53-.06.14-.17.62-.72.78-.97.17-.24.33-.21.55-.12.22.08 1.41.67 1.65.79.24.12.4.17.46.28.06.11.06.63-.18 1.31z"/></svg>';
 
+  function notifyCustomerWaConfirm(resId) {
+    if (!resId) return;
+    fetch(`/api/reservation/${encodeURIComponent(resId)}/wa-confirm`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ by: 'customer' }),
+      keepalive: true
+    }).catch(() => {});
+  }
+
   function renderReservationSuccess(feedback, r) {
     const venueUrl = waLink(venueWa, buildVenueMessage(r));
     const selfNumber = toWaNumber(r.phone);
@@ -197,34 +207,69 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="res-success-head">
           <span class="res-success-icon" aria-hidden="true">✓</span>
           <div>
-            <strong class="res-success-title">Rezervasyon talebiniz alındı</strong>
+            <strong class="res-success-title">Rezervasyon talebiniz yönetim panelimize düştü</strong>
             <span class="res-success-code">Talep Kodu: ${escapeHtml(r.id)}</span>
           </div>
         </div>
-        <p class="res-success-text">Talebiniz rezervasyon ekibimize ulaştı. Masanızın hemen ayrılması için talebinizi <strong>WhatsApp</strong> üzerinden de iletin — açılan sohbette yalnızca <strong>Gönder</strong>'e dokunmanız yeterli.</p>
+        <p class="res-success-text">Talebiniz yönetim panelimize kaydedildi. Rezervasyonunuzun kesinleşmesi için <strong>WhatsApp üzerinden onay teyidi</strong> alınmaktadır — açılan WhatsApp sohbetinde <strong>Gönder</strong>'e dokunarak onay teyidinizi tamamlayınız.</p>
         <ul class="res-success-summary">
           <li><span>Tarih</span><strong>${escapeHtml(formatTrDate(r.date))}</strong></li>
           <li><span>Kişi</span><strong>${escapeHtml(r.guests)}</strong></li>
           <li><span>Masa</span><strong>${escapeHtml(r.tableType)}</strong></li>
         </ul>
         <div class="res-success-actions">
-          <a href="${venueUrl}" target="_blank" rel="noopener" class="res-wa-btn res-wa-primary" data-wa-fixed data-track="reservation_whatsapp" data-track-source="Rezervasyon Formu Sonrası" data-track-label="Talebi WhatsApp ile Gönder">
-            ${WA_ICON}<span>Talebi WhatsApp ile Gönder</span>
+          <a href="${venueUrl}" target="_blank" rel="noopener" class="res-wa-btn res-wa-primary" data-wa-fixed data-res-wa-id="${escapeHtml(r.id)}" data-track="reservation_whatsapp" data-track-source="Rezervasyon Formu Sonrası" data-track-label="WhatsApp Onay Teyidi Gönder">
+            ${WA_ICON}<span>WhatsApp Üzerinden Onay Teyidi Gönder</span>
           </a>
           ${selfUrl ? `
           <a href="${selfUrl}" target="_blank" rel="noopener" class="res-wa-btn res-wa-secondary" data-wa-fixed data-track="reservation_self_whatsapp" data-track-source="Rezervasyon Formu Sonrası" data-track-label="Onay Bilgisini WhatsApp'ıma Kaydet">
             ${WA_ICON}<span>Onay Bilgisini WhatsApp'ıma Kaydet</span>
           </a>` : ''}
         </div>
-        <p class="res-success-foot">Yetkilimiz en geç 15 dakika içinde <strong>${escapeHtml(r.phone)}</strong> numarasından size dönüş yapacaktır.</p>
+        <p class="res-success-foot">Yetkilimiz WhatsApp üzerinden ve <strong>${escapeHtml(r.phone)}</strong> numarasından onay teyidinizi gerçekleştirecektir.</p>
       </div>`;
+    const primaryWaBtn = feedback.querySelector('[data-res-wa-id]');
+    if (primaryWaBtn) {
+      primaryWaBtn.addEventListener('click', () => notifyCustomerWaConfirm(r.id));
+    }
     feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return venueUrl;
+  }
+
+  function validateClientReservation(name, phone) {
+    const cleanName = String(name || '').trim().replace(/\s+/g, ' ');
+    if (cleanName.length < 4 || !/^[a-zA-ZçğıöşüÇĞİÖŞÜ\s.'-]+$/.test(cleanName)) {
+      return 'Lütfen geçerli ad ve soyadınızı (yalnızca harf kullanarak) giriniz.';
+    }
+    const words = cleanName.split(' ').filter(w => w.length >= 2);
+    if (words.length < 2) {
+      return 'Lütfen adınızı ve soyadınızı eksiksiz (en az iki kelime) giriniz.';
+    }
+    if (/[^aeıioöuüAEIİOÖUÜ\s.'-]{5,}/.test(cleanName) || !/[aeıioöuüAEIİOÖUÜ]/.test(cleanName) || /(.)\1{2,}/i.test(cleanName)) {
+      return 'Lütfen gerçek ad ve soyadınızı giriniz.';
+    }
+    const rawPhone = String(phone || '').trim();
+    if (/[*#a-zA-Z]/.test(rawPhone)) {
+      return 'Lütfen geçerli bir cep telefonu numarası giriniz (Örn: 0532 123 45 67).';
+    }
+    let digits = rawPhone.replace(/\D/g, '');
+    if (digits.startsWith('90') && digits.length === 12) digits = digits.slice(2);
+    else if (digits.startsWith('0') && digits.length === 11) digits = digits.slice(1);
+    if (!/^5[03456]\d{8}$/.test(digits) || /(\d)\1{5,}/.test(digits) || /123456|654321/.test(digits)) {
+      return 'Lütfen WhatsApp onay teyidi için geçerli bir Türkiye cep telefonu numarası (05XX XXX XX XX) giriniz.';
+    }
+    return null;
   }
 
   function bindReservationForm(form) {
     if (!form) return;
     const q = (sel) => form.querySelector(sel);
+
+    let humanInteracted = false;
+    const markHuman = () => { humanInteracted = true; };
+    form.addEventListener('keydown', markHuman, { once: true });
+    form.addEventListener('input', markHuman, { once: true });
+    form.addEventListener('pointerdown', markHuman, { once: true });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -252,7 +297,8 @@ document.addEventListener('DOMContentLoaded', () => {
         event: eventSelect ? eventSelect.value : (form.dataset.event || ''),
         menu: menuSelect ? menuSelect.value : '',
         note: noteInput ? noteInput.value.trim() : '',
-        page: window.location.pathname || '/'
+        page: window.location.pathname || '/',
+        humanVerified: Boolean(humanInteracted)
       };
 
       const showError = (msg) => {
@@ -265,9 +311,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      if (payload.phone.replace(/\D/g, '').length < 10) {
-        showError('Lütfen geçerli bir telefon numarası giriniz (Örn: 0532 123 45 67).');
-        if (phoneInput) phoneInput.focus();
+      if (!humanInteracted) {
+        showError('Lütfen rezervasyon formunu gerçek bilgilerinizle doldurunuz.');
+        return;
+      }
+
+      const validationErr = validateClientReservation(payload.name, payload.phone);
+      if (validationErr) {
+        showError(validationErr);
         return;
       }
 
@@ -299,7 +350,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // WhatsApp sohbetini otomatik aç (tarayıcı engellerse ekrandaki yeşil buton hazır)
         const waWindow = window.open(venueUrl, '_blank', 'noopener');
-        if (waWindow !== null || !feedback) {
+        if (waWindow !== null) {
+          notifyCustomerWaConfirm(saved.id);
           trackClick('reservation_whatsapp', 'Rezervasyon Formu (Otomatik Açılış)', 'Form gönderimi sonrası otomatik');
         }
 
