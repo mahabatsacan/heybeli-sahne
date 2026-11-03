@@ -1,18 +1,33 @@
 {
   "reservations": [
     {
+      "id": "RES-3894",
+      "name": "Rıfat yılmaz",
+      "phone": "5312776401",
+      "date": "2026-11-07",
+      "guests": "2 Kişi",
+      "tableType": "Standart Meyhane Masası",
+      "event": "Songül Güner",
+      "menu": "A La Carte / Masada Karar Vereceğim",
+      "note": "",
+      "page": "/rezervasyon",
+      "status": "yeni",
+      "createdAt": "2026-11-02T15:23:49.031Z",
+      "ip": "176.54.64.81"
+    },
+    {
       "id": "RES-2583",
       "name": "Pınar Duran",
       "phone": "05546101546",
       "date": "2026-11-20",
-      "guests": "3 Kişi",
+      "guests": "3-4 Kişi",
       "tableType": "Standart Meyhane Masası",
       "event": "Arzu Şahin",
-      "menu": "Alakart / Mekanda Seçim",
+      "menu": "A La Carte / Masada Karar Vereceğim",
       "note": "",
       "page": "/rezervasyon",
       "status": "yeni",
-      "createdAt": "2026-10-31T21:11:13.842Z",
+      "createdAt": "2026-10-31T16:44:50.569Z",
       "ip": "188.3.219.46"
     },
     {
@@ -21,17 +36,881 @@
       "phone": "05334243779",
       "date": "2026-11-17",
       "guests": "2 Kişi",
-      "tableType": "Standart Meyhane Masası",
+      "tableType": "Sahne Önü VIP Masa",
       "event": "Yılmaz Çelik",
-      "menu": "Alakart / Mekanda Seçim",
-      "note": "Güzel bir masa istiyoruz sahneyi iyi gören kalabalık gürültüden biraz daha sakin köşe",
+      "menu": "A La Carte / Masada Karar Vereceğim",
+      "note": "",
       "page": "/rezervasyon",
       "status": "yeni",
-      "createdAt": "2026-10-30T14:43:35.988Z",
+      "createdAt": "2026-10-28T11:17:11.277Z",
       "ip": "88.233.168.140"
     }
   ],
   "clicks": [
+    {
+      "id": "CLK-mvzirhw16a",
+      "type": "program",
+      "source": "Alt Bilgi (Footer)",
+      "label": "Etkinlik Takvimi",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T17:14:54.673Z"
+    },
+    {
+      "id": "CLK-mvzetr0hdk",
+      "type": "reservation_whatsapp",
+      "source": "Rezervasyon Formu Sonrası",
+      "label": "Talebi WhatsApp ile Gönder",
+      "page": "/rezervasyon",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T15:24:41.345Z"
+    },
+    {
+      "id": "CLK-mvzes4mzrj",
+      "type": "reservation_click",
+      "source": "Etkinlik Takvimi",
+      "label": "Masa Ayır",
+      "page": "/program",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T15:23:25.691Z"
+    },
+    {
+      "id": "CLK-mvzer7hhmm",
+      "type": "reservation_click",
+      "source": "Etkinlik Takvimi",
+      "label": "Masa Ayır",
+      "page": "/program",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T15:22:42.725Z"
+    },
+    {
+      "id": "CLK-mvzer4qb5z",
+      "type": "program",
+      "source": "Hero / Slider",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T15:22:39.155Z"
+    },
+    {
+      "id": "CLK-mvze4yvlsy",
+      "type": "whatsapp",
+      "source": "Sabit WhatsApp Butonu",
+      "label": "WhatsApp ile Hızlı İletişim",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T15:05:25.137Z"
+    },
+    {
+      "id": "CLK-mvze4mdhon",
+      "type": "map",
+      "source": "Alt Bilgi (Footer)",
+      "label": "📍 Google Haritalar'da Aç",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T15:05:08.933Z"
+    },
+    {
+      "id": "CLK-mvze2srclo",
+      "type": "page",
+      "source": "Üst Menü (Header)",
+      "label": "Anasayfa",
+      "page": "/hakkimizda",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T15:03:43.896Z"
+    },
+    {
+      "id": "CLK-mvze2ri4cu",
+      "type": "page",
+      "source": "Üst Menü (Header)",
+      "label": "Hakkımızda",
+      "page": "/menu",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T15:03:42.268Z"
+    },
+    {
+      "id": "CLK-mvze2gtimz",
+      "type": "menu",
+      "source": "Üst Menü (Header)",
+      "label": "Menü",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T15:03:28.422Z"
+    },
+    {
+      "id": "CLK-mvzdg6dcx4",
+      "type": "page",
+      "source": "Üst Menü (Header)",
+      "label": "İletişim",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T14:46:08.448Z"
+    },
+    {
+      "id": "CLK-mvzdf1pzga",
+      "type": "whatsapp",
+      "source": "Sabit WhatsApp Butonu",
+      "label": "WhatsApp ile Hızlı İletişim",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T14:45:15.767Z"
+    },
+    {
+      "id": "CLK-mvzdeqjixo",
+      "type": "page",
+      "source": "Üst Menü (Header)",
+      "label": "Heybeli Sahne",
+      "page": "/etkinlik-takvimi",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T14:45:01.278Z"
+    },
+    {
+      "id": "CLK-mvzdefnmh5",
+      "type": "program",
+      "source": "Üst Menü (Header)",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T14:44:47.171Z"
+    },
+    {
+      "id": "CLK-mvzddnry86",
+      "type": "reservation_click",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "Masa Ayır",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T14:44:11.038Z"
+    },
+    {
+      "id": "CLK-mvz9u74my6",
+      "type": "page",
+      "source": "Üst Menü (Header)",
+      "label": "Heybeli Sahne Ana Sayfa",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T13:05:04.151Z"
+    },
+    {
+      "id": "CLK-mvz97pjr0",
+      "type": "page",
+      "source": "Üst Menü (Header)",
+      "label": "Heybeli Sahne",
+      "page": "/menu",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T12:47:34.935Z"
+    },
+    {
+      "id": "CLK-mvz95d9rsh",
+      "type": "menu",
+      "source": "Üst Menü (Header)",
+      "label": "Menü",
+      "page": "/etkinlik-takvimi",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T12:45:45.711Z"
+    },
+    {
+      "id": "CLK-mvz95bmipl",
+      "type": "program",
+      "source": "Üst Menü (Header)",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T12:45:43.578Z"
+    },
+    {
+      "id": "CLK-mvz9585qk7",
+      "type": "reservation_click",
+      "source": "Üst Menü (Header)",
+      "label": "Şimdi Rezervasyon Yap",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-11-02T12:45:39.086Z"
+    },
+    {
+      "id": "CLK-mvz6xoyt5v",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "WhatsApp Sohbeti",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T11:43:48.389Z"
+    },
+    {
+      "id": "CLK-mvz6xh192m",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "ANA YEMEK",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T11:43:38.109Z"
+    },
+    {
+      "id": "CLK-mvz6xg389l",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T11:43:36.884Z"
+    },
+    {
+      "id": "CLK-mvz30tswto",
+      "type": "menu",
+      "source": "Hero / Slider",
+      "label": "Menüyü Keşfet",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T09:54:16.160Z"
+    },
+    {
+      "id": "CLK-mvz2zwubol",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T09:53:33.443Z"
+    },
+    {
+      "id": "CLK-mvytun64mi",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T05:37:31.084Z"
+    },
+    {
+      "id": "CLK-mvytu9qxye",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "MEZELER",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T05:37:13.689Z"
+    },
+    {
+      "id": "CLK-mvyjx0gksk",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "WhatsApp Sohbeti",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T00:59:25.460Z"
+    },
+    {
+      "id": "CLK-mvyjwo7z6e",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-11-02T00:59:09.599Z"
+    },
+    {
+      "id": "CLK-mvyd21wex1",
+      "type": "reservation_click",
+      "source": "Sayfa İçi Buton",
+      "label": "ŞİMDİ REZERVASYON YAP",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-11-01T21:47:23.294Z"
+    },
+    {
+      "id": "CLK-mvyd1y3f3y",
+      "type": "reservation_click",
+      "source": "Sayfa İçi Buton",
+      "label": "ŞİMDİ REZERVASYON YAP",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-11-01T21:47:18.363Z"
+    },
+    {
+      "id": "CLK-mvy96o9sj4",
+      "type": "whatsapp",
+      "source": "Sabit WhatsApp Butonu",
+      "label": "WhatsApp ile Hızlı İletişim",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-11-01T19:59:00.448Z"
+    },
+    {
+      "id": "CLK-mvy7myj0r",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "MEZELER",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-11-01T19:15:41.004Z"
+    },
+    {
+      "id": "CLK-mvy7mtj0y4",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-11-01T19:15:34.524Z"
+    },
+    {
+      "id": "CLK-mvxpyiw5hh",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-11-01T11:00:47.525Z"
+    },
+    {
+      "id": "CLK-mvx2pvxvtn",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-11-01T00:10:13.363Z"
+    },
+    {
+      "id": "CLK-mvx2phdns4",
+      "type": "whatsapp",
+      "source": "Sabit WhatsApp Butonu",
+      "label": "WhatsApp ile Hızlı İletişim",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-11-01T00:09:54.491Z"
+    },
+    {
+      "id": "CLK-mvx1oy4qon",
+      "type": "reservation_click",
+      "source": "Etkinlik Takvimi",
+      "label": "Masa Ayır",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T23:41:29.930Z"
+    },
+    {
+      "id": "CLK-mvx1nfgmai",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T23:40:19.078Z"
+    },
+    {
+      "id": "CLK-mvx1madjgz",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T23:39:25.831Z"
+    },
+    {
+      "id": "CLK-mvwryx3npr",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "MEZELER",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T19:09:18.995Z"
+    },
+    {
+      "id": "CLK-mvwq4uo2e6",
+      "type": "page",
+      "source": "Üst Menü (Header)",
+      "label": "Anasayfa",
+      "page": "/etkinlik-takvimi",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-31T18:17:56.546Z"
+    },
+    {
+      "id": "CLK-mvwq4nsja1",
+      "type": "program",
+      "source": "Üst Menü (Header)",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-31T18:17:47.635Z"
+    },
+    {
+      "id": "CLK-mvwmqpapii",
+      "type": "reservation_click",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "Masa Rezervasyonu",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T16:42:57.553Z"
+    },
+    {
+      "id": "CLK-mvwmqiufae",
+      "type": "menu",
+      "source": "Alt Bilgi (Footer)",
+      "label": "Menü & Mezeler",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T16:42:49.191Z"
+    },
+    {
+      "id": "CLK-mvwmq3iaiz",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T16:42:29.314Z"
+    },
+    {
+      "id": "CLK-mvwi29j8oe",
+      "type": "reservation_click",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "Masa Ayır",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T14:31:58.916Z"
+    },
+    {
+      "id": "CLK-mvwi1kzgn2",
+      "type": "menu",
+      "source": "Alt Bilgi (Footer)",
+      "label": "Menü & Mezeler",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T14:31:27.100Z"
+    },
+    {
+      "id": "CLK-mvwhzq3r1x",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T14:30:00.423Z"
+    },
+    {
+      "id": "CLK-mvw718oftj",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "MEZELER",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-31T09:23:15.375Z"
+    },
+    {
+      "id": "CLK-mvvddw6caj",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T19:33:17.220Z"
+    },
+    {
+      "id": "CLK-mvvb0k80im",
+      "type": "menu",
+      "source": "Alt Bilgi (Footer)",
+      "label": "Menü & Mezeler",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T18:26:55.968Z"
+    },
+    {
+      "id": "CLK-mvvacafd8k",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "ARA SICAKLAR",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T18:08:03.529Z"
+    },
+    {
+      "id": "CLK-mvva0pa9o",
+      "type": "map",
+      "source": "Alt Bilgi (Footer)",
+      "label": "📍 Google Haritalar'da Aç",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T17:59:02.913Z"
+    },
+    {
+      "id": "CLK-mvv9qb4cv6",
+      "type": "whatsapp",
+      "source": "Sabit WhatsApp Butonu",
+      "label": "WhatsApp ile Hızlı İletişim",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T17:50:57.996Z"
+    },
+    {
+      "id": "CLK-mvuxctacc7",
+      "type": "page",
+      "source": "Mobil Menü",
+      "label": "Hakkımızda",
+      "page": "/rezervasyon",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T12:04:32.964Z"
+    },
+    {
+      "id": "CLK-mvuxax7sta",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/rezervasyon",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T12:03:04.744Z"
+    },
+    {
+      "id": "CLK-mvux9vx049",
+      "type": "reservation_click",
+      "source": "Etkinlik Takvimi",
+      "label": "Masa Ayır",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T12:02:16.404Z"
+    },
+    {
+      "id": "CLK-mvux8vi3rx",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T12:01:29.211Z"
+    },
+    {
+      "id": "CLK-mvuq6qwmjl",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "ANA YEMEK",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T08:43:52.630Z"
+    },
+    {
+      "id": "CLK-mvuq6pkkeh",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "ANA YEMEK",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T08:43:50.900Z"
+    },
+    {
+      "id": "CLK-mvukunrk4p",
+      "type": "reservation_click",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "Masa Ayır",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T06:14:30.608Z"
+    },
+    {
+      "id": "CLK-mvukugp8i7",
+      "type": "reservation_click",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "Masa Ayır",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-30T06:14:21.452Z"
+    },
+    {
+      "id": "CLK-mvtu2rny55",
+      "type": "reservation_click",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "Masa Rezervasyonu",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T17:44:59.278Z"
+    },
+    {
+      "id": "CLK-mvtu2fvwkv",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/hakkimizda",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T17:44:44.012Z"
+    },
+    {
+      "id": "CLK-mvtu29eqxp",
+      "type": "page",
+      "source": "Mobil Menü",
+      "label": "Hakkımızda",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T17:44:35.618Z"
+    },
+    {
+      "id": "CLK-mvtu24uikk",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/rezervasyon",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T17:44:29.706Z"
+    },
+    {
+      "id": "CLK-mvtu1ft4mr",
+      "type": "reservation_click",
+      "source": "Sayfa İçi Buton",
+      "label": "ŞİMDİ REZERVASYON YAP",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T17:43:57.256Z"
+    },
+    {
+      "id": "CLK-mvtu14hpx0",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "TÜM MENÜMÜZÜ İNCELEYİN",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T17:43:42.589Z"
+    },
+    {
+      "id": "CLK-mvtaha4hku",
+      "type": "program",
+      "source": "Hero / Slider",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T08:36:24.065Z"
+    },
+    {
+      "id": "CLK-mvt8g3zq8x",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/men%25C3%25BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T07:39:30.230Z"
+    },
+    {
+      "id": "CLK-mvt54gaqy8",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "ANA YEMEK",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T06:06:27.458Z"
+    },
+    {
+      "id": "CLK-mvt54ckqww",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "ANA YEMEK",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-29T06:06:22.634Z"
+    },
+    {
+      "id": "CLK-mvsexyc0c2",
+      "type": "whatsapp",
+      "source": "Hero / Slider",
+      "label": "Bize Ulaşın (WhatsApp)",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T17:53:34.224Z"
+    },
+    {
+      "id": "CLK-mvsex9xg0",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T17:53:02.596Z"
+    },
+    {
+      "id": "CLK-mvs0tfbimg",
+      "type": "reservation_click",
+      "source": "Hero / Slider",
+      "label": "Masa Rezervasyonu",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T11:18:08.334Z"
+    },
+    {
+      "id": "CLK-mvs0qf29gu",
+      "type": "reservation_click",
+      "source": "Etkinlik Takvimi",
+      "label": "Masa Ayır",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T11:15:48.034Z"
+    },
+    {
+      "id": "CLK-mvs0oz3bwd",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T11:14:40.679Z"
+    },
+    {
+      "id": "CLK-mvrxxx7kwj",
+      "type": "program",
+      "source": "Etkinlik Takvimi",
+      "label": "Tüm Takvimi & Gelecek Programları Gör",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-28T09:57:39.296Z"
+    },
+    {
+      "id": "CLK-mvrtlxsuyf",
+      "type": "page",
+      "source": "Alt Bilgi (Footer)",
+      "label": "Hakkımızda",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T07:56:21.726Z"
+    },
+    {
+      "id": "CLK-mvrtl34jti",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T07:55:41.971Z"
+    },
+    {
+      "id": "CLK-mvrthz0kec",
+      "type": "whatsapp",
+      "source": "Sabit WhatsApp Butonu",
+      "label": "WhatsApp ile Hızlı İletişim",
+      "page": "/iletisim",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T07:53:16.676Z"
+    },
+    {
+      "id": "CLK-mvrtgk5mmz",
+      "type": "page",
+      "source": "Mobil Menü",
+      "label": "İletişim",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T07:52:10.762Z"
+    },
+    {
+      "id": "CLK-mvrtg20vfi",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/men%C3%BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-28T07:51:47.263Z"
+    },
+    {
+      "id": "CLK-mvrsawyxis",
+      "type": "page",
+      "source": "Üst Menü (Header)",
+      "label": "Heybeli Sahne Ana Sayfa",
+      "page": "/",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-28T07:19:47.817Z"
+    },
+    {
+      "id": "CLK-mvr8yu6wmd",
+      "type": "reservation_click",
+      "source": "Hero / Slider",
+      "label": "Masa Rezervasyonu",
+      "page": "/men%25C3%25BC",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T22:18:31.640Z"
+    },
+    {
+      "id": "CLK-mvr3lkriin",
+      "type": "reservation_click",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "Masa Rezervasyonu",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T19:48:14.814Z"
+    },
+    {
+      "id": "CLK-mvr3gstfiz",
+      "type": "whatsapp",
+      "source": "Mobil Menü",
+      "label": "WhatsApp Hattı (0530 866 43 21)",
+      "page": "/etkinlik-takvimi",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T19:44:31.971Z"
+    },
+    {
+      "id": "CLK-mvr3fmjr2h",
+      "type": "program",
+      "source": "Mobil Menü",
+      "label": "Etkinlik Takvimi",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T19:43:37.191Z"
+    },
+    {
+      "id": "CLK-mvr3ffrhh1",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "MEZELER",
+      "page": "/menu",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T19:43:28.397Z"
+    },
+    {
+      "id": "CLK-mvr3fdiz5b",
+      "type": "menu",
+      "source": "Mobil Menü",
+      "label": "Menü",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T19:43:25.499Z"
+    },
+    {
+      "id": "CLK-mvqsy7s4q0",
+      "type": "program",
+      "source": "Üst Menü (Header)",
+      "label": "Etkinlik Takvimi",
+      "page": "/menu",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-27T14:50:08.740Z"
+    },
+    {
+      "id": "CLK-mvqsy1vjwb",
+      "type": "menu",
+      "source": "Menü Bölümü",
+      "label": "ANA YEMEK",
+      "page": "/menu",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-27T14:50:01.087Z"
+    },
+    {
+      "id": "CLK-mvqnmhwzj4",
+      "type": "reservation_click",
+      "source": "Etkinlik Kartı",
+      "label": "Masa Ayır – Özcan Türe",
+      "page": "/program",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T12:21:03.923Z"
+    },
+    {
+      "id": "CLK-mvqnmhwike",
+      "type": "call",
+      "source": "Üst Menü (Header)",
+      "label": "0530 527 91 77",
+      "page": "/program",
+      "device": "Masaüstü",
+      "timestamp": "2026-10-27T12:21:03.906Z"
+    },
+    {
+      "id": "CLK-mvqnmhvzqp",
+      "type": "whatsapp",
+      "source": "Mobil Sabit Alt Bar",
+      "label": "WhatsApp",
+      "page": "/",
+      "device": "Mobil",
+      "timestamp": "2026-10-27T12:21:03.887Z"
+    },
     {
       "id": "CLK-6538",
       "type": "whatsapp",
@@ -322,187 +1201,115 @@
   ],
   "categories": [
     {
-      "id": "ana-yemek",
-      "name": "ANA YEMEK",
-      "tag": "USTALIKLA PİŞİRİLEN",
-      "desc": "Kömür ateşinde ızgara levrek, çipura, dana antrikot & kasap köfte",
-      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80",
+      "id": "viski",
+      "name": "VİSKİ",
+      "tag": "SEÇKİN VİSKİLER",
+      "desc": "Chivas Regal, Blue Label, Black Label ve Jack Daniels seçkisi",
+      "image": "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=700&q=80",
       "order": 1
     },
     {
-      "id": "ara-sicaklar",
-      "name": "ARA SICAKLAR",
-      "tag": "SICAK LEZZETLER",
-      "desc": "Güveçte tereyağlı karides, yaprak ciğer & çıtır paçanga böreği",
-      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=700&q=80",
+      "id": "izgara",
+      "name": "IZGARA",
+      "tag": "USTA ATEŞİNDEN",
+      "desc": "Kömür ateşinde pirzola, şiş, Adana, Urfa, kanat ve kavurma çeşitleri",
+      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80",
       "order": 2
     },
     {
-      "id": "mezeler",
-      "name": "MEZELER",
-      "tag": "EGE & AKDENİZ",
-      "desc": "Girit ezmesi, atom, köz patlıcanlı köpoğlu, levrek marin & haydari",
-      "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=700&q=80",
+      "id": "votka-sarap",
+      "name": "VOTKA & ŞARAP",
+      "tag": "KADEH & ŞİŞE SEÇKİSİ",
+      "desc": "Absolut, seçkin votkalar, şarap, cin ve tekila alternatifleri",
+      "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=80",
       "order": 3
     },
     {
-      "id": "salatalar",
-      "name": "SALATALAR",
-      "tag": "BAHÇEDEN SOFRAYA",
-      "desc": "Cevizli Gavurdağı salatası, nar ekşili Ege yeşillikleri, tulum peynirli roka",
-      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=80",
+      "id": "raki",
+      "name": "RAKI",
+      "tag": "MEYHANE KÜLTÜRÜ",
+      "desc": "Klasik, Altın Seri, Göbek, Efe Gold ve Yeni Seri rakı çeşitleri",
+      "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=700&q=80",
       "order": 4
     },
     {
-      "id": "meyve-tatli",
-      "name": "MEYVE VE ATIŞTIRMALIK",
-      "tag": "TATLI KAPANIŞ",
-      "desc": "Buzlu mevsim meyveleri seçkisi, tahinli sıcak sufle & çerez tabağı",
-      "image": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=700&q=80",
+      "id": "bira-meze",
+      "name": "BİRA & MEZE",
+      "tag": "SOFRA BAŞLANGICI",
+      "desc": "Günlük taze meze çeşitleri ve soğuk bira servisi",
+      "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=700&q=80",
       "order": 5
-    },
-    {
-      "id": "ickiler",
-      "name": "İÇKİLER",
-      "tag": "SOFRA KÜLTÜRÜ",
-      "desc": "Geleneksel yaş üzüm rakıları, altın seriler, seçkin şaraplar & kokteyller",
-      "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=80",
-      "order": 6
     }
   ],
   "menuItems": [
-    {
-      "id": "item-1",
-      "categoryId": "mezeler",
-      "name": "Girit Ezmesi",
-      "desc": "Ezine peyniri, ceviz, taze fesleğen ve fıstık dokunuşu ile zeytinyağlı meze",
-      "price": "Günlük Taze",
-      "badge": "Şefin İmzası",
-      "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80",
-      "order": 1,
-      "isAvailable": true
-    },
-    {
-      "id": "item-5",
-      "categoryId": "ara-sicaklar",
-      "name": "Tereyağında Karides Güveç",
-      "desc": "Sarımsak, pul biber ve domates soslu tereyağlı taze deniz karidesi",
-      "price": "Sıcak Başlangıç",
-      "badge": "Günün Favorisi",
-      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
-      "order": 1,
-      "isAvailable": true
-    },
-    {
-      "id": "item-8",
-      "categoryId": "ana-yemek",
-      "name": "Izgara Deniz Levreği",
-      "desc": "Kömür ateşinde nar gibi kızarmış taze levrek, roka, kırmızı soğan ve limon eşliğinde",
-      "price": "Ana Yemek",
-      "badge": "Taze Balık",
-      "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
-      "order": 1,
-      "isAvailable": true
-    },
-    {
-      "id": "item-10",
-      "categoryId": "salatalar",
-      "name": "Cevizli Gavurdağı Salatası",
-      "desc": "Küp doğranmış domates, salatalık, taze nane, ceviz içi ve Antakya nar ekşisi sosu",
-      "price": "Salata",
-      "badge": "Meyhane Klasiği",
-      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
-      "order": 1,
-      "isAvailable": true
-    },
-    {
-      "id": "item-11",
-      "categoryId": "meyve-tatli",
-      "name": "Buzlu Mevsim Meyveleri & Sıcak Sufle",
-      "desc": "Kavun, karpuz, ananas, çilek ve yanında Belçika çikolatalı sıcak sufle",
-      "price": "Tatlı Kapanış",
-      "badge": "İkramlık",
-      "image": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=600&q=80",
-      "order": 1,
-      "isAvailable": true
-    },
-    {
-      "id": "item-12",
-      "categoryId": "ickiler",
-      "name": "Yaş Üzüm Rakısı & Altın Seri",
-      "desc": "Geleneksel damıtım yaş üzüm rakıları, buz ve şalgam ikramı ile",
-      "price": "Sofranın Eşliği",
-      "badge": "Seçkin Koleksiyon",
-      "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80",
-      "order": 1,
-      "isAvailable": true
-    },
-    {
-      "id": "item-2",
-      "categoryId": "mezeler",
-      "name": "Köz Patlıcanlı Atom",
-      "desc": "Süzme yoğurt, acı tereyağlı çıtır biberler ile közlenmiş patlıcan",
-      "price": "Günlük Taze",
-      "badge": "Popüler",
-      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
-      "order": 2,
-      "isAvailable": true
-    },
-    {
-      "id": "item-6",
-      "categoryId": "ara-sicaklar",
-      "name": "Yaprak Ciğer (Edirne Usulü)",
-      "desc": "İnce kıyım dana ciğer, sumaklı soğan söğüş ve çıtır biber ile",
-      "price": "Sıcak Başlangıç",
-      "badge": "Geleneksel",
-      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      "order": 2,
-      "isAvailable": true
-    },
-    {
-      "id": "item-9",
-      "categoryId": "ana-yemek",
-      "name": "Özel Kasap Köfte & Antrikot",
-      "desc": "Kömürde pişirilmiş dana antrikot ve usta köftesi, köz biber ve domates ile",
-      "price": "Ana Yemek",
-      "badge": "Izgara Seçimi",
-      "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      "order": 2,
-      "isAvailable": true
-    },
-    {
-      "id": "item-3",
-      "categoryId": "mezeler",
-      "name": "Ege Deniz Börülcesi",
-      "desc": "Zeytinyağı, sarımsak ve limon emülsiyonu eşliğinde taze börülce",
-      "price": "Günlük Taze",
-      "badge": "Ege Klasiği",
-      "image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80",
-      "order": 3,
-      "isAvailable": true
-    },
-    {
-      "id": "item-7",
-      "categoryId": "ara-sicaklar",
-      "name": "Çıtır Paçanga Böreği",
-      "desc": "Kayseri pastırması, kaşar peyniri ve domates ile çıtır çıtır yufka",
-      "price": "Sıcak Başlangıç",
-      "badge": "",
-      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
-      "order": 3,
-      "isAvailable": true
-    },
-    {
-      "id": "item-4",
-      "categoryId": "mezeler",
-      "name": "Levrek Marin",
-      "desc": "Hardal tohumu, kişniş, taze narenciye ve sızma zeytinyağında marine edilmiş deniz levreği",
-      "price": "Gurme Seçki",
-      "badge": "Özel Meze",
-      "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
-      "order": 4,
-      "isAvailable": true
-    }
+    { "id": "viski-1", "categoryId": "viski", "name": "CHIVAS 35", "desc": "", "price": "₺ 3.200,00", "badge": "", "image": "", "order": 1, "isAvailable": true },
+    { "id": "viski-2", "categoryId": "viski", "name": "CHIVAS 50", "desc": "", "price": "₺ 4.450,00", "badge": "", "image": "", "order": 2, "isAvailable": true },
+    { "id": "viski-3", "categoryId": "viski", "name": "CHIVAS 70", "desc": "", "price": "₺ 5.700,00", "badge": "", "image": "", "order": 3, "isAvailable": true },
+    { "id": "viski-4", "categoryId": "viski", "name": "CHIVAS 100", "desc": "", "price": "₺ 7.450,00", "badge": "", "image": "", "order": 4, "isAvailable": true },
+    { "id": "viski-5", "categoryId": "viski", "name": "VİSKİ DUB", "desc": "", "price": "₺ 800,00", "badge": "", "image": "", "order": 5, "isAvailable": true },
+    { "id": "viski-6", "categoryId": "viski", "name": "VİSKİ TEK", "desc": "", "price": "₺ 600,00", "badge": "", "image": "", "order": 6, "isAvailable": true },
+    { "id": "viski-7", "categoryId": "viski", "name": "CHIVAS 18 YILLIK", "desc": "", "price": "₺ 12.000,00", "badge": "", "image": "", "order": 7, "isAvailable": true },
+    { "id": "viski-8", "categoryId": "viski", "name": "CHIVAS 70 CL 13 YILLIK", "desc": "", "price": "₺ 6.000,00", "badge": "", "image": "", "order": 8, "isAvailable": true },
+    { "id": "viski-9", "categoryId": "viski", "name": "BLUE LABEL 70 CL", "desc": "", "price": "₺ 25.000,00", "badge": "", "image": "", "order": 9, "isAvailable": true },
+    { "id": "viski-10", "categoryId": "viski", "name": "JACK DANIELS 35 CL", "desc": "", "price": "₺ 3.200,00", "badge": "", "image": "", "order": 10, "isAvailable": true },
+    { "id": "viski-11", "categoryId": "viski", "name": "JACK DANIELS 70 CL", "desc": "", "price": "₺ 5.700,00", "badge": "", "image": "", "order": 11, "isAvailable": true },
+    { "id": "viski-12", "categoryId": "viski", "name": "BLACK LABEL 35 CL", "desc": "", "price": "₺ 3.200,00", "badge": "", "image": "", "order": 12, "isAvailable": true },
+    { "id": "viski-13", "categoryId": "viski", "name": "BLACK LABEL 70 CL", "desc": "", "price": "₺ 5.700,00", "badge": "", "image": "", "order": 13, "isAvailable": true },
+    { "id": "izgara-1", "categoryId": "izgara", "name": "K. ET", "desc": "", "price": "₺ 1.100,00", "badge": "", "image": "", "order": 1, "isAvailable": true },
+    { "id": "izgara-2", "categoryId": "izgara", "name": "K. ET KIRMIZI", "desc": "", "price": "₺ 1.400,00", "badge": "", "image": "", "order": 2, "isAvailable": true },
+    { "id": "izgara-3", "categoryId": "izgara", "name": "KANAT", "desc": "", "price": "₺ 720,00", "badge": "", "image": "", "order": 3, "isAvailable": true },
+    { "id": "izgara-4", "categoryId": "izgara", "name": "T. ŞİŞ", "desc": "", "price": "₺ 720,00", "badge": "", "image": "", "order": 4, "isAvailable": true },
+    { "id": "izgara-5", "categoryId": "izgara", "name": "K. ŞİŞ", "desc": "", "price": "₺ 950,00", "badge": "", "image": "", "order": 5, "isAvailable": true },
+    { "id": "izgara-6", "categoryId": "izgara", "name": "PİRZOLA", "desc": "", "price": "₺ 1.350,00", "badge": "", "image": "", "order": 6, "isAvailable": true },
+    { "id": "izgara-7", "categoryId": "izgara", "name": "ADANA", "desc": "", "price": "₺ 750,00", "badge": "", "image": "", "order": 7, "isAvailable": true },
+    { "id": "izgara-8", "categoryId": "izgara", "name": "URFA", "desc": "", "price": "₺ 750,00", "badge": "", "image": "", "order": 8, "isAvailable": true },
+    { "id": "izgara-9", "categoryId": "izgara", "name": "PIRZOLA KALEM", "desc": "", "price": "₺ 450,00", "badge": "", "image": "", "order": 9, "isAvailable": true },
+    { "id": "izgara-10", "categoryId": "izgara", "name": "K. KAVURMA", "desc": "", "price": "₺ 990,00", "badge": "", "image": "", "order": 10, "isAvailable": true },
+    { "id": "izgara-11", "categoryId": "izgara", "name": "ET SOTE", "desc": "", "price": "₺ 990,00", "badge": "", "image": "", "order": 11, "isAvailable": true },
+    { "id": "izgara-12", "categoryId": "izgara", "name": "C. KAVURMA", "desc": "", "price": "₺ 990,00", "badge": "", "image": "", "order": 12, "isAvailable": true },
+    { "id": "votka-sarap-1", "categoryId": "votka-sarap", "name": "VOTKA DUBLE", "desc": "", "price": "₺ 600,00", "badge": "", "image": "", "order": 1, "isAvailable": true },
+    { "id": "votka-sarap-2", "categoryId": "votka-sarap", "name": "VOTKA 35 CL", "desc": "", "price": "₺ 1.800,00", "badge": "", "image": "", "order": 2, "isAvailable": true },
+    { "id": "votka-sarap-3", "categoryId": "votka-sarap", "name": "VOTKA 75 CL", "desc": "", "price": "₺ 3.150,00", "badge": "", "image": "", "order": 3, "isAvailable": true },
+    { "id": "votka-sarap-4", "categoryId": "votka-sarap", "name": "ŞARAP DUBLE", "desc": "", "price": "₺ 600,00", "badge": "", "image": "", "order": 4, "isAvailable": true },
+    { "id": "votka-sarap-5", "categoryId": "votka-sarap", "name": "ŞARAP 70 CL", "desc": "", "price": "₺ 1.950,00", "badge": "", "image": "", "order": 5, "isAvailable": true },
+    { "id": "votka-sarap-6", "categoryId": "votka-sarap", "name": "TEK VOTKA", "desc": "", "price": "₺ 450,00", "badge": "", "image": "", "order": 6, "isAvailable": true },
+    { "id": "votka-sarap-7", "categoryId": "votka-sarap", "name": "CIN DUBLE", "desc": "", "price": "₺ 750,00", "badge": "", "image": "", "order": 7, "isAvailable": true },
+    { "id": "votka-sarap-8", "categoryId": "votka-sarap", "name": "ABSOLUT 35 CL", "desc": "", "price": "₺ 2.250,00", "badge": "", "image": "", "order": 8, "isAvailable": true },
+    { "id": "votka-sarap-9", "categoryId": "votka-sarap", "name": "TEKILA 35 CL", "desc": "", "price": "₺ 1.500,00", "badge": "", "image": "", "order": 9, "isAvailable": true },
+    { "id": "votka-sarap-10", "categoryId": "votka-sarap", "name": "ABSOLUT 70 CL", "desc": "", "price": "₺ 4.150,00", "badge": "", "image": "", "order": 10, "isAvailable": true },
+    { "id": "votka-sarap-11", "categoryId": "votka-sarap", "name": "VOTKA 50 CL", "desc": "", "price": "₺ 2.500,00", "badge": "", "image": "", "order": 11, "isAvailable": true },
+    { "id": "votka-sarap-12", "categoryId": "votka-sarap", "name": "VOTKA 100 CL", "desc": "", "price": "₺ 4.400,00", "badge": "", "image": "", "order": 12, "isAvailable": true },
+    { "id": "votka-sarap-13", "categoryId": "votka-sarap", "name": "VODKA ENERJI", "desc": "", "price": "₺ 700,00", "badge": "", "image": "", "order": 13, "isAvailable": true },
+    { "id": "raki-1", "categoryId": "raki", "name": "RAKI DUBLE", "desc": "", "price": "₺ 770,00", "badge": "", "image": "", "order": 1, "isAvailable": true },
+    { "id": "raki-2", "categoryId": "raki", "name": "TEK RAKI", "desc": "", "price": "₺ 550,00", "badge": "", "image": "", "order": 2, "isAvailable": true },
+    { "id": "raki-3", "categoryId": "raki", "name": "20 RAKI", "desc": "", "price": "₺ 1.700,00", "badge": "", "image": "", "order": 3, "isAvailable": true },
+    { "id": "raki-4", "categoryId": "raki", "name": "35 RAKI", "desc": "", "price": "₺ 2.200,00", "badge": "", "image": "", "order": 4, "isAvailable": true },
+    { "id": "raki-5", "categoryId": "raki", "name": "50 RAKI", "desc": "", "price": "₺ 3.000,00", "badge": "", "image": "", "order": 5, "isAvailable": true },
+    { "id": "raki-6", "categoryId": "raki", "name": "70 RAKI", "desc": "", "price": "₺ 3.950,00", "badge": "", "image": "", "order": 6, "isAvailable": true },
+    { "id": "raki-7", "categoryId": "raki", "name": "100 RAKI", "desc": "", "price": "₺ 5.100,00", "badge": "", "image": "", "order": 7, "isAvailable": true },
+    { "id": "raki-8", "categoryId": "raki", "name": "ALTINSERI 20", "desc": "", "price": "₺ 2.000,00", "badge": "", "image": "", "order": 8, "isAvailable": true },
+    { "id": "raki-9", "categoryId": "raki", "name": "ALTINSERI 35", "desc": "", "price": "₺ 2.750,00", "badge": "", "image": "", "order": 9, "isAvailable": true },
+    { "id": "raki-10", "categoryId": "raki", "name": "ALTINSERI 50", "desc": "", "price": "₺ 3.850,00", "badge": "", "image": "", "order": 10, "isAvailable": true },
+    { "id": "raki-11", "categoryId": "raki", "name": "ALTINSERI 70", "desc": "", "price": "₺ 4.800,00", "badge": "", "image": "", "order": 11, "isAvailable": true },
+    { "id": "raki-12", "categoryId": "raki", "name": "ALTINSERI 100", "desc": "", "price": "₺ 6.000,00", "badge": "", "image": "", "order": 12, "isAvailable": true },
+    { "id": "raki-13", "categoryId": "raki", "name": "GÖBEK 20", "desc": "", "price": "₺ 2.100,00", "badge": "", "image": "", "order": 13, "isAvailable": true },
+    { "id": "raki-14", "categoryId": "raki", "name": "GÖBEK 35", "desc": "", "price": "₺ 3.000,00", "badge": "", "image": "", "order": 14, "isAvailable": true },
+    { "id": "raki-15", "categoryId": "raki", "name": "GÖBEK 50", "desc": "", "price": "₺ 4.150,00", "badge": "", "image": "", "order": 15, "isAvailable": true },
+    { "id": "raki-16", "categoryId": "raki", "name": "GÖBEK 70", "desc": "", "price": "₺ 5.200,00", "badge": "", "image": "", "order": 16, "isAvailable": true },
+    { "id": "raki-17", "categoryId": "raki", "name": "GÖBEK 100", "desc": "", "price": "₺ 6.900,00", "badge": "", "image": "", "order": 17, "isAvailable": true },
+    { "id": "raki-18", "categoryId": "raki", "name": "EFE GOLD 20", "desc": "", "price": "₺ 2.000,00", "badge": "", "image": "", "order": 18, "isAvailable": true },
+    { "id": "raki-19", "categoryId": "raki", "name": "EFE GOLD 35", "desc": "", "price": "₺ 2.750,00", "badge": "", "image": "", "order": 19, "isAvailable": true },
+    { "id": "raki-20", "categoryId": "raki", "name": "EFE GOLD 50", "desc": "", "price": "₺ 3.850,00", "badge": "", "image": "", "order": 20, "isAvailable": true },
+    { "id": "raki-21", "categoryId": "raki", "name": "EFE GOLD 70", "desc": "", "price": "₺ 4.800,00", "badge": "", "image": "", "order": 21, "isAvailable": true },
+    { "id": "raki-22", "categoryId": "raki", "name": "EFE GOLD 100", "desc": "", "price": "₺ 6.000,00", "badge": "", "image": "", "order": 22, "isAvailable": true },
+    { "id": "raki-23", "categoryId": "raki", "name": "YENI SERI 20", "desc": "", "price": "₺ 1.850,00", "badge": "", "image": "", "order": 23, "isAvailable": true },
+    { "id": "raki-24", "categoryId": "raki", "name": "YENI SERI 35", "desc": "", "price": "₺ 2.750,00", "badge": "", "image": "", "order": 24, "isAvailable": true },
+    { "id": "raki-25", "categoryId": "raki", "name": "YENI SERI 50", "desc": "", "price": "₺ 4.400,00", "badge": "", "image": "", "order": 25, "isAvailable": true },
+    { "id": "raki-26", "categoryId": "raki", "name": "YENI SERI 70", "desc": "", "price": "₺ 4.400,00", "badge": "", "image": "", "order": 26, "isAvailable": true },
+    { "id": "raki-27", "categoryId": "raki", "name": "YENI SERI 100", "desc": "", "price": "₺ 5.600,00", "badge": "", "image": "", "order": 27, "isAvailable": true },
+    { "id": "bira-meze-1", "categoryId": "bira-meze", "name": "33 CC BİRA", "desc": "", "price": "₺ 275,00", "badge": "", "image": "", "order": 1, "isAvailable": true },
+    { "id": "bira-meze-2", "categoryId": "bira-meze", "name": "50 CC BİRA", "desc": "", "price": "₺ 385,00", "badge": "", "image": "", "order": 2, "isAvailable": true },
+    { "id": "bira-meze-3", "categoryId": "bira-meze", "name": "MEZE", "desc": "", "price": "₺ 380,00", "badge": "", "image": "", "order": 3, "isAvailable": true }
   ],
   "events": [
     {
@@ -1000,8 +1807,13 @@
     }
   ],
   "clickTotals": {
-    "whatsapp": 2,
+    "whatsapp": 12,
     "call": 2,
-    "reservation_click": 1
+    "reservation_click": 19,
+    "menu": 31,
+    "program": 19,
+    "page": 12,
+    "map": 2,
+    "reservation_whatsapp": 1
   }
 }

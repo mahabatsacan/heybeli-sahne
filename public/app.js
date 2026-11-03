@@ -694,22 +694,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // D. Dinamik Menü Kategorileri (Anasayfada 3 Temel Kategori: Ana Yemek, Mezeler, İçkiler)
+  // D. Dinamik Menü Kategorileri (Tüm aktif menü kategorilerini ve üst menü dropdown'ını senkronla)
   function renderCategories(categories) {
+    if (!categories || categories.length === 0) return;
+
+    // 1. Üst menüdeki (Header) açılır Menü listesini yalnızca mevcut kategorilerle güncelle
+    document.querySelectorAll('.dropdown-menu').forEach(dd => {
+      dd.innerHTML = categories.map(cat => `
+        <li><a href="/menu#${escapeHtml(cat.id)}">${escapeHtml(cat.name)} <span class="sub-badge">${escapeHtml(cat.tag || 'Menü')}</span></a></li>
+      `).join('');
+    });
+
+    // 2. Sayfadaki kategori kartlarını çiz
     const grid = document.querySelector('.menu-categories-grid');
-    if (!grid || !categories || categories.length === 0) return;
+    if (!grid) return;
 
-    // Anasayfada 3 temel kategori sunulur: Ana Yemek, Mezeler, İçkiler
-    const selected = [];
-    const anaYemek = categories.find(c => (c.name || '').toLowerCase().includes('ana yemek')) || categories[0];
-    const mezeler = categories.find(c => (c.name || '').toLowerCase().includes('meze')) || categories[1];
-    const ickiler = categories.find(c => (c.name || '').toLowerCase().includes('içki') || (c.name || '').toLowerCase().includes('icki') || (c.name || '').toLowerCase().includes('kokteyl')) || categories[2];
-
-    if (anaYemek) selected.push(anaYemek);
-    if (mezeler && !selected.includes(mezeler)) selected.push(mezeler);
-    if (ickiler && !selected.includes(ickiler)) selected.push(ickiler);
-
-    const catsToRender = selected.length === 3 ? selected : categories.slice(0, 3);
+    const catsToRender = categories;
 
     const domSig = Array.from(grid.querySelectorAll('.menu-category-card')).map(c =>
       `${c.querySelector('.category-card-title')?.textContent.trim()}|${c.querySelector('img')?.getAttribute('src')}`
@@ -718,7 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (domSig === dataSig) return;
 
     grid.innerHTML = catsToRender.map(cat => `
-      <div class="menu-category-card" onclick="window.location.href='/menu#${cat.id}'" style="cursor: pointer;">
+      <div class="menu-category-card" id="card-${escapeHtml(cat.id)}" onclick="window.location.href='/menu#${escapeHtml(cat.id)}'" style="cursor: pointer;">
         <div class="category-card-img-wrap">
           <img src="${cat.image || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80'}" alt="${escapeHtml(cat.name)}" loading="lazy" decoding="async">
           <div class="category-card-overlay"></div>
@@ -734,7 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // E. Menü Sayfası Detayları (Sadece menu.html açıldığında çalışır)
   async function loadDynamicMenuDetails() {
-    const isMenuPage = window.location.pathname.includes('/menu');
+    const isMenuPage = decodeURIComponent(window.location.pathname).toLowerCase().includes('/menu') || decodeURIComponent(window.location.pathname).toLowerCase().includes('/menü');
     const dynamicMenuContainer = document.getElementById('dynamic-menu-container');
     if (!isMenuPage || !dynamicMenuContainer) return;
 
@@ -742,26 +742,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch('/api/menu');
       if (!res.ok) return;
       const data = await res.json();
-      const categories = data.categories || [];
+      const categories = (data.categories || []).filter(cat => (cat.items || []).length > 0);
 
       dynamicMenuContainer.innerHTML = categories.map(cat => `
-        <div class="menu-category-section" id="${cat.id}" style="margin-bottom: 50px;">
-          <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-hairline); padding-bottom: 12px; margin-bottom: 24px;">
+        <div class="menu-category-section" id="${escapeHtml(cat.id)}" style="margin-bottom: 56px; scroll-margin-top: 110px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--accent-gold, #C49A55); padding-bottom: 12px; margin-bottom: 22px;">
             <div>
-              <span class="eyebrow">${escapeHtml(cat.tag || 'LEZZET SEÇKİSİ')}</span>
-              <h2 style="font-family: var(--font-serif); font-size: 28px; color: var(--text-primary); margin-top: 4px;">${escapeHtml(cat.name)}</h2>
+              <span class="eyebrow">${escapeHtml(cat.tag || 'HEYBELİ SAHNE MENÜ')}</span>
+              <h2 style="font-family: var(--font-serif); font-size: 30px; color: var(--text-primary); margin-top: 4px; letter-spacing: 1px;">${escapeHtml(cat.name)}</h2>
             </div>
+            <span style="font-size: 12px; color: var(--text-secondary); font-weight: 600;">${(cat.items || []).length} Ürün</span>
           </div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px;">
             ${(cat.items || []).map(item => `
-              <div style="background: var(--bg-surface); border: 1px solid var(--border-hairline); border-radius: 8px; padding: 18px; display: flex; gap: 14px; align-items: center;">
-                ${item.image ? `<img src="${item.image}" style="width: 70px; height: 70px; border-radius: 6px; object-fit: cover;" alt="">` : ''}
-                <div style="flex: 1;">
-                  <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                    <h4 style="font-size: 15px; font-weight: 600; color: var(--text-primary);">${escapeHtml(item.name)}</h4>
-                    <span style="font-size: 13px; color: var(--accent-gold); font-weight: 700;">${escapeHtml(item.price || '')}</span>
+              <div style="background: var(--bg-surface); border: 1px solid var(--border-hairline); border-radius: 8px; padding: 14px 18px; display: flex; gap: 14px; align-items: center; justify-content: space-between;">
+                ${item.image ? `<img src="${item.image}" style="width: 60px; height: 60px; border-radius: 6px; object-fit: cover; flex-shrink: 0;" alt="${escapeHtml(item.name)}">` : ''}
+                <div style="flex: 1; min-width: 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                    <h4 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0; letter-spacing: 0.3px;">${escapeHtml(item.name)}</h4>
+                    <span style="font-size: 15px; color: var(--accent-gold, #B8860B); font-weight: 700; white-space: nowrap;">${escapeHtml(item.price || '')}</span>
                   </div>
-                  <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">${escapeHtml(item.desc || '')}</p>
+                  ${item.desc ? `<p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">${escapeHtml(item.desc)}</p>` : ''}
                   ${item.badge ? `<span style="font-size: 10px; color: var(--accent-gold); border: 1px solid var(--border-hairline); border-radius: 4px; padding: 2px 6px; display: inline-block; margin-top: 6px;">${escapeHtml(item.badge)}</span>` : ''}
                 </div>
               </div>
