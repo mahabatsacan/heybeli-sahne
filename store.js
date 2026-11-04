@@ -47,7 +47,7 @@ const DEFAULT_CATEGORIES = [
     name: 'VİSKİ',
     tag: 'SEÇKİN VİSKİLER',
     desc: 'Chivas Regal, Blue Label, Black Label ve Jack Daniels seçkisi',
-    image: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=700&q=80',
+    image: '/uploads/cat_viski.jpg',
     order: 1
   },
   {
@@ -55,7 +55,7 @@ const DEFAULT_CATEGORIES = [
     name: 'IZGARA',
     tag: 'USTA ATEŞİNDEN',
     desc: 'Kömür ateşinde pirzola, şiş, Adana, Urfa, kanat ve kavurma çeşitleri',
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80',
+    image: '/uploads/cat_izgara.jpg',
     order: 2
   },
   {
@@ -63,7 +63,7 @@ const DEFAULT_CATEGORIES = [
     name: 'VOTKA & ŞARAP',
     tag: 'KADEH & ŞİŞE SEÇKİSİ',
     desc: 'Absolut, seçkin votkalar, şarap, cin ve tekila alternatifleri',
-    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=80',
+    image: '/uploads/cat_votka_sarap.jpg',
     order: 3
   },
   {
@@ -71,7 +71,7 @@ const DEFAULT_CATEGORIES = [
     name: 'RAKI',
     tag: 'MEYHANE KÜLTÜRÜ',
     desc: 'Klasik, Altın Seri, Göbek, Efe Gold ve Yeni Seri rakı çeşitleri',
-    image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=700&q=80',
+    image: '/uploads/cat_raki.jpg',
     order: 4
   },
   {
@@ -79,7 +79,7 @@ const DEFAULT_CATEGORIES = [
     name: 'BİRA & MEZE',
     tag: 'SOFRA BAŞLANGICI',
     desc: 'Günlük taze meze çeşitleri ve soğuk bira servisi',
-    image: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=700&q=80',
+    image: '/uploads/cat_bira_meze.jpg',
     order: 5
   }
 ];

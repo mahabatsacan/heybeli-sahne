@@ -2313,7 +2313,10 @@
 
       container.innerHTML = categories.map(cat => `
         <div class="item-card">
-          <img src="${cat.image}" class="card-thumb" style="height: 120px;" alt="${escapeHtml(cat.name)}" onerror="this.src='https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80'">
+          <div style="position: relative;">
+            <img src="${cat.image}" class="card-thumb" style="height: 140px;" alt="${escapeHtml(cat.name)}" onerror="this.src='https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80'">
+            <button type="button" onclick="changeCategoryPhotoDirect('${cat.id}')" class="btn btn-gold btn-sm" style="position: absolute; bottom: 10px; right: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.6);">📷 Görsel Değiştir</button>
+          </div>
           <div class="card-body">
             <span class="card-meta">${escapeHtml(cat.tag || 'KATEGORİ')}</span>
             <h4 class="card-title">${escapeHtml(cat.name)}</h4>
@@ -2328,6 +2331,24 @@
           </div>
         </div>
       `).join('');
+    }
+
+    function changeCategoryPhotoDirect(catId) {
+      const cat = dashboardData && dashboardData.categories && dashboardData.categories.find(c => c.id === catId);
+      if (!cat) return;
+      triggerDirectActionUpload(async (uploadedUrl) => {
+        const res = await fetch(`/api/admin/categories/${catId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${appToken}` },
+          body: JSON.stringify({ ...cat, image: uploadedUrl })
+        });
+        if (res.ok) {
+          showToast(`✓ ${cat.name} kategori görseli güncellendi!`);
+          loadDashboardData();
+        } else {
+          showToast('✕ Kategori görseli güncellenemedi', true);
+        }
+      });
     }
 
     function openCategoryModal(cat = null) {
